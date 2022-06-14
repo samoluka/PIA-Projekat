@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
     user.firstName = this.firstName;
     user.lastName = this.lastName;
     user.username = this.username;
-    user.password = Md5.hashStr(this.password);
+    user.password = this.password;
     user.phone = this.phone;
     user.email = this.email;
     user.name = this.name;
