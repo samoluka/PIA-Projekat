@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { UserService } from '../services/user/user.service';
 import { Md5 } from 'ts-md5/dist/md5';
+import { catchError } from 'rxjs/internal/operators/catchError';
+import { Observable, ObservableInput } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -30,11 +32,14 @@ export class RegisterComponent implements OnInit {
   lastName: string;
   username: string;
   password: string;
+  passwordConfirm: String;
   phone: string;
   email: string;
   name: string;
   pib: string;
   matBroj: string;
+
+  message: string;
 
   register() {
     let user = new User();
@@ -49,7 +54,9 @@ export class RegisterComponent implements OnInit {
     user.matBroj = this.matBroj;
 
     this.servis.registerUser(user).subscribe((resp) => {
-      alert(resp['message']);
+      console.log(resp);
+      console.log(`kurcina poruka ${resp['message']}`);
+      this.message = resp['message'];
     });
   }
 }

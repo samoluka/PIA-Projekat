@@ -1,9 +1,9 @@
 import * as express from "express";
-import user from "../models/user";
 import User from "../models/user";
+import { Md5 } from "ts-md5";
 
 export class UserController {
-  allUsers = (req: express.Request, res: express.Response) => {
+  allUsers = (_req: express.Request, res: express.Response) => {
     User.find({}, (err, users) => {
       if (err) console.log(err);
       else res.json(users);
@@ -14,7 +14,7 @@ export class UserController {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
     let username = req.body.username;
-    let password = req.body.password;
+    let password = Md5.hashStr(req.body.password);
     let phone = req.body.phone;
     let email = req.body.email;
     let name = req.body.name;
@@ -34,10 +34,10 @@ export class UserController {
     });
     user
       .save()
-      .then((user) => {
+      .then((_user: any) => {
         res.status(200).json({ message: "uspesno dodat korisnik" });
       })
-      .catch((err) => {
+      .catch((err: any) => {
         console.log(err);
         res.status(400).json({ message: `doslo je do greske ${err}` });
       });
@@ -45,10 +45,10 @@ export class UserController {
 
   login = (req: express.Request, res: express.Response) => {
     let username = req.body.username;
-    let password = req.body.password;
+    let password = Md5.hashStr(req.body.password);
     User.findOne(
-      { username: req.body.username, password: password },
-      (err, user) => {
+      { username: username, password: password },
+      (err: any, user: any) => {
         if (err) console.log(err);
         else res.json(user);
       }

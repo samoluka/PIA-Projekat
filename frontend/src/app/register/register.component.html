@@ -1,62 +1,273 @@
-<h2>Add user</h2>
+<h2>Registracija</h2>
 <table>
   <tr>
     <td>ime:</td>
     <td>
-      <input type="text" name="firstname" [(ngModel)]="firstName" />
+      <input
+        type="text"
+        id=" firstName"
+        name=" firstName"
+        class="form-control"
+        required
+        [(ngModel)]="firstName"
+        #firstNameBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          firstNameBinding.invalid &&
+          (firstNameBinding.dirty || firstNameBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="firstNameBinding.errors?.['required']">
+          ime je obavezno polje
+        </div>
+      </div>
     </td>
   </tr>
   <tr>
     <td>prezime:</td>
     <td>
-      <input type="text" name="lastname" [(ngModel)]="lastName" />
+      <input
+        type="text"
+        id="lastName"
+        name="lastName"
+        class="form-control"
+        required
+        [(ngModel)]="lastName"
+        #lastNameBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          lastNameBinding.invalid &&
+          (lastNameBinding.dirty || lastNameBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="lastNameBinding.errors?.['required']">
+          prezime je obavezno polje
+        </div>
+      </div>
     </td>
   </tr>
   <tr>
     <td>korisnicko ime:</td>
     <td>
-      <input type="text" name="username" [(ngModel)]="username" />
+      <input
+        type="text"
+        id="username"
+        name="username"
+        class="form-control"
+        required
+        [(ngModel)]="username"
+        #usernameBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          usernameBinding.invalid &&
+          (usernameBinding.dirty || usernameBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="   usernameBinding.errors?.['required']">
+          korisnicko ime je obavezno polje
+        </div>
+      </div>
     </td>
   </tr>
   <tr>
     <td>sifra:</td>
     <td>
-      <input type="text" name="password" [(ngModel)]="password" />
+      <input
+        type="password"
+        id="password"
+        name="password"
+        class="form-control"
+        required
+        [(ngModel)]="password"
+        #passwordBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          passwordBinding.invalid &&
+          (passwordBinding.dirty || passwordBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="passwordBinding.errors?.['required']">
+          sifra je obavezno polje
+        </div>
+      </div>
+    </td>
+  </tr>
+  <tr>
+    <td>potvrdite sifru:</td>
+    <td>
+      <input
+        type="password"
+        id="passwordConfirm"
+        name="passwordConfirm"
+        class="form-control"
+        required
+        pattern="{{ password }}"
+        [(ngModel)]="passwordConfirm"
+        #passwordConfirmBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          passwordConfirmBinding.invalid &&
+          (passwordConfirmBinding.dirty || passwordConfirmBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="passwordConfirmBinding.errors?.['required']">
+          potvrda sifre je obavezno polje
+        </div>
+        <div *ngIf="passwordConfirmBinding.errors?.['pattern']">
+          potvrda sifre i sifra moraju biti iste
+        </div>
+      </div>
     </td>
   </tr>
   <tr>
     <td>broj telefona:</td>
     <td>
-      <input type="text" name="phone" [(ngModel)]="phone" />
+      <input
+        type="text"
+        id="phone"
+        name="phone"
+        class="form-control"
+        required
+        [(ngModel)]="phone"
+        #phoneBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          phoneBinding.invalid && (phoneBinding.dirty || phoneBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="phoneBinding.errors?.['required']">
+          broj telefona je obavezno polje
+        </div>
+      </div>
     </td>
   </tr>
   <tr>
     <td>email:</td>
     <td>
-      <input type="text" name="email" [(ngModel)]="email" />
+      <input
+        type="text"
+        id="email"
+        name="email"
+        class="form-control"
+        required
+        [(ngModel)]="email"
+        #emailBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          emailBinding.invalid && (emailBinding.dirty || emailBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="emailBinding.errors?.['required']">
+          email je obavezno polje
+        </div>
+      </div>
     </td>
   </tr>
   <tr>
     <td>naziv preduzeca:</td>
     <td>
-      <input type="text" name="name" [(ngModel)]="name" />
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="form-control"
+        required
+        [(ngModel)]="name"
+        #nameBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          nameBinding.invalid && (nameBinding.dirty || nameBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="nameBinding.errors?.['required']">
+          naziv preduzeca je obavezno polje
+        </div>
+      </div>
     </td>
   </tr>
   <tr>
     <td>pib:</td>
     <td>
-      <input type="text" name="pib" [(ngModel)]="pib" />
+      <input
+        type="text"
+        id="pib"
+        name="pib"
+        class="form-control"
+        required
+        [(ngModel)]="pib"
+        #pibBinding="ngModel"
+      />
+      <div
+        *ngIf="pibBinding.invalid && (pibBinding.dirty || pibBinding.touched)"
+        class="alert"
+      >
+        <div *ngIf="pibBinding.errors?.['required']">pib je obavezno polje</div>
+      </div>
     </td>
   </tr>
   <tr>
     <td>maticni broj preduzeca:</td>
     <td>
-      <input type="text" name="matBroj" [(ngModel)]="matBroj" />
+      <input
+        type="text"
+        id="matBroj"
+        name="matBroj"
+        class="form-control"
+        required
+        [(ngModel)]="matBroj"
+        #matBrojBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          matBrojBinding.invalid &&
+          (matBrojBinding.dirty || matBrojBinding.touched)
+        "
+        class="alert"
+      >
+        <div *ngIf="matBrojBinding.errors?.['required']">
+          maticni broj preduzeca je obavezno polje
+        </div>
+      </div>
     </td>
   </tr>
   <tr>
     <td colspan="2">
-      <button (click)="register()">Register</button>
+      <button
+        (click)="register()"
+        [disabled]="
+          firstNameBinding.invalid ||
+          lastNameBinding.invalid ||
+          usernameBinding.invalid ||
+          passwordBinding.invalid ||
+          passwordConfirmBinding.invalid ||
+          phoneBinding.invalid ||
+          emailBinding.invalid ||
+          nameBinding.invalid ||
+          pibBinding.invalid ||
+          matBrojBinding.invalid
+        "
+      >
+      Registracija
+      </button>
     </td>
   </tr>
 </table>
+<p>
+    {{message}}
+</p>
