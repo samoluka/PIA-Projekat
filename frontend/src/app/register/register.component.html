@@ -1,20 +1,62 @@
 <h2>Add user</h2>
 <table>
-    <tr>
-        <td>Username:</td>
-        <td>
-            <input type='text' name='username' [(ngModel)]='username'>
-        </td>
-    </tr>
-    <tr>
-        <td>Password:</td>
-        <td>
-            <input type='text' name='password' [(ngModel)]='password'>
-        </td>
-    </tr>
-    <tr>
-        <td colspan='2'>
-            <button (click)='register()'>Register</button>
-        </td>
-    </tr>
+  <tr>
+    <td>ime:</td>
+    <td>
+      <input type="text" name="firstname" [(ngModel)]="firstName" />
+    </td>
+  </tr>
+  <tr>
+    <td>prezime:</td>
+    <td>
+      <input type="text" name="lastname" [(ngModel)]="lastName" />
+    </td>
+  </tr>
+  <tr>
+    <td>korisnicko ime:</td>
+    <td>
+      <input type="text" name="username" [(ngModel)]="username" />
+    </td>
+  </tr>
+  <tr>
+    <td>sifra:</td>
+    <td>
+      <input type="text" name="password" [(ngModel)]="password" />
+    </td>
+  </tr>
+  <tr>
+    <td>broj telefona:</td>
+    <td>
+      <input type="text" name="phone" [(ngModel)]="phone" />
+    </td>
+  </tr>
+  <tr>
+    <td>email:</td>
+    <td>
+      <input type="text" name="email" [(ngModel)]="email" />
+    </td>
+  </tr>
+  <tr>
+    <td>naziv preduzeca:</td>
+    <td>
+      <input type="text" name="name" [(ngModel)]="name" />
+    </td>
+  </tr>
+  <tr>
+    <td>pib:</td>
+    <td>
+      <input type="text" name="pib" [(ngModel)]="pib" />
+    </td>
+  </tr>
+  <tr>
+    <td>maticni broj preduzeca:</td>
+    <td>
+      <input type="text" name="matBroj" [(ngModel)]="matBroj" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <button (click)="register()">Register</button>
+    </td>
+  </tr>
 </table>

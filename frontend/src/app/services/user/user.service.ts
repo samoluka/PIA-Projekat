@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -18,10 +19,17 @@ export class UserService {
     return this.http.post(`${this.uri}/users/login`, data);
   }
 
-  registerUser(username: string, password: string) {
+  registerUser(user: User) {
     const data = {
-      username: username,
-      password: password,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      username: user.username,
+      password: user.password,
+      phone: user.phone,
+      email: user.email,
+      name: user.name,
+      pib: user.pib,
+      matBroj: user.matBroj,
     };
     return this.http.post(`${this.uri}/users/addUser`, data);
   }
