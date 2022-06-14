@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { UserService } from '../services/user/user.service';
+import { Md5 } from 'ts-md5';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   login() {
     this.userService
-      .login(this.username, this.password)
+      .login(this.username, Md5.hashStr(this.password))
       .subscribe((user: User) => {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
