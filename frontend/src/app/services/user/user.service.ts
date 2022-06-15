@@ -19,6 +19,10 @@ export class UserService {
     return this.http.post(`${this.uri}/users/login`, data);
   }
 
+  getAllPendingCompanies() {
+    return this.http.get(`${this.uri}/users/getAllPendingCompanies`);
+  }
+
   registerUser(user: User) {
     const data = {
       firstName: user.firstName,

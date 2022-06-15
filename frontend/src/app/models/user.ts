@@ -8,4 +8,5 @@ export class User {
   name: string;
   pib: string;
   matBroj: string;
+  type: string;
 }

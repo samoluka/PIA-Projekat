@@ -3,8 +3,8 @@ import User from "../models/user";
 import { Md5 } from "ts-md5";
 
 export class UserController {
-  allUsers = (_req: express.Request, res: express.Response) => {
-    User.find({}, (err, users) => {
+  getAllPendingCompanies = (_req: express.Request, res: express.Response) => {
+    User.find({ type: "company", status: "pending" }, (err, users) => {
       if (err) console.log(err);
       else res.json(users);
     });
@@ -31,6 +31,8 @@ export class UserController {
       name: name,
       pib: pib,
       matBroj: matBroj,
+      type: "company",
+      status: "pending",
     });
     user
       .save()

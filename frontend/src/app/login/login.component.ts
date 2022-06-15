@@ -30,7 +30,8 @@ export class LoginComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
-          this.router.navigate(['/user']);
+          if (user.type === 'admin') this.router.navigate(['/admin']);
+          else this.router.navigate(['/user']);
         } else this.message = 'Bad data';
       });
   }

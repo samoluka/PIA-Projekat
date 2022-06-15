@@ -3,8 +3,8 @@ import { UserController } from "../controllers/user.controller";
 const userRouter = express.Router();
 
 userRouter
-  .route("/allUsers")
-  .get((req, res) => new UserController().allUsers(req, res));
+  .route("/getAllPendingCompanies")
+  .get((req, res) => new UserController().getAllPendingCompanies(req, res));
 userRouter
   .route("/addUser")
   .post((req, res) => new UserController().addUser(req, res));

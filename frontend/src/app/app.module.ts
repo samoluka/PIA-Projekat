@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { UserComponent } from './user/user.component';
 import { RegisterComponent } from './register/register.component';
 import { PasswordChangerComponent } from './password-changer/password-changer.component';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
 @NgModule({
   declarations: [
@@ -18,6 +19,7 @@ import { PasswordChangerComponent } from './password-changer/password-changer.co
     UserComponent,
     RegisterComponent,
     PasswordChangerComponent,
+    AdminPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

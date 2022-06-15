@@ -56,6 +56,21 @@ let User = new Schema({
     required: true,
     unique: true,
   },
+  type: {
+    type: String,
+    required: true,
+  },
+  status: {
+    type: String,
+    default: "active",
+    required: true,
+  },
 });
+
+User.methods.toJSON = function () {
+  var obj = this.toObject();
+  delete obj.password;
+  return obj;
+};
 
 export default mongoose.model("User", User, "users");
