@@ -12,7 +12,12 @@ import { UserService } from '../services/user/user.service';
 export class LoginComponent implements OnInit {
   constructor(private userService: UserService, private router: Router) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    if ('message' in localStorage) {
+      this.message = localStorage.getItem('message');
+      localStorage.removeItem('message');
+    }
+  }
 
   username: string;
   password: string;

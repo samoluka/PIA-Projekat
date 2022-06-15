@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User } from '../models/user';
 import { UserService } from '../services/user/user.service';
 
@@ -8,7 +9,7 @@ import { UserService } from '../services/user/user.service';
   styleUrls: ['./password-changer.component.css'],
 })
 export class PasswordChangerComponent implements OnInit {
-  constructor(private servis: UserService) {}
+  constructor(private servis: UserService, private router: Router) {}
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -28,7 +29,8 @@ export class PasswordChangerComponent implements OnInit {
       .changePassword(this.user, this.oldPassword, this.password)
       .subscribe({
         next: (v: any) => {
-          this.message = v['message'];
+          localStorage.setItem('message', 'uspesna promena lozinke');
+          this.router.navigate(['/']);
         },
         error: (e) => {
           this.message = e.error['message'];
