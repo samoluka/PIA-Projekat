@@ -8,7 +8,9 @@
     "start": "npm run serve",
     "serve": "node dist/server.js",
     "watch-node": "nodemon dist/server.js",
-    "watch-ts": "tsc -w"
+    "watch-ts": "tsc -w",
+    "start": "nodemon server.ts",
+    "devStart": "nodemon --watch \"src/**\" --ext \"ts,json\" --ignore \"src/**/*.spec.ts\" --exec \"ts-node src/server.ts"
   },
   "author": "",
   "license": "ISC",

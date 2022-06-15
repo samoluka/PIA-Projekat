@@ -35,11 +35,12 @@ export class UserController {
     user
       .save()
       .then((_user: any) => {
-        res.status(200).json({ message: "uspesno dodat korisnik" });
+        res.status(200).json({ message: "uspesno dodat korisnik kurcina" });
       })
       .catch((err: any) => {
-        console.log(err);
-        res.status(400).json({ message: `doslo je do greske ${err}` });
+        // res.statusMessage = "doslo je do greske kurcina";
+        // res.status(400).end();
+        res.status(400).json({ message: "doslo je do greske" });
       });
   };
 
@@ -49,8 +50,35 @@ export class UserController {
     User.findOne(
       { username: username, password: password },
       (err: any, user: any) => {
-        if (err) console.log(err);
-        else res.json(user);
+        if (err) {
+          // res.statusMessage = `doslo je do greske ${err}`;
+          // res.status(400).end();
+          res.status(400).json({ message: "doslo je do greske" });
+        } else res.status(200).json(user);
+      }
+    );
+  };
+
+  changePassword = (req: express.Request, res: express.Response) => {
+    let username = req.body.username;
+    let oldPassword = req.body.oldPassword;
+    let newPassword = req.body.newPassword;
+    User.findOne(
+      {
+        username: username,
+        password: Md5.hashStr(oldPassword),
+      },
+      (err: any, user: any) => {
+        if (user != null) {
+          user.password = Md5.hashStr(newPassword);
+          user.save().then((user) => {
+            res.status(200).json({ message: "sve je okej" });
+          });
+        } else {
+          // res.statusMessage = `doslo je do greske ${err}`;
+          res.status(400).json({ message: "doslo je do greske" });
+          // res.status(400).end();
+        }
       }
     );
   };

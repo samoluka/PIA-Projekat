@@ -33,4 +33,12 @@ export class UserService {
     };
     return this.http.post(`${this.uri}/users/addUser`, data);
   }
+  changePassword(user: User, oldPassword: String, newPassword: String) {
+    const data = {
+      username: user.username,
+      oldPassword: oldPassword,
+      newPassword: newPassword,
+    };
+    return this.http.post(`${this.uri}/users/changePassword`, data);
+  }
 }

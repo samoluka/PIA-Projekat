@@ -1,9 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../models/user';
 import { UserService } from '../services/user/user.service';
-import { Md5 } from 'ts-md5/dist/md5';
-import { catchError } from 'rxjs/internal/operators/catchError';
-import { Observable, ObservableInput } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -53,10 +50,13 @@ export class RegisterComponent implements OnInit {
     user.pib = this.pib;
     user.matBroj = this.matBroj;
 
-    this.servis.registerUser(user).subscribe((resp) => {
-      console.log(resp);
-      console.log(`kurcina poruka ${resp['message']}`);
-      this.message = resp['message'];
+    this.servis.registerUser(user).subscribe({
+      next: (v: any) => {
+        this.message = v['message'];
+      },
+      error: (e) => {
+        this.message = e.error['message'];
+      },
     });
   }
 }
