@@ -120,7 +120,8 @@ export class UserController {
       {
         username: username,
       },
-      update
+      update,
+      { new: true }
     ).then((user) => {
       if (user != null)
         res.status(200).json({ message: "sve ok ", user: user });

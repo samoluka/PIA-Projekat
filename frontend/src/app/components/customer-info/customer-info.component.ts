@@ -17,6 +17,10 @@ export class CustomerInfoComponent implements OnInit {
     this.changed = Array.from({ length: 5 }, (i) => (i = false));
 
     this.newLastName = this.user.lastName;
+    this.newFirstName = this.user.firstName;
+    this.newUsername = this.user.username;
+    this.newPhone = this.user.phone;
+    this.newPib = this.user.pib;
   }
 
   user: User;

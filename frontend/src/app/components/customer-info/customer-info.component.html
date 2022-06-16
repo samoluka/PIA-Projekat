@@ -1,13 +1,21 @@
-<table>
+<table class="table">
   <tr>
-    <td>ime:</td>
-    <td>
-      {{ user.firstName }}
+    <td class="td">ime:</td>
+    <td class="td">
+      <div (click)="startUpdate(0)" *ngIf="!update[0]">
+        {{ user.firstName }}
+      </div>
+      <input
+        type="text"
+        [(ngModel)]="newFirstName"
+        (blur)="saveUpdate(0)"
+        *ngIf="update[0]"
+      />
     </td>
   </tr>
   <tr>
-    <td>prezime:</td>
-    <td>
+    <td class="td">prezime:</td>
+    <td class="td">
       <div (click)="startUpdate(1)" *ngIf="!update[1]">{{ user.lastName }}</div>
       <input
         type="text"
@@ -18,27 +26,45 @@
     </td>
   </tr>
   <tr>
-    <td>korisnicko ime:</td>
-    <td>
-      {{ user.username }}
+    <td class="td">korisnicko ime:</td>
+    <td class="td">
+      <div (click)="startUpdate(2)" *ngIf="!update[2]">{{ user.username }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newUsername"
+        (blur)="saveUpdate(2)"
+        *ngIf="update[2]"
+      />
     </td>
   </tr>
   <tr>
-    <td>broj telefona:</td>
-    <td>
-      {{ user.phone }}
+    <td class="td">broj telefona:</td>
+    <td class="td">
+      <div (click)="startUpdate(3)" *ngIf="!update[3]">{{ user.phone }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPhone"
+        (blur)="saveUpdate(3)"
+        *ngIf="update[3]"
+      />
     </td>
   </tr>
   <tr>
-    <td>broj licne karte:</td>
-    <td>
-      {{ user.pib }}
+    <td class="td">broj licne karte:</td>
+    <td class="td">
+      <div (click)="startUpdate(4)" *ngIf="!update[4]">{{ user.pib }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPib"
+        (blur)="saveUpdate(4)"
+        *ngIf="update[4]"
+      />
     </td>
   </tr>
   <tr>
-      <td>
-          <button (click)="saveChanges()">sacuvaj izmene</button>
-      </td>
+    <td class="td" colspan="2">
+      <button (click)="saveChanges()">sacuvaj izmene</button>
+    </td>
   </tr>
 </table>
 <p>
