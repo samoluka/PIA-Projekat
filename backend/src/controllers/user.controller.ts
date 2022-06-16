@@ -20,6 +20,7 @@ export class UserController {
     let name = req.body.name;
     let pib = req.body.pib;
     let matBroj = req.body.matBroj;
+    let type = req.body.type;
 
     let user = new User({
       firstName: firstName,
@@ -27,22 +28,20 @@ export class UserController {
       username: username,
       password: password,
       phone: phone,
-      email: email,
-      name: name,
       pib: pib,
-      matBroj: matBroj,
-      type: "company",
+      type: type,
       status: "pending",
     });
+
     user
       .save()
       .then((_user: any) => {
-        res.status(200).json({ message: "uspesno dodat korisnik kurcina" });
+        res.status(200).json({ message: "uspesno dodat korisnik" });
       })
       .catch((err: any) => {
         // res.statusMessage = "doslo je do greske kurcina";
         // res.status(400).end();
-        res.status(400).json({ message: "doslo je do greske" });
+        res.status(400).json({ message: "doslo je do greske", err: err });
       });
   };
 
@@ -83,5 +82,34 @@ export class UserController {
         }
       }
     );
+  };
+
+  approveCompany = (req: express.Request, res: express.Response) => {
+    let username = req.body.username;
+    User.findOneAndUpdate(
+      {
+        username: username,
+      },
+      {
+        status: "approved",
+      }
+    ).then((user) => {
+      if (user != null) res.status(200).json({ message: "sve ok" });
+      else res.status(400).json({ message: "doslo je do greske" });
+    });
+  };
+  rejectCompany = (req: express.Request, res: express.Response) => {
+    let username = req.body.username;
+    User.findOneAndUpdate(
+      {
+        username: username,
+      },
+      {
+        status: "rejected",
+      }
+    ).then((user) => {
+      if (user != null) res.status(200).json({ message: "sve ok" });
+      else res.status(400).json({ message: "doslo je do greske" });
+    });
   };
 }

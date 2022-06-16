@@ -1,14 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user';
-import { UserService } from '../services/user/user.service';
+import { Route, Router } from '@angular/router';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css'],
+  selector: 'app-register-company-form',
+  templateUrl: './register-company-form.component.html',
+  styleUrls: ['./register-company-form.component.css'],
 })
-export class RegisterComponent implements OnInit {
-  constructor(private servis: UserService) {}
+export class RegisterCompanyFormComponent implements OnInit {
+  constructor(private servis: UserService, private router: Router) {}
 
   ngOnInit(): void {}
 
@@ -50,9 +51,15 @@ export class RegisterComponent implements OnInit {
     user.pib = this.pib;
     user.matBroj = this.matBroj;
 
-    this.servis.registerUser(user).subscribe({
+    let logedUser: User = JSON.parse(localStorage.getItem('user'));
+
+    this.servis.registerCompany(user).subscribe({
       next: (v: any) => {
         this.message = v['message'];
+        if (logedUser != null && logedUser.username === 'admin') {
+          console.log('admin');
+          this.router.navigate['admin'];
+        }
       },
       error: (e) => {
         this.message = e.error['message'];
@@ -60,4 +67,3 @@ export class RegisterComponent implements OnInit {
     });
   }
 }
-

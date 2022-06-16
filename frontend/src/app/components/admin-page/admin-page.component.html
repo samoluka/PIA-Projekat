@@ -1,0 +1,60 @@
+<table class="table">
+  <tr>
+    <th class="td">ime:</th>
+    <th class="td">prezime:</th>
+    <th class="td">korisnicko ime:</th>
+    <th class="td">broj telefona:</th>
+    <th class="td">naziv preduzeca:</th>
+    <th class="td">email:</th>
+    <th class="td">pib:</th>
+    <th class="td">maticni broj preduzeca:</th>
+  </tr>
+  <ng-container *ngFor="let company of companies">
+    <tr>
+      <td class="td">
+        {{ company.firstName }}
+      </td>
+      <td class="td">
+        {{ company.lastName }}
+      </td>
+      <td class="td">
+        {{ company.username }}
+      </td>
+      <td class="td">
+        {{ company.phone }}
+      </td>
+      <td class="td">
+        {{ company.email }}
+      </td>
+      <td class="td">
+        {{ company.username }}
+      </td>
+      <td class="td">
+        {{ company.pib }}
+      </td>
+      <td class="td">
+        {{ company.matBroj }}
+      </td>
+      <td>
+        <button (click)="approveCompany(company)">
+          Odobri kompaniju
+        </button>
+      </td>
+      <td>
+        <button (click)="rejectCompany(company)">
+          Odbij kompaniju
+        </button>
+      </td>
+    </tr>
+  </ng-container>
+</table>
+
+<span>
+  <h2>registruj preduzece:</h2>
+  <app-register-company-form></app-register-company-form>
+</span>
+
+<span>
+  <h2>registruj kupca:</h2>
+  <app-register-customer-form></app-register-customer-form>
+</span>

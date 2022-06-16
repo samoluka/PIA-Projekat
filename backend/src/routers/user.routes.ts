@@ -15,4 +15,12 @@ userRouter
 userRouter
   .route("/changePassword")
   .post((req, res) => new UserController().changePassword(req, res));
+
+userRouter
+  .route("/approveCompany")
+  .post((req, res) => new UserController().approveCompany(req, res));
+userRouter
+  .route("/rejectCompany")
+  .post((req, res) => new UserController().rejectCompany(req, res));
+
 export default userRouter;

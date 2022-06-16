@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../models/user';
-import { UserService } from '../services/user/user.service';
+import { User } from '../../models/user';
+import { UserService } from '../../services/user/user.service';
 
 @Component({
   selector: 'app-admin-page',
@@ -15,5 +15,17 @@ export class AdminPageComponent implements OnInit {
       this.companies = companies;
     });
   }
+
   companies: User[] = [];
+
+  approveCompany(user: User) {
+    this.userService.approveCompany(user).subscribe((resp) => {
+      this.ngOnInit();
+    });
+  }
+  rejectCompany(user: User) {
+    this.userService.rejectCompany(user).subscribe((resp) => {
+      this.ngOnInit();
+    });
+  }
 }

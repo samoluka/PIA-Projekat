@@ -39,12 +39,11 @@ let User = new Schema({
   },
   email: {
     type: String,
-    required: true,
     unique: true,
+    sparse: true,
   },
   name: {
     type: String,
-    required: true,
   },
   pib: {
     type: String,
@@ -53,8 +52,8 @@ let User = new Schema({
   },
   matBroj: {
     type: String,
-    required: true,
     unique: true,
+    sparse: true,
   },
   type: {
     type: String,

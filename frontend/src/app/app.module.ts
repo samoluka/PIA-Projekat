@@ -6,20 +6,26 @@ import { AppComponent } from './app.component';
  
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { LoginComponent } from './login/login.component';
-import { UserComponent } from './user/user.component';
-import { RegisterComponent } from './register/register.component';
-import { PasswordChangerComponent } from './password-changer/password-changer.component';
-import { AdminPageComponent } from './admin-page/admin-page.component';
+import { RegisterComponent } from './components/register/register.component';
+import { CompanyPageComponent } from './components/company-page/company-page.component';
+import { AdminPageComponent } from './components/admin-page/admin-page.component';
+import { LoginComponent } from './components/login/login.component';
+import { PasswordChangerComponent } from './components/password-changer/password-changer.component';
+import { RegisterCompanyFormComponent } from './components/register-company-form/register-company-form.component';
+import { RegisterCustomerFormComponent } from './components/register-customer-form/register-customer-form.component';
+import { AdminCompanyViewComponent } from './components/admin-company-view/admin-company-view.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    UserComponent,
     RegisterComponent,
     PasswordChangerComponent,
     AdminPageComponent,
+    CompanyPageComponent,
+    RegisterCompanyFormComponent,
+    RegisterCustomerFormComponent,
+    AdminCompanyViewComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
