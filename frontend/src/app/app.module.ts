@@ -13,6 +13,7 @@ import { LoginComponent } from './components/login/login.component';
 import { PasswordChangerComponent } from './components/password-changer/password-changer.component';
 import { RegisterCompanyFormComponent } from './components/register-company-form/register-company-form.component';
 import { RegisterCustomerFormComponent } from './components/register-customer-form/register-customer-form.component';
+import { CustomerPageComponent } from './components/customer-page/customer-page.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { RegisterCustomerFormComponent } from './components/register-customer-fo
     CompanyPageComponent,
     RegisterCompanyFormComponent,
     RegisterCustomerFormComponent,
+    CustomerPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

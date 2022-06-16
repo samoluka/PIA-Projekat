@@ -37,7 +37,10 @@ export class LoginComponent implements OnInit {
               this.router.navigate(['/admin']);
               break;
             case 'company':
-              this.router.navigate(['company']);
+              this.router.navigate(['/company']);
+              break;
+            case 'customer':
+              this.router.navigate(['/customer']);
               break;
           }
         } else this.message = 'Bad data';
