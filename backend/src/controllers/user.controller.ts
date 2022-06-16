@@ -112,4 +112,19 @@ export class UserController {
       else res.status(400).json({ message: "doslo je do greske" });
     });
   };
+
+  updateUser = (req: express.Request, res: express.Response) => {
+    let username = req.body.username;
+    let update = req.body.update;
+    User.findOneAndUpdate(
+      {
+        username: username,
+      },
+      update
+    ).then((user) => {
+      if (user != null)
+        res.status(200).json({ message: "sve ok ", user: user });
+      else res.status(400).json({ message: "doslo je do greske" });
+    });
+  };
 }

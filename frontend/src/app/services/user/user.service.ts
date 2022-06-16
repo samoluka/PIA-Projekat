@@ -73,4 +73,12 @@ export class UserService {
     };
     return this.http.post(`${this.uri}/users/rejectCompany`, data);
   }
+
+  updateUser(user: User, update: any) {
+    const data = {
+      username: user.username,
+      update: update,
+    };
+    return this.http.post(`${this.uri}/users/updateUser`, data);
+  }
 }

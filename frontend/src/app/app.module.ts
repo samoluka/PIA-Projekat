@@ -14,6 +14,7 @@ import { PasswordChangerComponent } from './components/password-changer/password
 import { RegisterCompanyFormComponent } from './components/register-company-form/register-company-form.component';
 import { RegisterCustomerFormComponent } from './components/register-customer-form/register-customer-form.component';
 import { CustomerPageComponent } from './components/customer-page/customer-page.component';
+import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { CustomerPageComponent } from './components/customer-page/customer-page.
     RegisterCompanyFormComponent,
     RegisterCustomerFormComponent,
     CustomerPageComponent,
+    CustomerInfoComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

@@ -1,0 +1,46 @@
+<table>
+  <tr>
+    <td>ime:</td>
+    <td>
+      {{ user.firstName }}
+    </td>
+  </tr>
+  <tr>
+    <td>prezime:</td>
+    <td>
+      <div (click)="startUpdate(1)" *ngIf="!update[1]">{{ user.lastName }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newLastName"
+        (blur)="saveUpdate(1)"
+        *ngIf="update[1]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td>korisnicko ime:</td>
+    <td>
+      {{ user.username }}
+    </td>
+  </tr>
+  <tr>
+    <td>broj telefona:</td>
+    <td>
+      {{ user.phone }}
+    </td>
+  </tr>
+  <tr>
+    <td>broj licne karte:</td>
+    <td>
+      {{ user.pib }}
+    </td>
+  </tr>
+  <tr>
+      <td>
+          <button (click)="saveChanges()">sacuvaj izmene</button>
+      </td>
+  </tr>
+</table>
+<p>
+  {{ message }}
+</p>

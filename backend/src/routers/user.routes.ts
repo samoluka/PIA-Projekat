@@ -23,4 +23,7 @@ userRouter
   .route("/rejectCompany")
   .post((req, res) => new UserController().rejectCompany(req, res));
 
+userRouter
+  .route("/updateUser")
+  .post((req, res) => new UserController().updateUser(req, res));
 export default userRouter;
