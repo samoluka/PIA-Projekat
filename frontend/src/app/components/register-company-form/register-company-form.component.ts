@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Route, Router } from '@angular/router';
+import { CommonService } from '../../services/commonService.service';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user/user.service';
 
@@ -9,7 +10,11 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./register-company-form.component.css'],
 })
 export class RegisterCompanyFormComponent implements OnInit {
-  constructor(private servis: UserService, private router: Router) {}
+  constructor(
+    private servis: UserService,
+    private commonService: CommonService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {}
 
@@ -57,8 +62,9 @@ export class RegisterCompanyFormComponent implements OnInit {
       next: (v: any) => {
         this.message = v['message'];
         if (logedUser != null && logedUser.username === 'admin') {
-          console.log('admin');
-          this.router.navigate['admin'];
+          this.commonService.sendUpdate(
+            'Message from Sender Component to Receiver Component!'
+          );
         }
       },
       error: (e) => {

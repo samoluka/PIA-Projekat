@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from '../../services/commonService.service';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user/user.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-admin-page',
@@ -8,7 +10,17 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./admin-page.component.css'],
 })
 export class AdminPageComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private commonService: CommonService
+  ) {
+    this.subscriptionName = this.commonService
+      .getUpdate()
+      .subscribe((message) => {
+        console.log(message);
+        this.ngOnInit();
+      });
+  }
 
   ngOnInit(): void {
     this.userService.getAllPendingCompanies().subscribe((companies: User[]) => {
@@ -16,6 +28,12 @@ export class AdminPageComponent implements OnInit {
     });
   }
 
+  ngOnDestroy() {
+    this.subscriptionName.unsubscribe();
+  }
+
+  messageReceived: any;
+  private subscriptionName: Subscription;
   companies: User[] = [];
 
   approveCompany(user: User) {
