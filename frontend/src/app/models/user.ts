@@ -9,4 +9,5 @@ export class User {
   pib: string;
   matBroj: string;
   type: string;
+  status: string;
 }

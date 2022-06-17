@@ -8,3 +8,20 @@
     border-collapse: collapse;
     text-align: center;
 }
+.red {
+    background-color: red;
+}
+
+.green {
+    background-color: greenyellow
+}
+
+.horizontally-outer {
+    display: flex;
+    flex-direction: row;
+    margin: auto;
+}
+
+.horizontally-inner {
+    padding: 50px;
+}

@@ -3,8 +3,10 @@ import User from "../models/user";
 import { Md5 } from "ts-md5";
 
 export class UserController {
-  getAllPendingCompanies = (_req: express.Request, res: express.Response) => {
-    User.find({ type: "company", status: "pending" }, (err, users) => {
+  getAllUsersWithFilter = (req: express.Request, res: express.Response) => {
+    let filter = JSON.parse(req.query.filter.toString());
+    console.log(filter);
+    User.find(filter, (err, users) => {
       if (err) console.log(err);
       else res.json(users);
     });
@@ -32,6 +34,16 @@ export class UserController {
       type: type,
       status: "pending",
     });
+
+    if (email != null) {
+      user.email = email;
+    }
+    if (name != null) {
+      user.name = name;
+    }
+    if (matBroj != null) {
+      user.matBroj = matBroj;
+    }
 
     user
       .save()
@@ -84,28 +96,15 @@ export class UserController {
     );
   };
 
-  approveCompany = (req: express.Request, res: express.Response) => {
+  setUserStatus = (req: express.Request, res: express.Response) => {
     let username = req.body.username;
+    let status = req.body.status;
     User.findOneAndUpdate(
       {
         username: username,
       },
       {
-        status: "approved",
-      }
-    ).then((user) => {
-      if (user != null) res.status(200).json({ message: "sve ok" });
-      else res.status(400).json({ message: "doslo je do greske" });
-    });
-  };
-  rejectCompany = (req: express.Request, res: express.Response) => {
-    let username = req.body.username;
-    User.findOneAndUpdate(
-      {
-        username: username,
-      },
-      {
-        status: "rejected",
+        status: status,
       }
     ).then((user) => {
       if (user != null) res.status(200).json({ message: "sve ok" });

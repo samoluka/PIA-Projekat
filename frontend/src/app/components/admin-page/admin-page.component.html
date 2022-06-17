@@ -1,4 +1,5 @@
 <a [routerLink]="['/passwordChanger']">Promeni sifru</a>
+<h2 style = "text-align: center;">Pregled svih neodobrenih kompanija</h2>
 <table class="table">
   <tr>
     <th class="td">ime:</th>
@@ -10,7 +11,7 @@
     <th class="td">pib:</th>
     <th class="td">maticni broj preduzeca:</th>
   </tr>
-  <ng-container *ngFor="let company of companies">
+  <ng-container *ngFor="let company of companiesPending">
     <tr>
       <td class="td">
         {{ company.firstName }}
@@ -50,12 +51,69 @@
   </ng-container>
 </table>
 
-<span>
-  <h2>registruj preduzece:</h2>
-  <app-register-company-form></app-register-company-form>
-</span>
+<br>
 
-<span>
-  <h2>registruj kupca:</h2>
-  <app-register-customer-form></app-register-customer-form>
-</span>
+<h2 style = "text-align: center;">Pregled svih odobrenih kompanija</h2>
+<table class="table">
+  <tr>
+    <th class="td">ime:</th>
+    <th class="td">prezime:</th>
+    <th class="td">korisnicko ime:</th>
+    <th class="td">broj telefona:</th>
+    <th class="td">naziv preduzeca:</th>
+    <th class="td">email:</th>
+    <th class="td">pib:</th>
+    <th class="td">maticni broj preduzeca:</th>
+    <th class="td">status:</th>
+    <th class="td">promeni status:</th>
+  </tr>
+  <ng-container *ngFor="let company of companiesApproved">
+    <tr>
+      <td class="td">
+        {{ company.firstName }}
+      </td>
+      <td class="td">
+        {{ company.lastName }}
+      </td>
+      <td class="td">
+        {{ company.username }}
+      </td>
+      <td class="td">
+        {{ company.phone }}
+      </td>
+      <td class="td">
+        {{ company.email }}
+      </td>
+      <td class="td">
+        {{ company.username }}
+      </td>
+      <td class="td">
+        {{ company.pib }}
+      </td>
+      <td class="td">
+        {{ company.matBroj }}
+      </td>
+      <td class="td">
+        {{ company.status }}
+      </td>
+      <td class="td">
+        <button (click)="changeStatus(company)"
+        [ngClass]="company.status == 'active' ? 'red' : 'green'" >
+           {{company.status === 'active' ? 'suspenduj':'aktiviraj'}}
+        </button>
+      </td>
+    </tr>
+  </ng-container>
+</table>
+
+
+<div class='horizontally-outer'>
+  <div class="horizontally-inner">
+    <h2>registruj preduzece:</h2>
+    <app-register-company-form></app-register-company-form>
+  </div>
+  <div class="horizontally-inner">
+    <h2>registruj kupca:</h2>
+    <app-register-customer-form></app-register-customer-form>
+  </div>
+</div>

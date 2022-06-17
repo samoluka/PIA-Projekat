@@ -3,8 +3,8 @@ import { UserController } from "../controllers/user.controller";
 const userRouter = express.Router();
 
 userRouter
-  .route("/getAllPendingCompanies")
-  .get((req, res) => new UserController().getAllPendingCompanies(req, res));
+  .route("/getAllUsersWithFilter")
+  .get((req, res) => new UserController().getAllUsersWithFilter(req, res));
 userRouter
   .route("/addUser")
   .post((req, res) => new UserController().addUser(req, res));
@@ -17,11 +17,8 @@ userRouter
   .post((req, res) => new UserController().changePassword(req, res));
 
 userRouter
-  .route("/approveCompany")
-  .post((req, res) => new UserController().approveCompany(req, res));
-userRouter
-  .route("/rejectCompany")
-  .post((req, res) => new UserController().rejectCompany(req, res));
+  .route("/setUserStatus")
+  .post((req, res) => new UserController().setUserStatus(req, res));
 
 userRouter
   .route("/updateUser")

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 
 @Injectable({
@@ -20,7 +20,27 @@ export class UserService {
   }
 
   getAllPendingCompanies() {
-    return this.http.get(`${this.uri}/users/getAllPendingCompanies`);
+    const filter = {
+      type: 'company',
+      status: 'pending',
+    };
+    return this.http.get(
+      `${this.uri}/users/getAllUsersWithFilter/?filter=${JSON.stringify(
+        filter
+      )}`
+    );
+  }
+
+  getAllApprovedCompanies() {
+    const filter = {
+      type: 'company',
+      status: { $nin: ['rejected', 'pending'] },
+    };
+    return this.http.get(
+      `${this.uri}/users/getAllUsersWithFilter/?filter=${JSON.stringify(
+        filter
+      )}`
+    );
   }
 
   registerCompany(user: User) {
@@ -61,17 +81,12 @@ export class UserService {
     return this.http.post(`${this.uri}/users/changePassword`, data);
   }
 
-  approveCompany(user: User) {
+  setUserStatus(user: User, status: string) {
     const data = {
       username: user.username,
+      status: status,
     };
-    return this.http.post(`${this.uri}/users/approveCompany`, data);
-  }
-  rejectCompany(user: User) {
-    const data = {
-      username: user.username,
-    };
-    return this.http.post(`${this.uri}/users/rejectCompany`, data);
+    return this.http.post(`${this.uri}/users/setUserStatus`, data);
   }
 
   updateUser(user: User, update: any) {
