@@ -25,3 +25,11 @@
 .horizontally-inner {
     padding: 50px;
 }
+.center {
+    text-align: center;
+    margin: auto
+}
+
+.pretraga {
+    font-size: larger;
+}
