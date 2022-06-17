@@ -96,4 +96,15 @@ export class UserService {
     };
     return this.http.post(`${this.uri}/users/updateUser`, data);
   }
+
+  setCompanyAdditionInfo(
+    user: User,
+    info: { category: string; code: string; pdv: boolean }
+  ) {
+    const data = {
+      username: user.username,
+      additionInfo: info,
+    };
+    return this.http.post(`${this.uri}/users/setCompanyAdditionInfo`, data);
+  }
 }

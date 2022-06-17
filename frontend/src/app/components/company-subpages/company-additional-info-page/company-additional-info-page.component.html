@@ -1,0 +1,22 @@
+<p>company-additional-info-page works!</p>
+
+<table>
+  <tr>
+    <td>kategorija:</td>
+    <td><input type="text" name="category"  [(ngModel)]="category" /></td>
+  </tr>
+  <tr>
+    <td>sifra delatnosti:</td>
+    <td><input type="text" name="code"  [(ngModel)]="code" /></td>
+  </tr>
+  <tr>
+    <td>pdv:</td>
+    <td><input type="checkbox" name = "pdv"  [(ngModel)]="pdv" /></td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <button (click)="saveAdditionInfo()">sacuvaj</button>
+    </td>
+  </tr>
+</table>
+<p>{{ message }}</p>

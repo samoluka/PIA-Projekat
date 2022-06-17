@@ -1,6 +1,7 @@
 import * as express from "express";
 import User from "../models/user";
 import { Md5 } from "ts-md5";
+import user from "../models/user";
 
 export class UserController {
   getAllUsersWithFilter = (req: express.Request, res: express.Response) => {
@@ -129,22 +130,15 @@ export class UserController {
   };
 
   setCompanyAdditionInfo = (req: express.Request, res: express.Response) => {
-    let category = req.body.category;
-    let code = req.body.code;
-    let pdv = req.body.pdv;
+    let additionInfo = req.body.additionInfo;
     let username = req.body.username;
-
     User.findOneAndUpdate(
       {
         username: username,
         type: "company",
       },
       {
-        additionInfo: {
-          category: category,
-          pdv: pdv,
-          code: code,
-        },
+        additionInfo: additionInfo,
       },
       { new: true }
     ).then((user) => {

@@ -16,7 +16,7 @@ import { RegisterCustomerFormComponent } from './components/register-customer-fo
 import { CustomerPageComponent } from './components/customer-page/customer-page.component';
 import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
 import { NotApprovedPageComponent } from './components/not-approved-page/not-approved-page.component';
-import { CompanyAditionalInfoPageComponent } from './components/CompanySubpages/company-aditional-info-page/company-aditional-info-page.component';
+import { CompanyAdditionalInfoPageComponent } from './components/company-subpages/company-additional-info-page/company-additional-info-page.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +31,7 @@ import { CompanyAditionalInfoPageComponent } from './components/CompanySubpages/
     CustomerPageComponent,
     CustomerInfoComponent,
     NotApprovedPageComponent,
-    CompanyAditionalInfoPageComponent,
+    CompanyAdditionalInfoPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],
