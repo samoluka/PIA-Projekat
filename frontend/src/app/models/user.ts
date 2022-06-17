@@ -10,4 +10,9 @@ export class User {
   matBroj: string;
   type: string;
   status: string;
+  additionInfo: {
+    category: string;
+    code: string;
+    pdv: boolean;
+  };
 }

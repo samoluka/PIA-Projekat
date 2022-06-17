@@ -1,2 +1,4 @@
-<p>company-page works!</p>
+<h1>Zdravo {{user.username}}</h1>
 <a [routerLink]="['/passwordChanger']">Promeni sifru</a>
+<br>
+<app-company-aditional-info-page *ngIf = "!user.additionInfo"></app-company-aditional-info-page>

@@ -127,4 +127,30 @@ export class UserController {
       else res.status(400).json({ message: "doslo je do greske" });
     });
   };
+
+  setCompanyAdditionInfo = (req: express.Request, res: express.Response) => {
+    let category = req.body.category;
+    let code = req.body.code;
+    let pdv = req.body.pdv;
+    let username = req.body.username;
+
+    User.findOneAndUpdate(
+      {
+        username: username,
+        type: "company",
+      },
+      {
+        additionInfo: {
+          category: category,
+          pdv: pdv,
+          code: code,
+        },
+      },
+      { new: true }
+    ).then((user) => {
+      if (user != null)
+        res.status(200).json({ message: "sve ok ", user: user });
+      else res.status(400).json({ message: "doslo je do greske" });
+    });
+  };
 }

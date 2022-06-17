@@ -30,19 +30,19 @@ export class LoginComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) {
           localStorage.setItem('user', JSON.stringify(user));
-          // if (user.type === 'admin') this.router.navigate(['/admin']);
-          // else this.router.navigate(['/user']);
-          switch (user.type) {
-            case 'admin':
-              this.router.navigate(['/admin']);
-              break;
-            case 'company':
-              this.router.navigate(['/company']);
-              break;
-            case 'customer':
-              this.router.navigate(['/customer']);
-              break;
-          }
+          if (user.status === 'pending') this.router.navigate(['/notApproved']);
+          else
+            switch (user.type) {
+              case 'admin':
+                this.router.navigate(['/admin']);
+                break;
+              case 'company':
+                this.router.navigate(['/company']);
+                break;
+              case 'customer':
+                this.router.navigate(['/customer']);
+                break;
+            }
         } else this.message = 'Bad data';
       });
   }

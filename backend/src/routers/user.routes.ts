@@ -23,4 +23,9 @@ userRouter
 userRouter
   .route("/updateUser")
   .post((req, res) => new UserController().updateUser(req, res));
+
+;
+userRouter
+  .route("/setCompanyAdditionInfo")
+  .post((req, res) => new UserController().setCompanyAdditionInfo(req, res));
 export default userRouter;

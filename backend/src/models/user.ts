@@ -64,6 +64,11 @@ let User = new Schema({
     default: "active",
     required: true,
   },
+  additionInfo: {
+    category: String,
+    code: String,
+    pdv: Boolean,
+  },
 });
 
 User.methods.toJSON = function () {
