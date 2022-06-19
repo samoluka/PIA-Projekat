@@ -13,14 +13,20 @@ export class CompanyInfoPageComponent implements OnInit {
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.oldUser = JSON.parse(localStorage.getItem('user'));
-    this.update = Array.from({ length: 5 }, (i) => (i = false));
-    this.changed = Array.from({ length: 5 }, (i) => (i = false));
+    this.update = Array.from({ length: 11 }, (i) => (i = false));
+    this.changed = Array.from({ length: 11 }, (i) => (i = false));
 
     this.newLastName = this.user.lastName;
     this.newFirstName = this.user.firstName;
     this.newUsername = this.user.username;
     this.newPhone = this.user.phone;
     this.newPib = this.user.pib;
+    this.newEmail = this.user.email;
+    this.newName = this.user.name;
+    this.newMatBroj = this.user.matBroj;
+    this.newCategory = this.user.additionInfo.category;
+    this.newPdv = this.user.additionInfo.pdv;
+    this.newCode = this.user.additionInfo.code;
   }
 
   user: User;
@@ -30,6 +36,12 @@ export class CompanyInfoPageComponent implements OnInit {
   newUsername: string;
   newPhone: string;
   newPib: string;
+  newEmail: string;
+  newName: string;
+  newMatBroj: string;
+  newCategory: string;
+  newPdv: boolean;
+  newCode: string;
 
   message: string;
   update: boolean[];
@@ -44,7 +56,14 @@ export class CompanyInfoPageComponent implements OnInit {
     this.user.username = this.newUsername;
     this.user.phone = this.newPhone;
     this.user.pib = this.newPib;
-    this.changed[id] = true;
+    this.user.email = this.newEmail;
+    this.user.name = this.newName;
+    this.user.matBroj = this.newMatBroj;
+    this.user.additionInfo.category = this.newCategory;
+    this.user.additionInfo.pdv = this.newPdv;
+    this.user.additionInfo.code = this.newCode;
+
+    this.changed[id > 8 ? 8 : id] = true;
     this.update[id] = false;
   }
 
@@ -55,6 +74,16 @@ export class CompanyInfoPageComponent implements OnInit {
       ...(this.changed[2] && { username: this.user.username }),
       ...(this.changed[3] && { phone: this.user.phone }),
       ...(this.changed[4] && { pib: this.user.pib }),
+      ...(this.changed[5] && { email: this.user.email }),
+      ...(this.changed[6] && { name: this.user.name }),
+      ...(this.changed[7] && { matBroj: this.user.matBroj }),
+      ...(this.changed[8] && {
+        additionInfo: {
+          category: this.user.additionInfo.category,
+          pdv: this.user.additionInfo.pdv,
+          code: this.user.additionInfo.code,
+        },
+      }),
     };
     console.log(updateData);
     this.servis.updateUser(this.oldUser, updateData).subscribe({
@@ -67,5 +96,11 @@ export class CompanyInfoPageComponent implements OnInit {
         this.message = e.error['message'];
       },
     });
+  }
+
+  changePdv() {
+    this.update[8] = true;
+    this.newPdv = !this.newPdv;
+    this.saveUpdate(8);
   }
 }
