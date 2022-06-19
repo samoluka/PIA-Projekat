@@ -1,0 +1,145 @@
+<p>company-info-page works!</p>
+<table class="table">
+  <tr>
+    <td class="td">ime:</td>
+    <td class="td">
+      <div (click)="startUpdate(0)" *ngIf="!update[0]">
+        {{ user.firstName }}
+      </div>
+      <input
+        type="text"
+        [(ngModel)]="newFirstName"
+        (blur)="saveUpdate(0)"
+        *ngIf="update[0]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">prezime:</td>
+    <td class="td">
+      <div (click)="startUpdate(1)" *ngIf="!update[1]">{{ user.lastName }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newLastName"
+        (blur)="saveUpdate(1)"
+        *ngIf="update[1]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">korisnicko ime:</td>
+    <td class="td">
+      <div (click)="startUpdate(2)" *ngIf="!update[2]">{{ user.username }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newUsername"
+        (blur)="saveUpdate(2)"
+        *ngIf="update[2]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">broj telefona:</td>
+    <td class="td">
+      <div (click)="startUpdate(3)" *ngIf="!update[3]">{{ user.phone }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPhone"
+        (blur)="saveUpdate(3)"
+        *ngIf="update[3]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">email:</td>
+    <td class="td">
+      <div (click)="startUpdate(3)" *ngIf="!update[3]">{{ user.email }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPhone"
+        (blur)="saveUpdate(3)"
+        *ngIf="update[3]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">naziv preduzeca:</td>
+    <td class="td">
+      <div (click)="startUpdate(3)" *ngIf="!update[3]">{{ user.name }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPhone"
+        (blur)="saveUpdate(3)"
+        *ngIf="update[3]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">maticni broj preduzeva:</td>
+    <td class="td">
+      <div (click)="startUpdate(4)" *ngIf="!update[4]">{{ user.matBroj }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPib"
+        (blur)="saveUpdate(4)"
+        *ngIf="update[4]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">pib:</td>
+    <td class="td">
+      <div (click)="startUpdate(4)" *ngIf="!update[4]">{{ user.pib }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPib"
+        (blur)="saveUpdate(4)"
+        *ngIf="update[4]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">kategorija:</td>
+    <td class="td">
+      <div (click)="startUpdate(4)" *ngIf="!update[4]">{{ user.additionInfo.category }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPib"
+        (blur)="saveUpdate(4)"
+        *ngIf="update[4]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">pdv:</td>
+    <td class="td">
+      <div (click)="startUpdate(4)" *ngIf="!update[4]">{{ user.additionInfo.pdv }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPib"
+        (blur)="saveUpdate(4)"
+        *ngIf="update[4]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td">sifra:</td>
+    <td class="td">
+      <div (click)="startUpdate(4)" *ngIf="!update[4]">{{ user.additionInfo.code }}</div>
+      <input
+        type="text"
+        [(ngModel)]="newPib"
+        (blur)="saveUpdate(4)"
+        *ngIf="update[4]"
+      />
+    </td>
+  </tr>
+  <tr>
+    <td class="td" colspan="2">
+      <button (click)="saveChanges()">sacuvaj izmene</button>
+    </td>
+  </tr>
+</table>
+<p>
+  {{ message }}
+</p>
