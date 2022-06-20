@@ -147,4 +147,6 @@ export class UserController {
       else res.status(400).json({ message: "doslo je do greske" });
     });
   };
+
+  addOrderingCompany = (req: express.Request, res: express.Response) => {};
 }

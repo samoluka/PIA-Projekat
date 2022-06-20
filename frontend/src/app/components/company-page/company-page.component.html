@@ -1,6 +1,8 @@
 <h1>Zdravo {{user.username}}</h1>
 <a [routerLink]="['/passwordChanger']">Promeni sifru</a>
 <br>
+<a [routerLink]="['/company/companyOrder']">Narucioci</a>
+<br>
 <app-company-additional-info-page *ngIf = "!user.additionInfo"></app-company-additional-info-page>
 
 <app-company-info-page></app-company-info-page>

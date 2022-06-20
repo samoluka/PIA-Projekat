@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { CompanyPageComponent } from './components/company-page/company-page.component';
+import { CompanyOrderCompanyPageComponent } from './components/company-subpages/company-order-company-page/company-order-company-page.component';
 import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
 import { CustomerPageComponent } from './components/customer-page/customer-page.component';
 import { LoginComponent } from './components/login/login.component';
@@ -15,8 +16,10 @@ const routes: Routes = [
   { path: 'passwordChanger', component: PasswordChangerComponent },
   { path: 'admin', component: AdminPageComponent },
   { path: 'company', component: CompanyPageComponent },
+  { path: 'company/companyOrder', component: CompanyOrderCompanyPageComponent },
   { path: 'customer', component: CustomerPageComponent },
   { path: 'customer/info', component: CustomerInfoComponent },
+
   { path: 'notApproved', component: NotApprovedPageComponent },
 ];
 

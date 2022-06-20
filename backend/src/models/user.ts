@@ -1,5 +1,5 @@
 import mongoose, { trusted } from "mongoose";
-
+import { Types } from "mongoose";
 const Schema = mongoose.Schema;
 
 // Регистрација предузећа треба да захтева унос следећих података:
@@ -68,6 +68,12 @@ let User = new Schema({
     category: String,
     code: String,
     pdv: Boolean,
+    partners: [
+      {
+        type: Types.ObjectId,
+        ref: "User",
+      },
+    ],
   },
 });
 
