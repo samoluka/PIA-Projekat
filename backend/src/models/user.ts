@@ -68,13 +68,13 @@ let User = new Schema({
     category: String,
     code: String,
     pdv: Boolean,
-    partners: [
-      {
-        type: Types.ObjectId,
-        ref: "User",
-      },
-    ],
   },
+  partners: [
+    {
+      type: Types.ObjectId,
+      ref: "User",
+    },
+  ],
 });
 
 User.methods.toJSON = function () {

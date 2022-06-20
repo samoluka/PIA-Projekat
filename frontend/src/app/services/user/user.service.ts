@@ -107,4 +107,13 @@ export class UserService {
     };
     return this.http.post(`${this.uri}/users/setCompanyAdditionInfo`, data);
   }
+
+  findUserWithPartners(user: User) {
+    const data = {
+      username: user.username,
+    };
+    console.log(`trazim za korisnika ${user.username}`);
+
+    return this.http.post(`${this.uri}/users/findUserWithPartners`, data);
+  }
 }

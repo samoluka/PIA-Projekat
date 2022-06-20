@@ -33,6 +33,14 @@ export class AdminPageComponent implements OnInit {
         this.companiesApproved = companies;
         this.companiesApprovedFiltered = companies;
       });
+    this.userService
+        .findUserWithPartners(JSON.parse(localStorage.getItem('user')))
+        .subscribe((user: User) => {
+          console.log(user);
+          if (user)
+            if (user.partners.length > 0)
+              this.partnerName = user.partners[0].username;
+        });
   }
 
   ngOnDestroy() {
@@ -46,6 +54,8 @@ export class AdminPageComponent implements OnInit {
 
   companiesPendingFiltered: User[] = [];
   companiesApprovedFiltered: User[] = [];
+
+  partnerName: string;
 
   pendingFilter: string = '';
   approvedFilter: string = '';

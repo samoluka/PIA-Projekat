@@ -15,4 +15,5 @@ export class User {
     code: string;
     pdv: boolean;
   };
+  partners: User[];
 }
