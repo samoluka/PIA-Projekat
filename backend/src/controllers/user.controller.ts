@@ -1,7 +1,7 @@
 import * as express from "express";
 import User from "../models/user";
 import { Md5 } from "ts-md5";
-import user from "../models/user";
+import path, { dirname } from "path";
 
 export class UserController {
   getAllUsersWithFilter = (req: express.Request, res: express.Response) => {
@@ -177,4 +177,36 @@ export class UserController {
       });
   };
 
+  uploadImage = (req, res) => {
+    const tempPath = req.file.path;
+    const appDir = dirname(require.main.filename);
+    console.log(appDir);
+    const fs = require("fs");
+
+    const targetPath = path.join(__dirname, "../../public/imag2e.webp");
+    if (path.extname(req.file.originalname).toLowerCase() === ".webp") {
+      fs.rename(tempPath, targetPath, (err) => {
+        if (err) return this.handleError(err, res);
+
+        res.status(200).contentType("text/plain").end("File uploaded!");
+      });
+    } else {
+      fs.unlink(tempPath, (err) => {
+        if (err) return this.handleError(err, res);
+
+        res
+          .status(403)
+          .contentType("text/plain")
+          .end("Only .webp files are allowed!");
+      });
+    }
+  };
+  handleError = (err, res) => {
+    console.log(err);
+
+    res
+      .status(500)
+      .contentType("text/plain")
+      .end("Oops! Something went wrong!");
+  };
 }

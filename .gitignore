@@ -102,3 +102,9 @@ dist
 
 # TernJS port file
 .tern-port
+
+# tmp files for backend
+tmp/
+
+# public files on backend
+public/
