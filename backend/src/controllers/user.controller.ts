@@ -4,6 +4,9 @@ import { Md5 } from "ts-md5";
 import path, { dirname } from "path";
 
 export class UserController {
+  appDir = dirname(require.main.filename);
+  fs = require("fs");
+
   getAllUsersWithFilter = (req: express.Request, res: express.Response) => {
     let filter = JSON.parse(req.query.filter.toString());
     console.log(filter);
@@ -179,19 +182,15 @@ export class UserController {
 
   uploadImage = (req, res) => {
     const tempPath = req.file.path;
-    const appDir = dirname(require.main.filename);
-    console.log(appDir);
-    const fs = require("fs");
-
-    const targetPath = path.join(__dirname, "../../public/imag2e.webp");
+    const targetPath = path.join(this.appDir, "../public/imag2e.webp");
     if (path.extname(req.file.originalname).toLowerCase() === ".webp") {
-      fs.rename(tempPath, targetPath, (err) => {
+      this.fs.rename(tempPath, targetPath, (err) => {
         if (err) return this.handleError(err, res);
 
         res.status(200).contentType("text/plain").end("File uploaded!");
       });
     } else {
-      fs.unlink(tempPath, (err) => {
+      this.fs.unlink(tempPath, (err) => {
         if (err) return this.handleError(err, res);
 
         res
@@ -201,6 +200,11 @@ export class UserController {
       });
     }
   };
+
+  getImage = (req, res) => {
+    res.sendFile(path.join(this.appDir, "../public/imag2e.webp"));
+  };
+
   handleError = (err, res) => {
     console.log(err);
 

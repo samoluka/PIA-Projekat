@@ -48,7 +48,9 @@ userRouter
     upload.single("file" /* name attribute of <file> element in your form */),
     (req, res) => new UserController().uploadImage(req, res)
   );
-
+userRouter
+  .route("/getImage")
+  .get((req, res) => new UserController().getImage(req, res));
 export default userRouter;
 
 
