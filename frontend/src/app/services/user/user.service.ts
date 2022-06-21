@@ -31,6 +31,17 @@ export class UserService {
     );
   }
 
+  findUserByPIB(pib: string) {
+    const filter = {
+      pib: pib,
+    };
+    return this.http.get(
+      `${this.uri}/users/getAllUsersWithFilter/?filter=${JSON.stringify(
+        filter
+      )}`
+    );
+  }
+
   getAllApprovedCompanies() {
     const filter = {
       type: 'company',
@@ -95,6 +106,14 @@ export class UserService {
       update: update,
     };
     return this.http.post(`${this.uri}/users/updateUser`, data);
+  }
+
+  addPartner(user: User, partnerUsername: string) {
+    const data = {
+      username: user.username,
+      partner: partnerUsername,
+    };
+    return this.http.post(`${this.uri}/users/addPartnerToCompany`, data);
   }
 
   setCompanyAdditionInfo(

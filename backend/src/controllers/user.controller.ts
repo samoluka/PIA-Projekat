@@ -6,7 +6,7 @@ import user from "../models/user";
 export class UserController {
   getAllUsersWithFilter = (req: express.Request, res: express.Response) => {
     let filter = JSON.parse(req.query.filter.toString());
-    //console.log(filter);
+    console.log(filter);
     User.find(filter, (err, users) => {
       if (err) console.log(err);
       else res.json(users);
@@ -170,12 +170,11 @@ export class UserController {
 
   findUserWithPartners = (req: express.Request, res: express.Response) => {
     let username = req.body.username;
-    console.log(username);
     User.findOne({ username: username })
       .populate("partners")
       .then((user) => {
-        console.log(user);
         res.status(200).json(user);
       });
   };
+
 }

@@ -18,7 +18,7 @@ import { CustomerInfoComponent } from './components/customer-info/customer-info.
 import { NotApprovedPageComponent } from './components/not-approved-page/not-approved-page.component';
 import { CompanyAdditionalInfoPageComponent } from './components/company-subpages/company-additional-info-page/company-additional-info-page.component';
 import { CompanyInfoPageComponent } from './components/company-subpages/company-info-page/company-info-page.component';
-import { CompanyOrderCompanyPageComponent } from './components/company-subpages/company-order-company-page/company-order-company-page.component';
+import { CompanyPartnersPageComponent } from './components/company-subpages/company-partners-page/company-partners-page.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +35,7 @@ import { CompanyOrderCompanyPageComponent } from './components/company-subpages/
     NotApprovedPageComponent,
     CompanyAdditionalInfoPageComponent,
     CompanyInfoPageComponent,
-    CompanyOrderCompanyPageComponent,
+    CompanyPartnersPageComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
   providers: [],

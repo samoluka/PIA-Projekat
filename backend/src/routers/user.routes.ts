@@ -5,6 +5,7 @@ const userRouter = express.Router();
 userRouter
   .route("/getAllUsersWithFilter")
   .get((req, res) => new UserController().getAllUsersWithFilter(req, res));
+  
 userRouter
   .route("/addUser")
   .post((req, res) => new UserController().addUser(req, res));

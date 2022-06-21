@@ -1,0 +1,59 @@
+<p>company-partners-page works!</p>
+
+<div class="center">
+  <label>PIB:</label>
+  <input type="text" name="pib" [(ngModel)]="pib" />
+  <button (click)="search()">Pretrazi</button>
+</div>
+<div class="rezultat center">
+  <div *ngIf="companies.length == 0">Ne postoji kompanija sa unetim pibom</div>
+  <table class="table" *ngIf="companies.length > 0">
+    <tr>
+      <th class="td">ime:</th>
+      <th class="td">prezime:</th>
+      <th class="td">korisnicko ime:</th>
+      <th class="td">broj telefona:</th>
+      <th class="td">naziv preduzeca:</th>
+      <th class="td">email:</th>
+      <th class="td">pib:</th>
+      <th class="td">maticni broj preduzeca:</th>
+      <th class="td">status:</th>
+      <th class="td">dodaj narucioca:</th>
+    </tr>
+    <ng-container *ngFor="let company of companies">
+      <tr>
+        <td class="td">
+          {{ company.firstName }}
+        </td>
+        <td class="td">
+          {{ company.lastName }}
+        </td>
+        <td class="td">
+          {{ company.username }}
+        </td>
+        <td class="td">
+          {{ company.phone }}
+        </td>
+        <td class="td">
+          {{ company.email }}
+        </td>
+        <td class="td">
+          {{ company.username }}
+        </td>
+        <td class="td">
+          {{ company.pib }}
+        </td>
+        <td class="td">
+          {{ company.matBroj }}
+        </td>
+        <td class="td">
+          {{ company.status }}
+        </td>
+        <td class="td">
+          <button (click)="addPartner(company)">Dodaj</button>
+        </td>
+      </tr>
+    </ng-container>
+  </table>
+</div>
+{{message}}
