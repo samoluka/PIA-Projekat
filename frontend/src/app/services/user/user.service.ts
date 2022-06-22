@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from 'src/app/models/user';
+import { arrayBufferToBlob } from 'blob-util';
 
 @Injectable({
   providedIn: 'root',
@@ -81,6 +82,24 @@ export class UserService {
       type: 'customer',
     };
     return this.http.post(`${this.uri}/users/addUser`, data);
+  }
+
+  changeFile(file) {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+      reader.onload = () => resolve(reader.result);
+      reader.onerror = (error) => reject(error);
+    });
+  }
+
+  addPhoto(file: Blob) {
+    console.log(file);
+
+    console.log(file instanceof Blob);
+    const formData = new FormData();
+    formData.append('file', file, 'image.jpg');
+    return this.http.post(`${this.uri}/users/upload`, formData);
   }
 
   changePassword(user: User, oldPassword: String, newPassword: String) {

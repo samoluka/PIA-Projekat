@@ -64,6 +64,10 @@ let User = new Schema({
     default: "active",
     required: true,
   },
+  photo: {
+    type: String,
+    default: "default.png",
+  },
   additionInfo: {
     category: String,
     code: String,

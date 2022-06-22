@@ -51,7 +51,11 @@ export class UserController {
 
     user
       .save()
-      .then((_user: any) => {
+      .then((user: any) => {
+        // let dir = path.join(this.appDir, `../public/${user.username}`);
+        // if (!this.fs.existsSync(dir)) {
+        //   this.fs.mkdirSync(dir, { recursive: true });
+        // }
         res.status(200).json({ message: "uspesno dodat korisnik" });
       })
       .catch((err: any) => {
@@ -182,35 +186,28 @@ export class UserController {
 
   uploadImage = (req, res) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(this.appDir, "../public/imag2e.webp");
-    if (path.extname(req.file.originalname).toLowerCase() === ".webp") {
+    const targetPath = path.join(this.appDir, "../public/image.jpg");
+    if (path.extname(req.file.originalname).toLowerCase() === ".jpg") {
       this.fs.rename(tempPath, targetPath, (err) => {
         if (err) return this.handleError(err, res);
 
-        res.status(200).contentType("text/plain").end("File uploaded!");
+        res.status(200).json({ message: "File uploaded!" });
       });
     } else {
       this.fs.unlink(tempPath, (err) => {
         if (err) return this.handleError(err, res);
-
-        res
-          .status(403)
-          .contentType("text/plain")
-          .end("Only .webp files are allowed!");
+        res.status(403).json({ message: "Only .webp files are allowed!" });
       });
     }
   };
 
   getImage = (req, res) => {
-    res.sendFile(path.join(this.appDir, "../public/imag2e.webp"));
+    res.sendFile(path.join(this.appDir, "../public/image.jpg"));
   };
 
   handleError = (err, res) => {
     console.log(err);
 
-    res
-      .status(500)
-      .contentType("text/plain")
-      .end("Oops! Something went wrong!");
+    res.status(500).json({ message: "Oops! Something went wrong!" });
   };
 }

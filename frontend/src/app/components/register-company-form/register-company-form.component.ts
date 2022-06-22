@@ -3,6 +3,7 @@ import { Route, Router } from '@angular/router';
 import { CommonService } from '../../services/commonService.service';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user/user.service';
+import { arrayBufferToBlob } from 'blob-util';
 
 @Component({
   selector: 'app-register-company-form',
@@ -41,7 +42,8 @@ export class RegisterCompanyFormComponent implements OnInit {
   name: string;
   pib: string;
   matBroj: string;
-
+  file: File;
+  blob: Blob;
   message: string;
 
   register() {
@@ -71,5 +73,23 @@ export class RegisterCompanyFormComponent implements OnInit {
         this.message = e.error['message'];
       },
     });
+  }
+  uploadPhoto() {
+    console.log(this.file.name);
+
+    this.servis.addPhoto(this.file).subscribe({
+      next: (v: any) => {
+        this.message = v['message'];
+      },
+      error: (e) => {
+        console.log(e);
+        console.log(e['message']);
+
+        this.message = e.error['message'];
+      },
+    });
+  }
+  change(event) {
+    this.file = (event.target as HTMLInputElement).files[0];
   }
 }
