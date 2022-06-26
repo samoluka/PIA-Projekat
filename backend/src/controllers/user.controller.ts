@@ -52,15 +52,9 @@ export class UserController {
     user
       .save()
       .then((user: any) => {
-        // let dir = path.join(this.appDir, `../public/${user.username}`);
-        // if (!this.fs.existsSync(dir)) {
-        //   this.fs.mkdirSync(dir, { recursive: true });
-        // }
         res.status(200).json({ message: "uspesno dodat korisnik" });
       })
       .catch((err: any) => {
-        // res.statusMessage = "doslo je do greske kurcina";
-        // res.status(400).end();
         res.status(400).json({ message: "doslo je do greske", err: err });
       });
   };
@@ -186,7 +180,10 @@ export class UserController {
 
   uploadImage = (req, res) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(this.appDir, "../public/image.jpg");
+    const targetPath = path.join(
+      this.appDir,
+      `../public/userImages/${req.file.originalname}`
+    );
     if (path.extname(req.file.originalname).toLowerCase() === ".jpg") {
       this.fs.rename(tempPath, targetPath, (err) => {
         if (err) return this.handleError(err, res);
@@ -202,7 +199,9 @@ export class UserController {
   };
 
   getImage = (req, res) => {
-    res.sendFile(path.join(this.appDir, "../public/image.jpg"));
+    res.sendFile(
+      path.join(this.appDir, `../public/userImages/${req.query.image}`)
+    );
   };
 
   handleError = (err, res) => {

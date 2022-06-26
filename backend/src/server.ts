@@ -4,14 +4,18 @@ import bodyParser from "body-parser";
 import mongoose from "mongoose";
 import userRouter from "./routers/user.routes";
 import helloRouter from "./routers/hello.routes";
-import databaseRouter from "./routers/database.routers";
-import path from "path";
+import databaseRouter from "./routers/database.routes";
+import productRouter from "./routers/product.routes";
 
 const app = express();
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(express.urlencoded());
+app.use(
+  express.urlencoded({
+    extended: true,
+  })
+);
 
 mongoose.connect("mongodb://localhost:27017/projekat");
 const connection = mongoose.connection;
@@ -23,6 +27,7 @@ const router = express.Router();
 router.use("/users", userRouter);
 router.use("/hello", helloRouter);
 router.use("/database", databaseRouter);
+router.use("/products", productRouter);
 
 app.use("/", router);
 

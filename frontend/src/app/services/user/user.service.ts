@@ -93,12 +93,12 @@ export class UserService {
     });
   }
 
-  addPhoto(file: Blob) {
+  addPhoto(file: File) {
     console.log(file);
 
     console.log(file instanceof Blob);
     const formData = new FormData();
-    formData.append('file', file, 'image.jpg');
+    formData.append('file', file, file.name);
     return this.http.post(`${this.uri}/users/upload`, formData);
   }
 

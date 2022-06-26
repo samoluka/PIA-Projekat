@@ -79,6 +79,12 @@ let User = new Schema({
       ref: "User",
     },
   ],
+  products: [
+    {
+      type: Types.ObjectId,
+      ref: "Product",
+    },
+  ],
 });
 
 User.methods.toJSON = function () {
