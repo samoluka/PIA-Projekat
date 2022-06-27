@@ -87,4 +87,35 @@ export class ProductController {
         handleError(err, res);
       });
   };
+
+  deleteProduct = (req, res) => {
+    console.log(req.body.id);
+    Product.findByIdAndDelete(req.body.id)
+      .then((product: any) => {
+        if (product) res.status(200).json({ message: "proizvod obrisan" });
+        else res.status(400).json({ message: "ne postoji takav proizvod" });
+      })
+      .catch((err: any) => {
+        res
+          .status(400)
+          .json({ message: "doslo je do greske", err: err.toString() });
+      });
+  };
+  updateProduct = (req, res) => {
+    let update = req.body.update;
+    delete update.photo;
+    Product.findByIdAndUpdate(req.body.id, update, { new: true })
+      .then((product: any) => {
+        if (product)
+          res
+            .status(200)
+            .json({ message: "proizvod izmenjen", product: product });
+        else res.status(400).json({ message: "ne postoji takav proizvod" });
+      })
+      .catch((err: any) => {
+        res
+          .status(400)
+          .json({ message: "doslo je do greske", err: err.toString() });
+      });
+  };
 }

@@ -15,5 +15,10 @@ productRouter
     upload.single("file" /* name attribute of <file> element in your form */),
     (req, res) => new ProductController().addProductToCompany(req, res)
   );
-
+productRouter
+  .route("/delete")
+  .delete((req, res) => new ProductController().deleteProduct(req, res));
+productRouter
+  .route("/update")
+  .post((req, res) => new ProductController().updateProduct(req, res));
 export default productRouter;
