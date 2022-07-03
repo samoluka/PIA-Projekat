@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { Route, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { CommonService } from '../../services/commonService.service';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user/user.service';
-import { arrayBufferToBlob } from 'blob-util';
 
 @Component({
   selector: 'app-register-company-form',

@@ -25,28 +25,40 @@ export class LoginComponent implements OnInit {
 
   hide: boolean = true;
 
-  login() {
-    console.log(this.username, this.password);
+  showError() {
+    this.message = 'Ne postoji korisnik sa unetim podacima';
+  }
 
+  login() {
     this.userService
       .login(this.username, this.password)
-      .subscribe((user: User) => {
-        if (user) {
-          localStorage.setItem('user', JSON.stringify(user));
-          if (user.status === 'pending') this.router.navigate(['/notApproved']);
-          else
-            switch (user.type) {
-              case 'admin':
-                this.router.navigate(['/admin']);
-                break;
-              case 'company':
-                this.router.navigate(['/company']);
-                break;
-              case 'customer':
-                this.router.navigate(['/customer']);
-                break;
-            }
-        } else this.message = 'Bad data';
+      // .subscribe((user: User) => {
+      //
+      // });
+      .subscribe({
+        next: (v) => {
+          let user: User = v['user'];
+          if (user) {
+            localStorage.setItem('user', JSON.stringify(user));
+            if (user.status === 'pending')
+              this.router.navigate(['/notApproved']);
+            else
+              switch (user.type) {
+                case 'admin':
+                  this.router.navigate(['/admin']);
+                  break;
+                case 'company':
+                  this.router.navigate(['/company']);
+                  break;
+                case 'customer':
+                  this.router.navigate(['/customer']);
+                  break;
+              }
+          } else this.showError();
+        },
+        error: (err) => {
+          this.showError();
+        },
       });
   }
 }

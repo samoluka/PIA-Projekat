@@ -5,14 +5,16 @@ import { CompanyPageComponent } from './components/company-page/company-page.com
 import { CompanyPartnersPageComponent } from './components/company-subpages/company-partners-page/company-partners-page.component';
 import { CustomerInfoComponent } from './components/customer-info/customer-info.component';
 import { CustomerPageComponent } from './components/customer-page/customer-page.component';
+import { HomePageComponent } from './components/home-page/home-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { NotApprovedPageComponent } from './components/not-approved-page/not-approved-page.component';
 import { PasswordChangerComponent } from './components/password-changer/password-changer.component';
-import { RegisterComponent } from './components/register/register.component';
+import { RegisterCompanyFormComponent } from './components/register-company-form/register-company-form.component';
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'register', component: RegisterComponent },
+  { path: '', component: HomePageComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterCompanyFormComponent },
   { path: 'passwordChanger', component: PasswordChangerComponent },
   { path: 'admin', component: AdminPageComponent },
   { path: 'company', component: CompanyPageComponent },

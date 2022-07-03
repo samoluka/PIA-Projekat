@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
  
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RegisterComponent } from './components/register/register.component';
 import { CompanyPageComponent } from './components/company-page/company-page.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
 import { LoginComponent } from './components/login/login.component';
@@ -20,17 +19,16 @@ import { CompanyAdditionalInfoPageComponent } from './components/company-subpage
 import { CompanyInfoPageComponent } from './components/company-subpages/company-info-page/company-info-page.component';
 import { CompanyPartnersPageComponent } from './components/company-subpages/company-partners-page/company-partners-page.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
+import { HomePageComponent } from './components/home-page/home-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent,
     PasswordChangerComponent,
     AdminPageComponent,
     CompanyPageComponent,
@@ -42,6 +40,7 @@ import { MatButtonModule } from '@angular/material/button';
     CompanyAdditionalInfoPageComponent,
     CompanyInfoPageComponent,
     CompanyPartnersPageComponent,
+    HomePageComponent,
   ],
   imports: [
     BrowserModule,

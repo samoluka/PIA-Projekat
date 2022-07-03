@@ -67,7 +67,7 @@ export class UserController {
       (err: any, user: any) => {
         if (err) {
           res.status(400).json({ message: "doslo je do greske" });
-        } else res.status(200).json(user);
+        } else res.status(200).json({ user: user });
       }
     );
   };

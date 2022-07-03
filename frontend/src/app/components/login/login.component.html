@@ -1,25 +1,3 @@
-<!-- <table>
-  <tr>
-    <td>Username:</td>
-    <td>
-      <input type="text" name="username" [(ngModel)]="username" />
-    </td>
-  </tr>
-  <tr>
-    <td>Password:</td>
-    <td>
-      <input type="password" name="password" [(ngModel)]="password" />
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <button (click)="login()">Login</button>
-    </td>
-  </tr>
-</table>
-<span class="error">{{ message }}</span>
-<hr />
-Register <a routerLink="register">here.</a> -->
 <div class="login-container">
   <mat-form-field class="" appearance="fill">
     <mat-label>Unesite korisnicko ime:</mat-label>
@@ -46,4 +24,5 @@ Register <a routerLink="register">here.</a> -->
   <button class="" mat-flat-button color="primary" (click)="login()">
     Uloguj se
   </button>
+  <mat-error>{{message}}</mat-error>
 </div>
