@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
  
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RegisterComponent } from './components/register/register.component';
 import { CompanyPageComponent } from './components/company-page/company-page.component';
 import { AdminPageComponent } from './components/admin-page/admin-page.component';
@@ -19,6 +19,12 @@ import { NotApprovedPageComponent } from './components/not-approved-page/not-app
 import { CompanyAdditionalInfoPageComponent } from './components/company-subpages/company-additional-info-page/company-additional-info-page.component';
 import { CompanyInfoPageComponent } from './components/company-subpages/company-info-page/company-info-page.component';
 import { CompanyPartnersPageComponent } from './components/company-subpages/company-partners-page/company-partners-page.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -37,7 +43,18 @@ import { CompanyPartnersPageComponent } from './components/company-subpages/comp
     CompanyInfoPageComponent,
     CompanyPartnersPageComponent,
   ],
-  imports: [BrowserModule, AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    HttpClientModule,
+    FormsModule,
+    BrowserAnimationsModule,
+    MatInputModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatButtonModule,
+    ReactiveFormsModule,
+  ],
   providers: [],
   bootstrap: [AppComponent],
 })

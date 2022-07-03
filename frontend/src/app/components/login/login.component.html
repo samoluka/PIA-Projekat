@@ -1,22 +1,49 @@
-<table>
-    <tr>
-        <td>Username:</td>
-        <td>
-            <input type='text' name='username' [(ngModel)]='username'>
-        </td>
-    </tr>
-    <tr>
-        <td>Password:</td>
-        <td>
-            <input type='password' name='password' [(ngModel)]='password'>
-        </td>
-    </tr>
-    <tr>
-        <td colspan='2'>
-            <button (click)='login()'>Login</button>
-        </td>
-    </tr>
+<!-- <table>
+  <tr>
+    <td>Username:</td>
+    <td>
+      <input type="text" name="username" [(ngModel)]="username" />
+    </td>
+  </tr>
+  <tr>
+    <td>Password:</td>
+    <td>
+      <input type="password" name="password" [(ngModel)]="password" />
+    </td>
+  </tr>
+  <tr>
+    <td colspan="2">
+      <button (click)="login()">Login</button>
+    </td>
+  </tr>
 </table>
-<span class='error'>{{message}}</span>
-<hr/>
-Register <a routerLink='register'>here.</a>
+<span class="error">{{ message }}</span>
+<hr />
+Register <a routerLink="register">here.</a> -->
+<div class="login-container">
+  <mat-form-field class="" appearance="fill">
+    <mat-label>Unesite korisnicko ime:</mat-label>
+    <input matInput placeholder="korisnicko ime" [(ngModel)]="username" />
+  </mat-form-field>
+
+  <mat-form-field class="" appearance="fill">
+    <mat-label>Unesite sifru:</mat-label>
+    <input
+      matInput
+      [(ngModel)]="password"
+      [type]="hide ? 'password' : 'text'"
+    />
+    <button
+      mat-icon-button
+      matSuffix
+      (click)="hide = !hide"
+      [attr.aria-label]="'Hide password'"
+      [attr.aria-pressed]="hide"
+    >
+      <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+    </button>
+  </mat-form-field>
+  <button class="" mat-flat-button color="primary" (click)="login()">
+    Uloguj se
+  </button>
+</div>

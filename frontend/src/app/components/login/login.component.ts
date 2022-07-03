@@ -1,4 +1,3 @@
-import { ThisReceiver } from '@angular/compiler';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../../models/user';
@@ -24,7 +23,11 @@ export class LoginComponent implements OnInit {
 
   message: string;
 
+  hide: boolean = true;
+
   login() {
+    console.log(this.username, this.password);
+
     this.userService
       .login(this.username, this.password)
       .subscribe((user: User) => {

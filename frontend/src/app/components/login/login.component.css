@@ -1,3 +1,17 @@
 .error{
     color: red;
 }
+.login-container {
+    padding: 20px;
+    text-align: center;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    width: 20vw;
+    min-width: 250px;
+}
+
+.halfWidth {
+    width: 50%;
+    min-width: 250px;
+}
