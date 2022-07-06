@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from 'src/app/models/user';
-import { arrayBufferToBlob } from 'blob-util';
 
 @Injectable({
   providedIn: 'root',

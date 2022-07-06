@@ -22,8 +22,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
+import { MatTabsModule } from '@angular/material/tabs';
 import { MatButtonModule } from '@angular/material/button';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatSelectModule } from '@angular/material/select';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { NewProductComponent } from './components/company-subpages/new-product/new-product.component';
 
 @NgModule({
   declarations: [
@@ -41,6 +45,7 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     CompanyInfoPageComponent,
     CompanyPartnersPageComponent,
     HomePageComponent,
+    NewProductComponent,
   ],
   imports: [
     BrowserModule,
@@ -53,6 +58,9 @@ import { HomePageComponent } from './components/home-page/home-page.component';
     MatIconModule,
     MatButtonModule,
     ReactiveFormsModule,
+    MatTabsModule,
+    MatExpansionModule,
+    MatSelectModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

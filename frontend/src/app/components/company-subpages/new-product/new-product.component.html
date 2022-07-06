@@ -1,0 +1,72 @@
+<!-- code: string;
+name: string;
+taxRate: number;
+company: User;
+unit: string;
+photo: string; -->
+<div class="globalForm">
+  <mat-accordion [multi]="true">
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Opsti podaci </mat-panel-title>
+        <mat-panel-description>
+          Ovde unosite opste podatke o novom artiklu
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="infoForm">
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Sifra artikla:</mat-label>
+          <input matInput placeholder="12345678" [(ngModel)]="code" required />
+          <mat-error *ngIf="!code || code.length == 0"
+            >"Sifra artikla je obavezno polje"</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Naziv artikla:</mat-label>
+          <input matInput placeholder="banana" [(ngModel)]="name" required />
+          <mat-error *ngIf="!name || name.length == 0"
+            >"Naziv artikla je obavezno polje"</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Jedinica mere artikla</mat-label>
+          <mat-select [(value)]="unit" required>
+            <mat-option value="kg">kg</mat-option>
+            <mat-option value="g">g</mat-option>
+            <mat-option value="lb">lb</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!unit || unit.length == 0"
+            >"Jedinica mere artikla je obavezno polje"</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="fill" *ngIf="company.additionInfo.pdv">
+          <mat-label>Poreska stopa</mat-label>
+          <mat-select [(value)]="taxRate" required>
+            <mat-option value="20">Opsta (20%)</mat-option>
+            <mat-option value="10">Posebna (10%)</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Slika artikla </mat-panel-title>
+        <mat-panel-description>
+          Ovde dodajete sliku novog artikla(opciono)
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="infoForm">
+        <input hidden id="photoId" type="file" (change)="change($event)" />
+        <label for="photoId" class="mat-button mat-raised mat-primary">
+          <div *ngIf="!photo">Odaberite sliku</div>
+          <div *ngIf="photo">Odabrali ste sliku: {{ photo.name }}</div>
+        </label>
+      </div>
+    </mat-expansion-panel>
+  </mat-accordion>
+  <div class="submitButton">
+    <button mat-raised-button color="primary" (click)="saveProduct()">
+      Kreiraj novi artikal
+    </button>
+  </div>
+</div>

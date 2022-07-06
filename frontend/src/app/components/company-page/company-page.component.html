@@ -1,10 +1,18 @@
-<h1>Zdravo {{user.username}}</h1>
-<a [routerLink]="['/passwordChanger']">Promeni sifru</a>
-<br>
-<a [routerLink]="['/company/partners']">Narucioci</a>
-<br>
-<app-company-additional-info-page *ngIf = "!user.additionInfo"></app-company-additional-info-page>
+<app-company-additional-info-page
+  *ngIf="!user.additionInfo"
+></app-company-additional-info-page>
 
-<app-company-info-page></app-company-info-page>
+<div *ngIf="user.additionInfo">
+  <mat-tab-group>
+    <mat-tab label="Roba i usluge">
+        <app-new-product></app-new-product>
+      </mat-tab>
+    <mat-tab label="Licni podaci">
+      <app-company-info-page></app-company-info-page>
+    </mat-tab>
+    <mat-tab label="Narucioci">
+      <app-company-partners-page></app-company-partners-page>
+    </mat-tab>
 
-<img src="http://localhost:4000/users/getImage?image=photo-1633332755192-727a05c4013d.jpg" width="300" height="300" />
+  </mat-tab-group>
+</div>

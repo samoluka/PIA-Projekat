@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CommonService } from 'src/app/services/commonService.service';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user/user.service';
 
@@ -8,7 +9,10 @@ import { UserService } from '../../../services/user/user.service';
   styleUrls: ['./company-info-page.component.css'],
 })
 export class CompanyInfoPageComponent implements OnInit {
-  constructor(private servis: UserService) {}
+  constructor(
+    private servis: UserService,
+    private commonService: CommonService
+  ) {}
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
@@ -90,6 +94,9 @@ export class CompanyInfoPageComponent implements OnInit {
       next: (v: any) => {
         this.message = v['message'];
         localStorage.setItem('user', JSON.stringify(v['user']));
+        this.commonService.sendUpdate(
+          'Message from Sender Component to Receiver Component!'
+        );
         this.ngOnInit();
       },
       error: (e) => {

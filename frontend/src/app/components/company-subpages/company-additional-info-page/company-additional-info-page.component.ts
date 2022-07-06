@@ -32,7 +32,7 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
   user: User;
   category: string;
   code: string;
-  pdv: boolean;
+  pdv: boolean = false;
   message: string;
 
   saveAdditionInfo() {
