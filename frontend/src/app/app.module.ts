@@ -31,6 +31,7 @@ import { MatCardModule } from '@angular/material/card';
 import { NewProductComponent } from './components/company-subpages/new-product/new-product.component';
 import { ProductCardComponent } from './components/product-card/product-card.component';
 import { AllProductsComponent } from './components/company-subpages/all-products/all-products.component';
+import { MatPaginatorModule } from '@angular/material/paginator'; 
 
 @NgModule({
   declarations: [
@@ -67,6 +68,7 @@ import { AllProductsComponent } from './components/company-subpages/all-products
     MatExpansionModule,
     MatSelectModule,
     MatCardModule,
+    MatPaginatorModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from 'src/app/models/user';
+import { NgIf } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
@@ -154,9 +155,9 @@ export class UserService {
     return this.http.post(`${this.uri}/users/findUserWithPartners`, data);
   }
 
-  findCompanyWithProducts(user: User) {
+  findCompanyWithProducts(user: User, start: number, end: number) {
     return this.http.get(
-      `${this.uri}/users/findUserWithProducts/?username=${user.username}`
+      `${this.uri}/users/findUserWithProducts/?username=${user.username}&start=${start}&end=${end}`
     );
   }
 }

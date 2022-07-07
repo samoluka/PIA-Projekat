@@ -177,8 +177,16 @@ export class UserController {
   };
   findUserWithProducts = (req: express.Request, res: express.Response) => {
     let username = req.query.username;
+    let start = req.query.start;
+    let end = req.query.end;
     User.findOne({ username: username })
-      .populate("products")
+      .populate({
+        path: "products",
+        options: {
+          skip: Number.parseInt(start.toString()),
+          limit: Number.parseInt(end.toString()),
+        },
+      })
       .then((user) => {
         res.status(200).json(user);
       });

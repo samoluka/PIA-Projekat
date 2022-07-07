@@ -3,4 +3,17 @@
     *ngFor="let product of user.products"
     [product]="product"
   ></app-product-card>
+  <!-- <mat-paginator
+    [length]="100"
+    [pageSize]="10"
+    [pageSizeOptions]="[5, 10, 25, 100]"
+    aria-label="Select page",
+    page="pageEvent = getData($event)"
+  >
+  </mat-paginator> -->
+  <div class="pagination">
+    <button (click)="getData(false)">Prev</button>
+    <button (click)="getData(true)">Next</button>
+  </div>
+
 </div>
