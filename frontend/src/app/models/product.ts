@@ -1,6 +1,7 @@
 import { User } from './user';
 
 export class Product {
+  _id: string;
   code: string;
   name: string;
   taxRate: number;

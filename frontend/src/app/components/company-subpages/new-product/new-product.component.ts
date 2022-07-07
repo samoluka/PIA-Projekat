@@ -34,6 +34,17 @@ export class NewProductComponent implements OnInit {
   unit: string;
   photo: File;
   error: string = '';
+  origin: string;
+  originalName: string;
+  barcode: string;
+  producer: string;
+  customFee: number;
+  ecoTax: boolean;
+  excise: boolean;
+  minStock: number;
+  maxStock: number;
+  about: string;
+  declaration: string;
 
   ngOnInit(): void {
     this.company = JSON.parse(localStorage.getItem('user'));
@@ -61,7 +72,42 @@ export class NewProductComponent implements OnInit {
     product.company = this.company;
     product.taxRate = this.taxRate;
     product.unit = this.unit;
-    this.addSimilar(product);
+    product.additionalData = {
+      ...(this.origin && {
+        origin: this.origin,
+      }),
+      ...(this.originalName && {
+        originalName: this.originalName,
+      }),
+      ...(this.barcode && {
+        barcode: this.barcode,
+      }),
+      ...(this.producer && {
+        producer: this.producer,
+      }),
+      ...(this.customFee && {
+        customFee: this.customFee,
+      }),
+      ...(this.ecoTax && {
+        ecoTax: this.ecoTax,
+      }),
+      ...(this.excise && {
+        excise: this.excise,
+      }),
+      ...(this.minStock && {
+        minStock: this.minStock,
+      }),
+      ...(this.maxStock && {
+        maxStock: this.maxStock,
+      }),
+      ...(this.about && {
+        about: this.about,
+      }),
+      ...(this.declaration && {
+        declaration: this.declaration,
+      }),
+    };
+    //this.addSimilar(product);
     this.productService.addProduct(product, this.photo).subscribe({
       next: (v) => {
         console.log(v);

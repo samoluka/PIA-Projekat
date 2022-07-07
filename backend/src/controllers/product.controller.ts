@@ -26,8 +26,6 @@ export class ProductController {
     const companyUsername = req.body.companyUsername;
     const unit = req.body.unit;
 
-    console.log(req.body);
-
     let handleError = (err: any, res: express.Response) => {
       console.log(err);
       res
@@ -45,8 +43,8 @@ export class ProductController {
             taxRate: taxRate,
             company: user._id,
             unit: unit,
-            ...(req.body.additionlData && {
-              additionalData: req.body.additionlData,
+            ...(req.body.additionalData && {
+              additionalData: JSON.parse(req.body.additionalData),
             }),
           });
 

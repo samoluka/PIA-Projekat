@@ -1,4 +1,4 @@
-<div class="allProducts">
+<div class="allProducts" *ngIf="user">
   <app-product-card
     *ngFor="let product of user.products"
     [product]="product"
@@ -8,12 +8,11 @@
     [pageSize]="10"
     [pageSizeOptions]="[5, 10, 25, 100]"
     aria-label="Select page",
-    page="pageEvent = getData($event)"
+    (page)="pageEvent = handlePage($event)"
   >
   </mat-paginator> -->
   <div class="pagination">
     <button (click)="getData(false)">Prev</button>
     <button (click)="getData(true)">Next</button>
   </div>
-
 </div>

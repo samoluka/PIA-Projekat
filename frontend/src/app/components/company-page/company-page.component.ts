@@ -13,6 +13,7 @@ export class CompanyPageComponent implements OnInit {
     this.subscriptionName = this.commonService
       .getUpdate()
       .subscribe((message) => {
+        console.log(message);
         this.ngOnInit();
       });
   }

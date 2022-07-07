@@ -4,6 +4,13 @@ taxRate: number;
 company: User;
 unit: string;
 photo: string; -->
+
+<!-- Допунски
+подаци“ (необавезни) садрже информације о земљи порекла, страни назив артикла, 
+баркод број, назив произвођача, царинску тарифу у %, информацију да ли се
+примењује еко такса или акцизе (поља за потврду), жељене залихе на нивоу
+предузећа (минималне и максималне), опис и декларација -->
+
 <div class="globalForm">
   <mat-accordion [multi]="true">
     <mat-expansion-panel>
@@ -23,7 +30,12 @@ photo: string; -->
         </mat-form-field>
         <mat-form-field class="" appearance="fill">
           <mat-label>Naziv artikla:</mat-label>
-          <input matInput placeholder="banana" [(ngModel)]="name" required />
+          <input
+            matInput
+            placeholder="pomorandza"
+            [(ngModel)]="name"
+            required
+          />
           <mat-error *ngIf="!name || name.length == 0"
             >"Naziv artikla je obavezno polje"</mat-error
           >
@@ -63,6 +75,84 @@ photo: string; -->
         </label>
       </div>
     </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Dopunski podaci artikla </mat-panel-title>
+        <mat-panel-description>
+          Ovde dodajete dopunske podatke novog artikla(opciono)
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="infoForm">
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Zemlja porekla artikla</mat-label>
+          <input matInput placeholder="Turska" [(ngModel)]="origin" />
+        </mat-form-field>
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Strani naziv artikla</mat-label>
+          <input matInput placeholder="orange" [(ngModel)]="originalName" />
+        </mat-form-field>
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Barkod artikla</mat-label>
+          <input matInput placeholder="123dqd1231dq" [(ngModel)]="barcode" />
+        </mat-form-field>
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Naziv proizvodjaca artikla</mat-label>
+          <input matInput placeholder="tuti fruti" [(ngModel)]="producer" />
+        </mat-form-field>
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Carinska tariga artikla</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="10"
+            [(ngModel)]="customFee"
+          />
+          <span matSuffix>%</span>
+        </mat-form-field>
+        <section class="checkBoxSection">
+          <mat-checkbox [(ngModel)]="ecoTax">eko taksa</mat-checkbox>
+          <mat-checkbox [(ngModel)]="excise">akciza</mat-checkbox>
+        </section>
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Minimalna zaliha artikla</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="10"
+            [(ngModel)]="minStock"
+          />
+        </mat-form-field>
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Maksimalna zaliha artikla</mat-label>
+          <input
+            matInput
+            type="number"
+            placeholder="100"
+            [(ngModel)]="maxStock"
+          />
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>O artiklu</mat-label>
+          <textarea matInput [(ngModel)]="about"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>Deklaracija artikla</mat-label>
+          <textarea matInput [(ngModel)]="declaration"></textarea>
+        </mat-form-field>
+      </div>
+    </mat-expansion-panel>
+
+    <!-- origin: string;
+    originalName: string;
+    barcode: string;
+    producer: string;
+    customFee: number;
+    ecoTax: boolean;
+    excise: boolean;
+    minStock: number;
+    maxStock: number;
+    about: string;
+    declaration: string; -->
   </mat-accordion>
   <div class="submitButton">
     <button mat-raised-button color="primary" (click)="saveProduct()">

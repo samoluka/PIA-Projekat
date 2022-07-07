@@ -19,3 +19,7 @@
     margin: auto;
     margin-top: 5%;
 }
+.checkBoxSection {
+    display: flex;
+    justify-content: space-evenly;
+}
