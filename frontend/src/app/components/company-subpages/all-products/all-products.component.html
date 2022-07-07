@@ -12,7 +12,33 @@
   >
   </mat-paginator> -->
   <div class="pagination">
-    <button (click)="getData(false)">Prev</button>
-    <button (click)="getData(true)">Next</button>
+    <div class="pButton">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="getData(false)"
+        [disabled]="current == 0 ? true : null"
+      >
+        Previous
+      </button>
+    </div>
+    <div class="pButton">
+      <button
+        mat-flat-button
+        color="accent"
+      >
+        {{ current }}
+      </button>
+    </div>
+    <div class="pButton">
+      <button
+        mat-flat-button
+        color="primary"
+        (click)="getData(true)"
+        [disabled]="user.products.length < 10 ? true : null"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </div>

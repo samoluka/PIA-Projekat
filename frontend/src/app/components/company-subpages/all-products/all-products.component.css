@@ -9,5 +9,11 @@
     flex-wrap: wrap;
 }
 .pagination {
+    margin: auto;
     margin-top: 5%;
+    display: flex;
+    }
+    
+    .pButton {
+        margin-left: 1%;
 }
