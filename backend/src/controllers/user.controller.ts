@@ -175,7 +175,14 @@ export class UserController {
         res.status(200).json(user);
       });
   };
-
+  findUserWithProducts = (req: express.Request, res: express.Response) => {
+    let username = req.query.username;
+    User.findOne({ username: username })
+      .populate("products")
+      .then((user) => {
+        res.status(200).json(user);
+      });
+  };
   uploadImage = (req, res) => {
     const tempPath = req.file.path;
     const targetPath = path.join(

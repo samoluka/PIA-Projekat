@@ -24,7 +24,7 @@ export class ProductService {
     formData.append('taxRate', product.taxRate.toString());
     formData.append('companyUsername', product.company.username);
     formData.append('unit', product.unit);
-    formData.append('file', photo, photo.name);
+    if (photo) formData.append('file', photo, photo.name);
     return this.http.post(`${this.uri}/products/addProduct`, formData);
   }
 }

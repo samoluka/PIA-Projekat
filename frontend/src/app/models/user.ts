@@ -1,3 +1,5 @@
+import { Product } from './product';
+
 export class User {
   firstName: string;
   lastName: string;
@@ -15,5 +17,6 @@ export class User {
     code: string;
     pdv: boolean;
   };
+  products: Product[];
   partners: User[];
 }

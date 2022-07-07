@@ -12,7 +12,7 @@ export class ProductController {
     const tempPath = file.path;
     const targetPath = path.join(
       this.appDir,
-      `../public/productImage/${imageName}`
+      `../public/productImages/${imageName}`
     );
     await this.fs.rename(tempPath, targetPath, (err) => {
       if (err) console.log(`greska ${err}`);
@@ -117,5 +117,10 @@ export class ProductController {
           .status(400)
           .json({ message: "doslo je do greske", err: err.toString() });
       });
+  };
+  getImage = (req, res) => {
+    res.sendFile(
+      path.join(this.appDir, `../public/productImages/${req.query.image}`)
+    );
   };
 }

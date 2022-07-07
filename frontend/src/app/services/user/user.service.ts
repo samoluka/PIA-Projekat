@@ -153,4 +153,10 @@ export class UserService {
 
     return this.http.post(`${this.uri}/users/findUserWithPartners`, data);
   }
+
+  findCompanyWithProducts(user: User) {
+    return this.http.get(
+      `${this.uri}/users/findUserWithProducts/?username=${user.username}`
+    );
+  }
 }

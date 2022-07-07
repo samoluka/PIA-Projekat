@@ -36,6 +36,10 @@ userRouter
   .post((req, res) => new UserController().setCompanyAdditionInfo(req, res));
 
 userRouter
+  .route("/findUserWithProducts")
+  .get((req, res) => new UserController().findUserWithProducts(req, res));
+
+userRouter
   .route("/findUserWithPartners")
   .post((req, res) => new UserController().findUserWithPartners(req, res));
 userRouter
@@ -52,5 +56,3 @@ userRouter
   .route("/getImage")
   .get((req, res) => new UserController().getImage(req, res));
 export default userRouter;
-
-

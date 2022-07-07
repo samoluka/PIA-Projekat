@@ -1,0 +1,15 @@
+<mat-card class="card">
+  <mat-card-title-group>
+    <mat-card-title>{{product.name}}</mat-card-title>
+    <mat-card-subtitle>sifra:{{product.code}}</mat-card-subtitle>
+    <img
+      mat-card-md-image
+      src="http://localhost:4000/products/getImage/?image={{product.photo}}"
+    />
+  </mat-card-title-group>
+  <mat-card-content>
+    <h2>Jedinica mere: {{product.unit}}</h2>
+    <h2>Stopa poreza: {{product.taxRate}}</h2>
+    <h2>Proizvodjac: {{product.additionalData.producer ? product.additionalData.producer : "nepoznat"}}</h2>
+  </mat-card-content>
+</mat-card>

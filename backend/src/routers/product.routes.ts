@@ -21,4 +21,7 @@ productRouter
 productRouter
   .route("/update")
   .post((req, res) => new ProductController().updateProduct(req, res));
+  productRouter
+    .route("/getImage")
+    .get((req, res) => new ProductController().getImage(req, res));
 export default productRouter;

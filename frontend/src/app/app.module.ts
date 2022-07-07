@@ -27,7 +27,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { MatSelectModule } from '@angular/material/select';
 import { HomePageComponent } from './components/home-page/home-page.component';
+import { MatCardModule } from '@angular/material/card'; 
 import { NewProductComponent } from './components/company-subpages/new-product/new-product.component';
+import { ProductCardComponent } from './components/product-card/product-card.component';
+import { AllProductsComponent } from './components/company-subpages/all-products/all-products.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +49,8 @@ import { NewProductComponent } from './components/company-subpages/new-product/n
     CompanyPartnersPageComponent,
     HomePageComponent,
     NewProductComponent,
+    ProductCardComponent,
+    AllProductsComponent,
   ],
   imports: [
     BrowserModule,
@@ -61,6 +66,7 @@ import { NewProductComponent } from './components/company-subpages/new-product/n
     MatTabsModule,
     MatExpansionModule,
     MatSelectModule,
+    MatCardModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

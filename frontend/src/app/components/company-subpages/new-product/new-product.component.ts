@@ -61,6 +61,7 @@ export class NewProductComponent implements OnInit {
     product.company = this.company;
     product.taxRate = this.taxRate;
     product.unit = this.unit;
+    this.addSimilar(product);
     this.productService.addProduct(product, this.photo).subscribe({
       next: (v) => {
         console.log(v);
@@ -70,4 +71,23 @@ export class NewProductComponent implements OnInit {
       },
     });
   }
+  private addSimilar(product: Product) {
+    let i = 0;
+    while (i < 5) {
+      let newP = Object.assign({}, product);
+      console.log(newP);
+      newP.name = newP.name + i;
+      newP.code = newP.code + i;
+      i++;
+      this.productService.addProduct(newP, null).subscribe({
+        next: (v) => {
+          console.log(v);
+        },
+        error: (e) => {
+          console.log(e);
+        },
+      });
+    }
+  }
 }
+
