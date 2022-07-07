@@ -186,6 +186,14 @@ export class UserController {
           skip: Number.parseInt(start.toString()),
           limit: Number.parseInt(end.toString()),
         },
+        populate: {
+          path: "category",
+          model: "Category",
+          populate: {
+            path: "supercategory",
+            model: "Category",
+          },
+        },
       })
       .then((user) => {
         res.status(200).json(user);

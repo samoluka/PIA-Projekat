@@ -21,7 +21,21 @@ productRouter
 productRouter
   .route("/update")
   .post((req, res) => new ProductController().updateProduct(req, res));
-  productRouter
-    .route("/getImage")
-    .get((req, res) => new ProductController().getImage(req, res));
+productRouter
+  .route("/getImage")
+  .get((req, res) => new ProductController().getImage(req, res));
+
+productRouter
+  .route("/addCategoty")
+  .post((req, res) => new ProductController().addCategory(req, res));
+productRouter
+  .route("/addSubcategory")
+  .post((req, res) => new ProductController().addSubcategory(req, res));
+productRouter
+  .route("/getCategories")
+  .get((req, res) => new ProductController().getCategories(req, res));
+
+productRouter
+  .route("/addToCategory")
+  .post((req, res) => new ProductController().addToCategory(req, res));
 export default productRouter;

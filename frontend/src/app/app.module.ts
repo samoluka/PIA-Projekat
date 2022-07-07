@@ -33,6 +33,7 @@ import { ProductCardComponent } from './components/product-card/product-card.com
 import { AllProductsComponent } from './components/company-subpages/all-products/all-products.component';
 import { MatPaginatorModule } from '@angular/material/paginator'; 
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -71,6 +72,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatCardModule,
     MatPaginatorModule,
     MatCheckboxModule,
+    MatDialogModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

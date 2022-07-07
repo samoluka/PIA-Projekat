@@ -43,6 +43,11 @@ let Product = new Schema({
     type: String,
     default: "productDefault.png",
   },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "Category",
+    default: null,
+  },
   additionalData: {
     origin: {
       type: String,
