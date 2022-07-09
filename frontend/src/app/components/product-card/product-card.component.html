@@ -12,7 +12,7 @@
     <h2>Stopa poreza: {{product.taxRate}}</h2>
     <h2>Proizvodjac: {{product.additionalData.producer ? product.additionalData.producer : "nepoznat"}}</h2>
   </mat-card-content>
-  <mat-card-actions>
+  <mat-card-actions *ngIf="btns">
     <button mat-raised-button color="primary">Izmena</button>
     <button mat-raised-button color="warn" (click)="deleteProduct()">Brisanje</button>
   </mat-card-actions>

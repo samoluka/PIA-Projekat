@@ -179,13 +179,16 @@ export class UserController {
     let username = req.query.username;
     let start = req.query.start;
     let end = req.query.end;
+
     User.findOne({ username: username })
       .populate({
         path: "products",
-        options: {
-          skip: Number.parseInt(start.toString()),
-          limit: Number.parseInt(end.toString()),
-        },
+        ...(Number.parseInt(start.toString()) >= 0 && {
+          options: {
+            skip: Number.parseInt(start.toString()),
+            limit: Number.parseInt(end.toString()),
+          },
+        }),
         populate: {
           path: "category",
           model: "Category",

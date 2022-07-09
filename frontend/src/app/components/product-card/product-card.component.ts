@@ -21,6 +21,7 @@ export class ProductCardComponent implements OnInit {
   ) {}
 
   @Input() product!: Product;
+  @Input() btns: boolean = true;
 
   ngOnInit(): void {}
 

@@ -151,7 +151,7 @@ export class ProductController {
   };
 
   getCategories = (req, res) => {
-    User.findById(req.body.id)
+    User.findById(req.query.id)
       .populate({
         path: "categories",
         populate: {
@@ -163,7 +163,7 @@ export class ProductController {
           },
         },
       })
-      .then((user) => {
+      .then(async (user) => {
         if (user) {
           res.status(200).json(user.categories);
         } else {
@@ -206,25 +206,32 @@ export class ProductController {
   addToCategory = (req, res) => {
     const product = req.body.product;
     const category = req.body.category;
+
     Product.findById(product).then((product) => {
       if (product) {
-        Category.findById(category)
-          .then((category) => {
-            if (category) {
-              category.products.push(product);
-              category.save().then((category) => {
-                product.category = category._id;
-                product.save().then((product) => {
-                  res.status(200).json({ message: "dodato u kategoriju" });
+        if (!product.category) {
+          Category.findById(category)
+            .then((category) => {
+              if (category) {
+                category.products.push(product);
+                category.save().then((category) => {
+                  product.category = category._id;
+                  product.save().then((product) => {
+                    res.status(200).json({ message: "dodato u kategoriju" });
+                  });
                 });
-              });
-            } else {
-              res
-                .status(400)
-                .json({ message: "ne postoji trazena kategorija" });
-            }
-          })
-          .catch((err) => this.handleError(err, res));
+              } else {
+                res
+                  .status(400)
+                  .json({ message: "ne postoji trazena kategorija" });
+              }
+            })
+            .catch((err) => this.handleError(err, res));
+        } else {
+          res
+            .status(400)
+            .json({ message: "proizvod se vec nalazi u kategoriji" });
+        }
       } else {
         res.status(400).json({ message: "ne postoji trazeni proizvod" });
       }

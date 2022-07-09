@@ -1,3 +1,4 @@
+import { Category } from './category';
 import { User } from './user';
 
 export class Product {
@@ -8,6 +9,7 @@ export class Product {
   company: User;
   unit: string;
   photo: string;
+  category: Category;
   additionalData: {
     origin: string;
     originalName: string;

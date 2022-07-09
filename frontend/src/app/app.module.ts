@@ -34,7 +34,10 @@ import { AllProductsComponent } from './components/company-subpages/all-products
 import { MatPaginatorModule } from '@angular/material/paginator'; 
 import { MatCheckboxModule } from '@angular/material/checkbox'; 
 import { MatDialogModule } from '@angular/material/dialog';
-
+import { CategoryPageComponent } from './components/company-subpages/category-page/category-page.component';
+import { MatTreeModule } from '@angular/material/tree';
+import { AddProductToCategotyPageComponent } from './components/company-subpages/add-product-to-categoty-page/add-product-to-categoty-page.component';
+import { MatTableModule } from '@angular/material/table'; 
 @NgModule({
   declarations: [
     AppComponent,
@@ -54,6 +57,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     NewProductComponent,
     ProductCardComponent,
     AllProductsComponent,
+    CategoryPageComponent,
+    AddProductToCategotyPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +78,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatPaginatorModule,
     MatCheckboxModule,
     MatDialogModule,
+    MatTreeModule,
+    MatTableModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { User } from 'src/app/models/user';
 import { NgIf } from '@angular/common';
+import { Category } from 'src/app/models/category';
+import { Product } from 'src/app/models/product';
 
 @Injectable({
   providedIn: 'root',
@@ -160,4 +162,35 @@ export class UserService {
       `${this.uri}/users/findUserWithProducts/?username=${user.username}&start=${start}&end=${end}`
     );
   }
+
+  getCategories(user: User) {
+    return this.http.get<Category[]>(
+      `${this.uri}/products/getCategories?id=${user._id}`
+    );
+  }
+
+  addCategory(user: User, name: string) {
+    return this.http.post(`${this.uri}/products/addCategoty`, {
+      name: name,
+      company: user._id,
+    });
+  }
+  addSubCategory(user: User, category: Category, name: string) {
+    return this.http.post(`${this.uri}/products/addSubcategory`, {
+      name: name,
+      company: user._id,
+      category: category._id,
+    });
+  }
+
+  addProductToCategory(product: Product, category: Category) {
+    return this.http.post(`${this.uri}/products/addToCategory`, {
+      product: product._id,
+      category: category._id,
+    });
+  }
 }
+
+// "name": "konobar",
+// "category":"62c7621097ed3c5b797e51ad",
+// "company": "62c760c0a574087adaafaeba"

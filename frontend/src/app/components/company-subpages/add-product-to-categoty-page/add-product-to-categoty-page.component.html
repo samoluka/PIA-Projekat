@@ -1,0 +1,32 @@
+<div class="center">
+  <mat-form-field appearance="standard">
+    <mat-label>Filter</mat-label>
+    <input
+      matInput
+      (keyup)="applyFilter($event)"
+      placeholder="paprika"
+      #input
+    />
+  </mat-form-field>
+
+  <table class="center">
+    <tr *ngFor="let product of toDisplay">
+      <td>
+        <app-product-card [product]="product" [btns]="false"></app-product-card>
+      </td>
+      <td>
+        {{ product.category ? product.category.name : "nema kategoriju" }}
+      </td>
+      <td>
+        <button
+          mat-button
+          color="primary"
+          [disabled]="product.category"
+          (click)="addToCategory(product)"
+        >
+          Dodaj u kategoriju
+        </button>
+      </td>
+    </tr>
+  </table>
+</div>

@@ -3,17 +3,19 @@
 ></app-company-additional-info-page>
 
 <div *ngIf="user.additionInfo">
-  <mat-tab-group>
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Raspored artikala">
+      <app-category-page></app-category-page>
+    </mat-tab>
     <mat-tab label="Roba i usluge">
-        <app-all-products></app-all-products>
-        <app-new-product></app-new-product>
-      </mat-tab>
+      <app-all-products></app-all-products>
+      <app-new-product></app-new-product>
+    </mat-tab>
     <mat-tab label="Licni podaci">
       <app-company-info-page></app-company-info-page>
     </mat-tab>
     <mat-tab label="Narucioci">
       <app-company-partners-page></app-company-partners-page>
     </mat-tab>
-
   </mat-tab-group>
 </div>
