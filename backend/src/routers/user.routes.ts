@@ -55,4 +55,16 @@ userRouter
 userRouter
   .route("/getImage")
   .get((req, res) => new UserController().getImage(req, res));
+
+userRouter
+  .route("/addRoom")
+  .post((req, res) => new UserController().addRoom(req, res));
+
+userRouter
+  .route("/addTable")
+  .post((req, res) => new UserController().addTable(req, res));
+
+userRouter
+  .route("/getTables")
+  .get((req, res) => new UserController().getTables(req, res));
 export default userRouter;

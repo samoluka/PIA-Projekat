@@ -37,7 +37,12 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { CategoryPageComponent } from './components/company-subpages/category-page/category-page.component';
 import { MatTreeModule } from '@angular/material/tree';
 import { AddProductToCategotyPageComponent } from './components/company-subpages/add-product-to-categoty-page/add-product-to-categoty-page.component';
-import { MatTableModule } from '@angular/material/table'; 
+import { MatTableModule } from '@angular/material/table';
+import { TablesPageComponent } from './components/company-subpages/tables-page/tables-page.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -59,6 +64,7 @@ import { MatTableModule } from '@angular/material/table';
     AllProductsComponent,
     CategoryPageComponent,
     AddProductToCategotyPageComponent,
+    TablesPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -80,6 +86,7 @@ import { MatTableModule } from '@angular/material/table';
     MatDialogModule,
     MatTreeModule,
     MatTableModule,
+    DragDropModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

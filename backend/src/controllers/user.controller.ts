@@ -233,4 +233,73 @@ export class UserController {
 
     res.status(500).json({ message: "Oops! Something went wrong!" });
   };
+
+  addRoom(req, res) {
+    let user = req.body.id;
+    let name = req.body.name;
+    console.log(req.body);
+
+    User.findOneAndUpdate(
+      {
+        _id: user,
+      },
+      {
+        $push: {
+          rooms: {
+            name: name,
+            tables: [],
+          },
+        },
+      },
+      { new: true, useFindAndModify: false }
+    ).then((user) => {
+      console.log(user);
+      res.status(200).json(user);
+    });
+  }
+
+  addTable(req, res) {
+    let user = req.body.id;
+    let name = req.body.name;
+    User.findOne({
+      _id: user,
+    }).then((user) => {
+      if (user) {
+        let index = user.rooms.findIndex((r) => r.name == name);
+        if (index != -1) {
+          user.rooms[index].tables.push({
+            width: req.body.width,
+            height: req.body.height,
+            shape: req.body.shape,
+            centerX: req.body.centerX,
+            centerY: req.body.centerY,
+          });
+          user.save().then((user) => res.status(200).json(user));
+        } else {
+          res.status(400).json("ne postoji takva soba");
+        }
+      } else {
+        res.status(400).json("ne postoji takav korisnik");
+      }
+    });
+  }
+
+  getTables(req, res) {
+    let id = req.body.id;
+    let name = req.body.name;
+    User.findOne({
+      _id: id,
+    }).then((user) => {
+      if (user) {
+        let index = user.rooms.findIndex((r) => r.name == name);
+        if (index != -1) {
+          res.status(200).json(user.rooms[index].tables);
+        } else {
+          res.status(400).json("ne postoji takva soba");
+        }
+      } else {
+        res.status(400).json("ne postoji takav korisnik");
+      }
+    });
+  }
 }

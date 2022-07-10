@@ -91,6 +91,20 @@ let User = new Schema({
       ref: "Category",
     },
   ],
+  rooms: [
+    {
+      name: String,
+      tables: [
+        {
+          width: Number,
+          height: Number,
+          shape: String,
+          centerX: Number,
+          centerY: Number,
+        },
+      ],
+    },
+  ],
 });
 
 User.methods.toJSON = function () {

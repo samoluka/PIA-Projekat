@@ -4,6 +4,9 @@
 
 <div *ngIf="user.additionInfo">
   <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Raspored stolova">
+      <app-tables-page></app-tables-page>
+    </mat-tab>
     <mat-tab label="Raspored artikala">
       <app-category-page></app-category-page>
     </mat-tab>

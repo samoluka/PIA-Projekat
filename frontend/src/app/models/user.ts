@@ -1,4 +1,5 @@
 import { Product } from './product';
+import { Table } from './table';
 
 export class User {
   _id: string;
@@ -20,4 +21,10 @@ export class User {
   };
   products: Product[];
   partners: User[];
+  rooms: [
+    {
+      name: string;
+      tables: [Table];
+    }
+  ];
 }

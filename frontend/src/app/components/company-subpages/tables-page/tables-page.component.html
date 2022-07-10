@@ -1,0 +1,13 @@
+<div class="example-boundary center">
+  <div
+    class="example-box"
+    cdkDragBoundary=".example-boundary"
+    cdkDrag
+    [style.width.px]="table.width"
+    [style.height.px]="table.height"
+    [style.border-radius.px]="table.shape=='circle'?table.width:20"
+    *ngFor="let table of tables"
+  >
+    I can only be dragged within the dotted container
+  </div>
+</div>
