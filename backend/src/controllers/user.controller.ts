@@ -258,23 +258,18 @@ export class UserController {
     });
   }
 
-  addTable(req, res) {
-    let user = req.body.id;
+  updateTables(req, res) {
+    let id = req.body.id;
     let name = req.body.name;
+    let tables = req.body.tables;
+    console.log(req.body);
     User.findOne({
-      _id: user,
+      _id: id,
     }).then((user) => {
       if (user) {
         let index = user.rooms.findIndex((r) => r.name == name);
         if (index != -1) {
-          user.rooms[index].tables.push({
-            width: req.body.width,
-            height: req.body.height,
-            shape: req.body.shape,
-            centerX: req.body.centerX,
-            centerY: req.body.centerY,
-            name: req.body.tableName,
-          });
+          user.rooms[index].tables = tables;
           user.save().then((user) => res.status(200).json(user));
         } else {
           res.status(400).json("ne postoji takva soba");

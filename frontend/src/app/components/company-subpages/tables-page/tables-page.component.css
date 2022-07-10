@@ -32,11 +32,13 @@
 .center {
   margin: auto;
   justify-content: center;
-  margin-top: 10%;
+  margin-top: 2%;
 }
-.newTable {
-  margin: auto;
-  text-align: center;
+
+.options{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
 }
 
 .square{
@@ -44,4 +46,17 @@
     flex-direction: column;
     width: fit-content;
     margin: auto;
+}
+
+.panel{
+    background-color: greenyellow;
+    margin-bottom: 5%;
+}
+
+.addBtn{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: auto;
+    text-align: center;
 }

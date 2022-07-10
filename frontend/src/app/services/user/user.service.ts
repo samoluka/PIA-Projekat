@@ -4,6 +4,7 @@ import { User } from 'src/app/models/user';
 import { NgIf } from '@angular/common';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
+import { Table } from 'src/app/models/table';
 
 @Injectable({
   providedIn: 'root',
@@ -187,6 +188,21 @@ export class UserService {
     return this.http.post(`${this.uri}/products/addToCategory`, {
       product: product._id,
       category: category._id,
+    });
+  }
+
+  updateTables(user: User, room: string, tables: Table[]) {
+    return this.http.post(`${this.uri}/users/updateTables`, {
+      id: user._id,
+      name: room,
+      tables: tables,
+    });
+  }
+
+  addRoom(user: User, room: string) {
+    return this.http.post(`${this.uri}/users/addRoom`, {
+      id: user._id,
+      name: room,
     });
   }
 }

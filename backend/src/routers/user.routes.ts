@@ -61,8 +61,8 @@ userRouter
   .post((req, res) => new UserController().addRoom(req, res));
 
 userRouter
-  .route("/addTable")
-  .post((req, res) => new UserController().addTable(req, res));
+  .route("/updateTables")
+  .post((req, res) => new UserController().updateTables(req, res));
 
 userRouter
   .route("/getTables")

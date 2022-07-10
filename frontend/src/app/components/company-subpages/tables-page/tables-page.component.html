@@ -1,62 +1,78 @@
+<div class="addBtn">
+  <mat-form-field class="" appearance="fill">
+    <mat-label>Unesite naziv prostorije:</mat-label>
+    <input
+      matInput
+      placeholder="basta"
+      [(ngModel)]="newRoom"
+    />
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="addRoom()">dodaj prostoriju</button>
+</div>
 <mat-tab-group mat-align-tabs="center">
   <mat-tab [label]="room.name" *ngFor="let room of rooms">
-    <div class="newTable">
-      <mat-form-field appearance="fill">
-        <mat-label>Tip stola</mat-label>
-        <mat-select [(ngModel)]="type">
-          <mat-option value="circle">Kruzni sto</mat-option>
-          <mat-option value="square">Pravougaoni sto</mat-option>
-        </mat-select>
-      </mat-form-field>
-      <div class="square" *ngIf="type == 'square'">
-        <mat-form-field class="" appearance="fill">
-          <mat-label>Unesite sirinu stola:</mat-label>
-          <input
-            matInput
-            placeholder="123"
-            type="number"
-            [(ngModel)]="newWidth"
-          />
+    <div class="options">
+      <div class="newTable">
+        <mat-form-field appearance="fill">
+          <mat-label>Tip stola</mat-label>
+          <mat-select [(ngModel)]="type">
+            <mat-option value="circle">Kruzni sto</mat-option>
+            <mat-option value="square">Pravougaoni sto</mat-option>
+          </mat-select>
         </mat-form-field>
-        <mat-form-field class="" appearance="fill">
-          <mat-label>Unesite visinu stola:</mat-label>
-          <input
-            matInput
-            placeholder="123"
-            type="number"
-            [(ngModel)]="newHeight"
-          />
-        </mat-form-field>
+        <div class="square" *ngIf="type == 'square'">
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Unesite sirinu stola:</mat-label>
+            <input
+              matInput
+              placeholder="123"
+              type="number"
+              [(ngModel)]="newWidth"
+            />
+          </mat-form-field>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Unesite visinu stola:</mat-label>
+            <input
+              matInput
+              placeholder="123"
+              type="number"
+              [(ngModel)]="newHeight"
+            />
+          </mat-form-field>
+        </div>
+        <div class="circle" *ngIf="type == 'circle'">
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Unesite poluprecnik stola:</mat-label>
+            <input
+              matInput
+              placeholder="123"
+              type="number"
+              [(ngModel)]="newWidth"
+            />
+          </mat-form-field>
+        </div>
+        <div class="nameInput" *ngIf="type">
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Unesite naziv stola:</mat-label>
+            <input
+              matInput
+              placeholder="123"
+              type="number"
+              [(ngModel)]="newName"
+            />
+          </mat-form-field>
+        </div>
+        <div class="addBtn" *ngIf="type">
+          <button mat-button color="primary" (click)="addTable(room.name)">
+            Dodaj sto
+          </button>
+        </div>
       </div>
-      <div class="circle" *ngIf="type == 'circle'">
-        <mat-form-field class="" appearance="fill">
-          <mat-label>Unesite poluprecnik stola:</mat-label>
-          <input
-            matInput
-            placeholder="123"
-            type="number"
-            [(ngModel)]="newWidth"
-          />
-        </mat-form-field>
-      </div>
-      <div class="nameInput" *ngIf="type">
-        <mat-form-field class="" appearance="fill">
-          <mat-label>Unesite naziv stola:</mat-label>
-          <input
-            matInput
-            placeholder="123"
-            type="number"
-            [(ngModel)]="newName"
-          />
-        </mat-form-field>
-      </div>
-      <div class="addBtn" *ngIf="type">
-        <button mat-button color="primary" (click)="addTable(room.name)">
-          Dodaj sto
-        </button>
-      </div>
+      <button mat-button color="primary" (click)="saveRoomLayout(room)">
+        sacuvaj pozicije stolova
+      </button>
     </div>
-    <div class="example-boundary center">
+    <div class="example-boundary center panel">
       <div
         class="example-box"
         cdkDragBoundary=".example-boundary"
@@ -64,8 +80,9 @@
         [style.width.px]="table.width"
         [style.height.px]="table.height"
         [style.border-radius.px]="table.shape == 'circle' ? table.width : 20"
-        [style.transform]="tableStyleMap[table.centerX + ';' + table.centerY]"
+        [style.transform]="table.position"
         *ngFor="let table of room.tables"
+        #room.tables
       >
         {{ table.name }}
       </div>
