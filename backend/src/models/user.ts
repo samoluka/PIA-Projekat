@@ -101,6 +101,7 @@ let User = new Schema({
           shape: String,
           centerX: Number,
           centerY: Number,
+          name: String,
         },
       ],
     },

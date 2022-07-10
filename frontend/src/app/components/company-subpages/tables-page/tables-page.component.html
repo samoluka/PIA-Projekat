@@ -39,8 +39,21 @@
           />
         </mat-form-field>
       </div>
+      <div class="nameInput" *ngIf="type">
+        <mat-form-field class="" appearance="fill">
+          <mat-label>Unesite naziv stola:</mat-label>
+          <input
+            matInput
+            placeholder="123"
+            type="number"
+            [(ngModel)]="newName"
+          />
+        </mat-form-field>
+      </div>
       <div class="addBtn" *ngIf="type">
-        <button mat-button color="primary" (click)="addTable(room.name)">Dodaj sto</button>
+        <button mat-button color="primary" (click)="addTable(room.name)">
+          Dodaj sto
+        </button>
       </div>
     </div>
     <div class="example-boundary center">
@@ -54,7 +67,7 @@
         [style.transform]="tableStyleMap[table.centerX + ';' + table.centerY]"
         *ngFor="let table of room.tables"
       >
-        I can only be dragged within the dotted container
+        {{ table.name }}
       </div>
     </div>
   </mat-tab>

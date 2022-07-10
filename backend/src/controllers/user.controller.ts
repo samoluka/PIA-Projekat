@@ -273,6 +273,7 @@ export class UserController {
             shape: req.body.shape,
             centerX: req.body.centerX,
             centerY: req.body.centerY,
+            name: req.body.tableName,
           });
           user.save().then((user) => res.status(200).json(user));
         } else {

@@ -17,6 +17,7 @@ export class TablesPageComponent implements OnInit {
 
   newWidth: number;
   newHeight: number;
+  newName: string;
   type: string;
 
   user: User;
@@ -50,6 +51,7 @@ export class TablesPageComponent implements OnInit {
     t.shape = this.type;
     t.centerX = 100;
     t.centerY = 100;
+    t.name = this.newName;
     this.newTables.push(t);
     this.rooms.find((r) => r.name == roomName).tables.push(t);
     console.log(this.rooms);

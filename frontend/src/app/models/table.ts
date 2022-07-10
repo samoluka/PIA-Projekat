@@ -4,4 +4,5 @@ export class Table {
   height: number;
   centerX: number;
   centerY: number;
+  name: string;
 }
