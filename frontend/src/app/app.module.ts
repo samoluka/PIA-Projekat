@@ -38,7 +38,7 @@ import { CategoryPageComponent } from './components/company-subpages/category-pa
 import { MatTreeModule } from '@angular/material/tree';
 import { AddProductToCategotyPageComponent } from './components/company-subpages/add-product-to-categoty-page/add-product-to-categoty-page.component';
 import { MatTableModule } from '@angular/material/table';
-import { TablesPageComponent } from './components/company-subpages/tables-page/tables-page.component';
+import { TablesPageComponent } from './components/company-subpages/tables-page/tables-page.component'; 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 
