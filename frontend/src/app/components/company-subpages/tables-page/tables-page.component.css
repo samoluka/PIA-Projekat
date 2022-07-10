@@ -1,3 +1,4 @@
+
 .example-box {
     border: solid 1px #ccc;
     color: rgba(0, 0, 0, 0.87);
@@ -8,7 +9,7 @@
     text-align: center;
     background: #fff;
     margin-right: 25px;
-    position: relative;
+    position: absolute;
     z-index: 1;
     box-sizing: border-box;
     padding: 10px;

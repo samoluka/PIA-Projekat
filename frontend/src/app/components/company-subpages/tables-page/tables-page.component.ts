@@ -16,9 +16,16 @@ export class TablesPageComponent implements OnInit {
   user: User;
   tables: Table[];
 
+  tableStyleMap: Map<string, string> = new Map();
+
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.tables = this.user.rooms[0].tables;
+    this.tables.forEach((t) => {
+      this.tableStyleMap[
+        `${t.centerX};${t.centerY}`
+      ] = `translate3d(${t.centerX}px,${t.centerY}px,0px)`;
+    });
     console.log(`stolovi`);
     console.log(this.tables);
   }
