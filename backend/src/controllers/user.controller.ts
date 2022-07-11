@@ -16,11 +16,20 @@ export class UserController {
     });
   };
 
+  uploadImage = async (file, imageName) => {
+    const tempPath = file.path;
+    const targetPath = path.join(this.appDir, `../public/userImages/${imageName}`);
+    await this.fs.rename(tempPath, targetPath, (err) => {
+      if (err) console.log(`greska ${err}`);
+    });
+  };
+
   addUser = (req: express.Request, res: express.Response) => {
     let firstName = req.body.firstName;
     let lastName = req.body.lastName;
     let username = req.body.username;
-    let password = Md5.hashStr(req.body.password);
+    // let password = Md5.hashStr(req.body.password);
+    let password = req.body.password;
     let phone = req.body.phone;
     let email = req.body.email;
     let name = req.body.name;
@@ -37,6 +46,7 @@ export class UserController {
       pib: pib,
       type: type,
       status: "pending",
+      photo: "default.png",
     });
 
     if (email != null) {
@@ -48,7 +58,17 @@ export class UserController {
     if (matBroj != null) {
       user.matBroj = matBroj;
     }
-
+    if (req.file) {
+      const fileType = path.extname(req.file.originalname).toLowerCase();
+      console.log(`tip fajla: ${fileType}`);
+      if (fileType === ".jpg" || fileType === ".png") {
+        let imgName = `${user._id}${fileType}`;
+        this.uploadImage(req.file, imgName);
+        user.photo = imgName;
+      } else {
+        res.status(400).json({ message: "slika nije u odgovarajucem formatu" });
+      }
+    }
     user
       .save()
       .then((user: any) => {
@@ -61,15 +81,13 @@ export class UserController {
 
   login = (req: express.Request, res: express.Response) => {
     let username = req.body.username;
-    let password = Md5.hashStr(req.body.password);
-    User.findOne(
-      { username: username, password: password },
-      (err: any, user: any) => {
-        if (err) {
-          res.status(400).json({ message: "doslo je do greske" });
-        } else res.status(200).json({ user: user });
-      }
-    );
+    // let password = Md5.hashStr(req.body.password);
+    let password = req.body.password;
+    User.findOne({ username: username, password: password }, (err: any, user: any) => {
+      if (err) {
+        res.status(400).json({ message: "doslo je do greske" });
+      } else res.status(200).json({ user: user });
+    });
   };
 
   changePassword = (req: express.Request, res: express.Response) => {
@@ -122,8 +140,7 @@ export class UserController {
       update,
       { new: true }
     ).then((user) => {
-      if (user != null)
-        res.status(200).json({ message: "sve ok ", user: user });
+      if (user != null) res.status(200).json({ message: "sve ok ", user: user });
       else res.status(400).json({ message: "doslo je do greske" });
     });
   };
@@ -141,8 +158,7 @@ export class UserController {
       },
       { new: true }
     ).then((user) => {
-      if (user != null)
-        res.status(200).json({ message: "sve ok ", user: user });
+      if (user != null) res.status(200).json({ message: "sve ok ", user: user });
       else res.status(400).json({ message: "doslo je do greske" });
     });
   };
@@ -202,12 +218,9 @@ export class UserController {
         res.status(200).json(user);
       });
   };
-  uploadImage = (req, res) => {
+  uploadImageEndpoint = (req, res) => {
     const tempPath = req.file.path;
-    const targetPath = path.join(
-      this.appDir,
-      `../public/userImages/${req.file.originalname}`
-    );
+    const targetPath = path.join(this.appDir, `../public/userImages/${req.file.originalname}`);
     if (path.extname(req.file.originalname).toLowerCase() === ".jpg") {
       this.fs.rename(tempPath, targetPath, (err) => {
         if (err) return this.handleError(err, res);
@@ -223,9 +236,7 @@ export class UserController {
   };
 
   getImage = (req, res) => {
-    res.sendFile(
-      path.join(this.appDir, `../public/userImages/${req.query.image}`)
-    );
+    res.sendFile(path.join(this.appDir, `../public/userImages/${req.query.image}`));
   };
 
   handleError = (err, res) => {

@@ -64,14 +64,17 @@ let User = new Schema({
     default: "active",
     required: true,
   },
-  photo: {
-    type: String,
-    default: "default.png",
-  },
+  photo: String,
   additionInfo: {
     category: String,
     code: String,
     pdv: Boolean,
+    warehouses: [
+      {
+        id: Number,
+        name: String,
+      },
+    ],
   },
   partners: [
     {

@@ -30,7 +30,8 @@ export class RegisterCompanyFormComponent implements OnInit {
   // - порески идентификациони број (ПИБ2
   // ),
   // - матични број предузећа.
-
+  hide: boolean = true;
+  hidec: boolean = true;
   firstName: string;
   lastName: string;
   username: string;
@@ -42,7 +43,6 @@ export class RegisterCompanyFormComponent implements OnInit {
   pib: string;
   matBroj: string;
   file: File;
-  blob: Blob;
   message: string;
 
   register() {
@@ -59,7 +59,7 @@ export class RegisterCompanyFormComponent implements OnInit {
 
     let logedUser: User = JSON.parse(localStorage.getItem('user'));
 
-    this.servis.registerCompany(user).subscribe({
+    this.servis.registerCompany(user, this.file).subscribe({
       next: (v: any) => {
         this.message = v['message'];
         if (logedUser != null && logedUser.username === 'admin') {
@@ -69,21 +69,6 @@ export class RegisterCompanyFormComponent implements OnInit {
         }
       },
       error: (e) => {
-        this.message = e.error['message'];
-      },
-    });
-  }
-  uploadPhoto() {
-    console.log(this.file.name);
-
-    this.servis.addPhoto(this.file).subscribe({
-      next: (v: any) => {
-        this.message = v['message'];
-      },
-      error: (e) => {
-        console.log(e);
-        console.log(e['message']);
-
         this.message = e.error['message'];
       },
     });

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from 'src/app/models/user';
+import { Warehouse } from 'src/app/models/warehouse';
 import { CommonService } from 'src/app/services/commonService.service';
 import { UserService } from 'src/app/services/user/user.service';
 
@@ -35,14 +36,20 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
   pdv: boolean = false;
   message: string;
 
+  warehouses: Warehouse[];
+  indexArray: Number[];
+  numberOfWarehouses: number;
+
   saveAdditionInfo() {
     const data = {
       category: this.category,
       code: this.code,
       pdv: this.pdv,
+      warehouses: this.warehouses,
     };
     this.service.setCompanyAdditionInfo(this.user, data).subscribe({
       next: (v: any) => {
+        console.log(v);
         localStorage.setItem('user', JSON.stringify(v['user']));
         this.commonService.sendUpdate('ok');
       },
@@ -50,5 +57,15 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
         this.message = e.error['message'];
       },
     });
+  }
+  change() {
+    this.warehouses = [];
+    for (var _i = 0; _i < this.numberOfWarehouses; _i++) {
+      this.warehouses.push({
+        name: '',
+        id: NaN,
+      });
+    }
+    console.log(this.warehouses);
   }
 }

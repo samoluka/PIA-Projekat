@@ -1,22 +1,41 @@
-<p>company-additional-info-page works!</p>
-
-<table>
-  <tr>
-    <td>kategorija:</td>
-    <td><input type="text" name="category"  [(ngModel)]="category" /></td>
-  </tr>
-  <tr>
-    <td>sifra delatnosti:</td>
-    <td><input type="text" name="code"  [(ngModel)]="code" /></td>
-  </tr>
-  <tr>
-    <td>pdv:</td>
-    <td><input type="checkbox" name = "pdv"  [(ngModel)]="pdv" /></td>
-  </tr>
-  <tr>
-    <td colspan="2">
-      <button (click)="saveAdditionInfo()">sacuvaj</button>
-    </td>
-  </tr>
-</table>
-<p>{{ message }}</p>
+<div class="form">
+  <h1>
+    Molimo vas za da unesete dodatne informacije o preduzecu kako biste
+    nastavili
+  </h1>
+  <mat-form-field class="" appearance="fill">
+    <mat-label>Unesite kategoriju preduzeca:</mat-label>
+    <input matInput placeholder="kategorija" [(ngModel)]="category" />
+  </mat-form-field>
+  <mat-form-field class="" appearance="fill">
+    <mat-label>Unesite sifru delatnosti:</mat-label>
+    <input matInput placeholder="sifra delatnosti" [(ngModel)]="code" />
+  </mat-form-field>
+  <mat-checkbox class="example-margin" [(ngModel)]="pdv"
+    >Da li je preduzece u sistemu pdv-a</mat-checkbox
+  >
+  <mat-form-field class="" appearance="fill">
+    <mat-label>Unesite broj magacina:</mat-label>
+    <input
+      matInput
+      placeholder="broj magacina"
+      type="number"
+      [(ngModel)]="numberOfWarehouses"
+      (ngModelChange)="change()"
+    />
+  </mat-form-field>
+  <div *ngFor="let warehouse of warehouses" class="warehouses">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Naziv magacina:</mat-label>
+      <input matInput placeholder="naziv" [(ngModel)]="warehouse.name" />
+    </mat-form-field>
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>id magacina:</mat-label>
+      <input matInput placeholder="id" type="number" [(ngModel)]="warehouse.id" />
+    </mat-form-field>
+  </div>
+  <button mat-raised-button color="primary" (click)="saveAdditionInfo()">
+    sacuvaj
+  </button>
+  <p>{{ message }}</p>
+</div>

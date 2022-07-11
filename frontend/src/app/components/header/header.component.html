@@ -1,11 +1,13 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row>
-      <span>Mnogo kul aplikacija</span>
-      <span class="example-spacer"></span>
-      <div *ngIf="user">
-        <span>ovde ide slika korisnika</span>
-        <button mat-button color="secondary" (click)="logOut()">Odjavi se</button>
-      </div>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  
+  <mat-toolbar-row>
+    <span>Mnogo kul aplikacija</span>
+    <span class="example-spacer"></span>
+    <div *ngIf="user">
+      <img
+        class="photo"
+        src="http://localhost:4000/users/getImage/?image={{ user.photo }}"
+      />
+      <button mat-button color="secondary" (click)="logOut()">Odjavi se</button>
+    </div>
+  </mat-toolbar-row>
+</mat-toolbar>

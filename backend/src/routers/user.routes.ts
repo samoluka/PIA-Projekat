@@ -14,22 +14,18 @@ userRouter
 
 userRouter
   .route("/addUser")
-  .post((req, res) => new UserController().addUser(req, res));
+  .post(upload.single("file" /* name attribute of <file> element in your form */), (req, res) =>
+    new UserController().addUser(req, res)
+  );
 
-userRouter
-  .route("/login")
-  .post((req, res) => new UserController().login(req, res));
+userRouter.route("/login").post((req, res) => new UserController().login(req, res));
 userRouter
   .route("/changePassword")
   .post((req, res) => new UserController().changePassword(req, res));
 
-userRouter
-  .route("/setUserStatus")
-  .post((req, res) => new UserController().setUserStatus(req, res));
+userRouter.route("/setUserStatus").post((req, res) => new UserController().setUserStatus(req, res));
 
-userRouter
-  .route("/updateUser")
-  .post((req, res) => new UserController().updateUser(req, res));
+userRouter.route("/updateUser").post((req, res) => new UserController().updateUser(req, res));
 
 userRouter
   .route("/setCompanyAdditionInfo")
@@ -48,23 +44,14 @@ userRouter
 
 userRouter
   .route("/upload")
-  .post(
-    upload.single("file" /* name attribute of <file> element in your form */),
-    (req, res) => new UserController().uploadImage(req, res)
+  .post(upload.single("file" /* name attribute of <file> element in your form */), (req, res) =>
+    new UserController().uploadImageEndpoint(req, res)
   );
-userRouter
-  .route("/getImage")
-  .get((req, res) => new UserController().getImage(req, res));
+userRouter.route("/getImage").get((req, res) => new UserController().getImage(req, res));
 
-userRouter
-  .route("/addRoom")
-  .post((req, res) => new UserController().addRoom(req, res));
+userRouter.route("/addRoom").post((req, res) => new UserController().addRoom(req, res));
 
-userRouter
-  .route("/updateTables")
-  .post((req, res) => new UserController().updateTables(req, res));
+userRouter.route("/updateTables").post((req, res) => new UserController().updateTables(req, res));
 
-userRouter
-  .route("/getTables")
-  .get((req, res) => new UserController().getTables(req, res));
+userRouter.route("/getTables").get((req, res) => new UserController().getTables(req, res));
 export default userRouter;

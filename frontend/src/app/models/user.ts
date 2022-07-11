@@ -1,5 +1,6 @@
 import { Product } from './product';
 import { Table } from './table';
+import { Warehouse } from './warehouse';
 
 export class User {
   _id: string;
@@ -14,10 +15,12 @@ export class User {
   matBroj: string;
   type: string;
   status: string;
+  photo: string;
   additionInfo: {
     category: string;
     code: string;
     pdv: boolean;
+    warehouses: [Warehouse];
   };
   products: Product[];
   partners: User[];

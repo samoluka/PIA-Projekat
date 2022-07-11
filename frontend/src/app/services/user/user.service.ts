@@ -58,20 +58,34 @@ export class UserService {
     );
   }
 
-  registerCompany(user: User) {
-    const data = {
-      firstName: user.firstName,
-      lastName: user.lastName,
-      username: user.username,
-      password: user.password,
-      phone: user.phone,
-      email: user.email,
-      name: user.name,
-      pib: user.pib,
-      matBroj: user.matBroj,
-      type: 'company',
-    };
-    return this.http.post(`${this.uri}/users/addUser`, data);
+  registerCompany(user: User, file: File) {
+    // const data = {
+    //   firstName: user.firstName,
+    //   lastName: user.lastName,
+    //   username: user.username,
+    //   password: user.password,
+    //   phone: user.phone,
+    //   email: user.email,
+    //   name: user.name,
+    //   pib: user.pib,
+    //   matBroj: user.matBroj,
+    //   type: 'company',
+    // };
+    // return this.http.post(`${this.uri}/users/addUser`, data);
+
+    const formData = new FormData();
+    formData.append('firstName', user.firstName);
+    formData.append('lastName', user.lastName);
+    formData.append('username', user.username);
+    formData.append('password', user.password);
+    formData.append('phone', user.phone);
+    formData.append('email', user.email);
+    formData.append('name', user.name);
+    formData.append('pib', user.pib);
+    formData.append('matBroj', user.matBroj);
+    formData.append('type', 'company');
+    if (file) formData.append('file', file, file.name);
+    return this.http.post(`${this.uri}/users/adduser`, formData);
   }
 
   registerCustomer(user: User) {

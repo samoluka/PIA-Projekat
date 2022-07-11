@@ -1,8 +1,8 @@
 <app-company-additional-info-page
-  *ngIf="!user.additionInfo"
+  *ngIf="!user.additionInfo.pdv"
 ></app-company-additional-info-page>
 
-<div *ngIf="user.additionInfo">
+<div *ngIf="user.additionInfo.pdv">
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Raspored stolova">
       <app-tables-page></app-tables-page>
