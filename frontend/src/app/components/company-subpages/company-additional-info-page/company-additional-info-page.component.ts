@@ -37,8 +37,7 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
   message: string;
 
   warehouses: Warehouse[];
-  indexArray: Number[];
-  numberOfWarehouses: number;
+  numberOfWarehouses: number = 1;
 
   saveAdditionInfo() {
     const data = {

@@ -1,5 +1,6 @@
 import { Category } from './category';
 import { User } from './user';
+import { WarehouseInfo } from './warehouseInfo';
 
 export class Product {
   _id: string;
@@ -10,6 +11,7 @@ export class Product {
   unit: string;
   photo: string;
   category: Category;
+  warehouseInfo: WarehouseInfo[];
   additionalData: {
     origin: string;
     originalName: string;

@@ -48,6 +48,16 @@ let Product = new Schema({
     ref: "Category",
     default: null,
   },
+  warehouseInfo: [
+    {
+      id: Number,
+      buyPrice: Number,
+      sellPrice: Number,
+      stocks: Number,
+      min: Number,
+      max: Number,
+    },
+  ],
   additionalData: {
     origin: {
       type: String,

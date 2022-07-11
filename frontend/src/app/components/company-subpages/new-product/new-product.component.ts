@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs/internal/Subscription';
 import { Product } from 'src/app/models/product';
 import { User } from 'src/app/models/user';
+import { WarehouseInfo } from 'src/app/models/warehouseInfo';
 import { CommonService } from 'src/app/services/commonService.service';
 import { ProductService } from 'src/app/services/product/product.service';
 
@@ -48,8 +49,21 @@ export class NewProductComponent implements OnInit {
   about: string;
   declaration: string;
 
+  warehouseInfo: WarehouseInfo[];
+
   ngOnInit(): void {
     this.company = JSON.parse(localStorage.getItem('user'));
+    this.warehouseInfo = [];
+    this.company.additionInfo.warehouses.forEach((w) => {
+      this.warehouseInfo.push({
+        id: w.id,
+        buyPrice: NaN,
+        sellPrice: NaN,
+        stocks: NaN,
+        min: NaN,
+        max: NaN,
+      });
+    });
   }
 
   change(event) {
@@ -74,6 +88,7 @@ export class NewProductComponent implements OnInit {
     product.company = this.company;
     product.taxRate = this.taxRate;
     product.unit = this.unit;
+    product.warehouseInfo = this.warehouseInfo;
     product.additionalData = {
       ...(this.origin && {
         origin: this.origin,

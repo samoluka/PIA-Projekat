@@ -62,21 +62,6 @@ photo: string; -->
     </mat-expansion-panel>
     <mat-expansion-panel>
       <mat-expansion-panel-header>
-        <mat-panel-title> Slika artikla </mat-panel-title>
-        <mat-panel-description>
-          Ovde dodajete sliku novog artikla(opciono)
-        </mat-panel-description>
-      </mat-expansion-panel-header>
-      <div class="infoForm">
-        <input hidden id="photoId" type="file" (change)="change($event)" />
-        <label for="photoId" class="mat-button mat-raised mat-primary">
-          <div *ngIf="!photo">Odaberite sliku</div>
-          <div *ngIf="photo">Odabrali ste sliku: {{ photo.name }}</div>
-        </label>
-      </div>
-    </mat-expansion-panel>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
         <mat-panel-title> Dopunski podaci artikla </mat-panel-title>
         <mat-panel-description>
           Ovde dodajete dopunske podatke novog artikla(opciono)
@@ -141,18 +126,53 @@ photo: string; -->
         </mat-form-field>
       </div>
     </mat-expansion-panel>
-
-    <!-- origin: string;
-    originalName: string;
-    barcode: string;
-    producer: string;
-    customFee: number;
-    ecoTax: boolean;
-    excise: boolean;
-    minStock: number;
-    maxStock: number;
-    about: string;
-    declaration: string; -->
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Cena i stanje robe </mat-panel-title>
+        <mat-panel-description> Cena i stanje robe </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div *ngFor="let info of warehouseInfo">
+        Magacin id: {{ info.id }}
+        <br />
+        <div class="warehouses">
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>nabavna cena:</mat-label>
+            <input matInput type="number" [(ngModel)]="info.buyPrice" />
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>prodajna cena:</mat-label>
+            <input matInput type="number" [(ngModel)]="info.sellPrice" />
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>stanje na lageru</mat-label>
+            <input matInput type="number" [(ngModel)]="info.stocks" />
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>minimalna kolicina</mat-label>
+            <input matInput type="number" [(ngModel)]="info.min" />
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>maksimalna kolicina</mat-label>
+            <input matInput type="number" [(ngModel)]="info.max" />
+          </mat-form-field>
+        </div>
+      </div>
+    </mat-expansion-panel>
+    <mat-expansion-panel>
+      <mat-expansion-panel-header>
+        <mat-panel-title> Slika artikla </mat-panel-title>
+        <mat-panel-description>
+          Ovde dodajete sliku novog artikla(opciono)
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <div class="infoForm">
+        <input hidden id="photoId" type="file" (change)="change($event)" />
+        <label for="photoId" class="mat-button mat-raised mat-primary">
+          <div *ngIf="!photo">Odaberite sliku</div>
+          <div *ngIf="photo">Odabrali ste sliku: {{ photo.name }}</div>
+        </label>
+      </div>
+    </mat-expansion-panel>
   </mat-accordion>
   <div class="submitButton">
     <button mat-raised-button color="primary" (click)="saveProduct()">

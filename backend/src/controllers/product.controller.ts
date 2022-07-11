@@ -32,7 +32,7 @@ export class ProductController {
     const taxRate = req.body.taxRate;
     const companyUsername = req.body.companyUsername;
     const unit = req.body.unit;
-
+    const warehouseInfo = JSON.parse(req.body.warehouseInfo);
     User.findOne({
       username: companyUsername,
     })
@@ -43,6 +43,7 @@ export class ProductController {
             name: name,
             taxRate: taxRate,
             company: user._id,
+            warehouseInfo: warehouseInfo,
             unit: unit,
             ...(req.body.additionalData && {
               additionalData: JSON.parse(req.body.additionalData),
@@ -53,9 +54,7 @@ export class ProductController {
             .save()
             .then(async (product: any) => {
               if (req.file) {
-                const fileType = path
-                  .extname(req.file.originalname)
-                  .toLowerCase();
+                const fileType = path.extname(req.file.originalname).toLowerCase();
                 console.log(`tip fajla: ${fileType}`);
                 if (fileType === ".jpg" || fileType === ".png") {
                   await this.uploadImage(req.file, `${product._id}${fileType}`);
