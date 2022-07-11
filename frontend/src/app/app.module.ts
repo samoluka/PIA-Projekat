@@ -40,7 +40,8 @@ import { AddProductToCategotyPageComponent } from './components/company-subpages
 import { MatTableModule } from '@angular/material/table';
 import { TablesPageComponent } from './components/company-subpages/tables-page/tables-page.component'; 
 import { DragDropModule } from '@angular/cdk/drag-drop';
-
+import { HeaderComponent } from './components/header/header.component';
+import { MatToolbarModule } from '@angular/material/toolbar'; 
 
 
 @NgModule({
@@ -65,6 +66,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     CategoryPageComponent,
     AddProductToCategotyPageComponent,
     TablesPageComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
@@ -87,6 +89,7 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatTreeModule,
     MatTableModule,
     DragDropModule,
+    MatToolbarModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

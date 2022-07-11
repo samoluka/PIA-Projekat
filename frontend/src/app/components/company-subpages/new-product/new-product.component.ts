@@ -15,9 +15,11 @@ export class NewProductComponent implements OnInit {
     private commonService: CommonService,
     private productService: ProductService
   ) {
-    this.commonService.getUpdate().subscribe((message) => {
-      this.ngOnInit();
-    });
+    this.subscriptionName = this.commonService
+      .getUpdate()
+      .subscribe((message) => {
+        if (message != 'logout') this.ngOnInit();
+      });
   }
   ngOnDestroy() {
     this.subscriptionName.unsubscribe();

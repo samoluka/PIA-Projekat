@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { CommonService } from 'src/app/services/commonService.service';
 import { User } from '../../models/user';
 import { UserService } from '../../services/user/user.service';
 
@@ -9,7 +10,11 @@ import { UserService } from '../../services/user/user.service';
   styleUrls: ['./login.component.css'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private userService: UserService, private router: Router) {}
+  constructor(
+    private userService: UserService,
+    private router: Router,
+    private commonService: CommonService
+  ) {}
 
   ngOnInit(): void {
     if ('message' in localStorage) {
@@ -40,6 +45,7 @@ export class LoginComponent implements OnInit {
           let user: User = v['user'];
           if (user) {
             localStorage.setItem('user', JSON.stringify(user));
+            this.commonService.sendUpdate('loged user');
             if (user.status === 'pending')
               this.router.navigate(['/notApproved']);
             else

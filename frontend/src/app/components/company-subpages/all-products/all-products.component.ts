@@ -1,6 +1,5 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, PageEvent } from '@angular/material/paginator';
-import { Subscription, tap } from 'rxjs';
+import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { CommonService } from 'src/app/services/commonService.service';
 import { UserService } from 'src/app/services/user/user.service';
@@ -47,9 +46,11 @@ export class AllProductsComponent implements OnInit {
       .subscribe((user: User) => {
         if (user) this.user = user;
       });
-    this.commonService.getUpdate().subscribe((message) => {
-      this.ngOnInit();
-    });
+    this.subscriptionName = this.commonService
+      .getUpdate()
+      .subscribe((message) => {
+        if (message != 'logout') this.ngOnInit();
+      });
   }
   ngOnDestroy() {
     this.subscriptionName.unsubscribe();
