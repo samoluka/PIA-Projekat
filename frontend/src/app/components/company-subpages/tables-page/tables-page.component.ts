@@ -48,7 +48,7 @@ export class TablesPageComponent implements OnInit {
       t.height = this.newWidth;
     }
     t.shape = this.type;
-    t.position = `translate3d(100px,100px,0px)`;
+    t.position = `translate3d(0px,0px,0px)`;
     t.name = this.newName;
     this.rooms.find((r) => r.name == roomName).tables.push(t);
     console.log(this.rooms);
@@ -56,20 +56,39 @@ export class TablesPageComponent implements OnInit {
   saveRoomLayout(room: Room) {
     let skip = 0;
     let notfound = true;
-    console.log(this.elements);
     this.user.rooms.forEach((r) => {
-      if (r.name != room.name && notfound) skip += room.tables.length;
+      if (r.name != room.name && notfound) skip += r.tables.length;
       if (r.name == room.name) notfound = false;
     });
     let ind = 0;
-    console.log(skip);
+
     this.elements.forEach((e) => {
       if (skip > 0) {
         skip--;
         return;
       }
-      if (ind < room.tables.length)
-        room.tables[ind].position = e.nativeElement.style.transform;
+      if (ind < room.tables.length) {
+        let p: string[] = e.nativeElement.style.transform.split(')');
+        let patern = /translate3d\((-*[0-9]+)px, (-*[0-9]+)px, ([0-9]+)px/;
+        let sumF = 0;
+        let sumS = 0;
+        console.log(`obradjujem: ${e.nativeElement.innerHtml}`);
+        console.log('splitovano');
+        console.log(p);
+        p.forEach((s) => {
+          const match = s.match(patern);
+          if (match) {
+            let first = Number.parseInt(match[1]);
+            let second = Number.parseInt(match[2]);
+            sumF += first;
+            sumS += second;
+
+            console.log(`${s} => ${first}, ${second}`);
+          }
+        });
+        room.tables[ind].position = `translate3d(${sumF}px, ${sumS}px, 0px)`;
+        // console.log(`translate3d(${sumF}px, ${sumS}px, 0px)`);
+      }
       ind++;
     });
     this.userService
