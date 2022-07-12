@@ -6,6 +6,7 @@ import userRouter from "./routers/user.routes";
 import helloRouter from "./routers/hello.routes";
 import databaseRouter from "./routers/database.routes";
 import productRouter from "./routers/product.routes";
+import paymentRouter from "./routers/payment.routes";
 
 const app = express();
 
@@ -28,7 +29,7 @@ router.use("/users", userRouter);
 router.use("/hello", helloRouter);
 router.use("/database", databaseRouter);
 router.use("/products", productRouter);
-
+router.use("/payment", paymentRouter);
 app.use("/", router);
 
 app.listen(4000, () => console.log(`Express server running on port 4000`));

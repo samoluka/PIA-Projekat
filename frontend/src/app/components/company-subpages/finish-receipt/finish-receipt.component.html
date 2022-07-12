@@ -1,0 +1,81 @@
+<div class="payment">
+  <div class="receipt">
+    <div class="receiptInfo" *ngFor="let p of productsAdded">
+      proizvod: {{ p.name }} cena: {{ p.price }} kolicina: {{ p.quantity
+      }}{{ p.unit }}
+    </div>
+  </div>
+
+  <div class="sum">
+    Ukupno bez pdva: {{ sumNo }}
+    <br />
+    ukupno sa pdvom: {{ sumYes }}
+  </div>
+
+  <mat-label>Odaberite nacin placanja</mat-label>
+  <mat-select [(ngModel)]="paymentType" placeholder="nacin placanja">
+    <mat-option value="gotovina">gotovina</mat-option>
+    <mat-option value="kartica">kartica</mat-option>
+    <mat-option value="cekovi">cekovi</mat-option>
+    <mat-option value="virman">virman</mat-option>
+  </mat-select>
+  <div class="cash info" *ngIf="paymentType == 'gotovina'">
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite koliko je kupac dao</mat-label>
+      <input matInput placeholder="1234" type="number" [(ngModel)]="cash" />
+    </mat-form-field>
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite broj licne karte kupca</mat-label>
+      <input
+        matInput
+        placeholder="broj licne karte"
+        type="number"
+        [(ngModel)]="idCard"
+      />
+    </mat-form-field>
+    <div>kusur:{{ cash - sumYes }}</div>
+  </div>
+  <div class="check info" *ngIf="paymentType == 'cekovi'">
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite ime kupca</mat-label>
+      <input matInput placeholder="ime" [(ngModel)]="firstName" />
+    </mat-form-field>
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite prezime kupca</mat-label>
+      <input matInput placeholder="prezime" [(ngModel)]="lastName" />
+    </mat-form-field>
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite broj licne karte kupca</mat-label>
+      <input
+        matInput
+        placeholder="broj licne karte"
+        type="number"
+        [(ngModel)]="idCard"
+      />
+    </mat-form-field>
+  </div>
+  <div class="card info" *ngIf="paymentType == 'kartica'">
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite broj licne karte kupca</mat-label>
+      <input
+        matInput
+        placeholder="broj licne karte"
+        type="number"
+        [(ngModel)]="idCard"
+      />
+    </mat-form-field>
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite broj slip racuna</mat-label>
+      <input matInput placeholder="slip racun" [(ngModel)]="slip" />
+    </mat-form-field>
+  </div>
+  <div class="virman info" *ngIf="paymentType == 'virman'">
+    <mat-label>Odaberite narucioca</mat-label>
+    <mat-select [(ngModel)]="payingCompany" placeholder="narucila">
+      <mat-option *ngFor="let n of user.partners" [value]="n">{{
+        n.name
+      }}</mat-option>
+    </mat-select>
+  </div>
+  <button *ngIf="paymentType" mat-raised-button color="primary" (click)="finishReceipt()">Zavrsi racun</button>
+</div>

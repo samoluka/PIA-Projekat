@@ -1,0 +1,14 @@
+.card{
+    width: 80%;
+    min-width: 250px;
+}
+.productsInfo{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.info{
+    width: 20%;
+    min-width: 250px;
+    margin-top: 5%
+}

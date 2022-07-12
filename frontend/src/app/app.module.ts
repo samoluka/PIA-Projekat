@@ -41,7 +41,10 @@ import { MatTableModule } from '@angular/material/table';
 import { TablesPageComponent } from './components/company-subpages/tables-page/tables-page.component'; 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { HeaderComponent } from './components/header/header.component';
-import { MatToolbarModule } from '@angular/material/toolbar'; 
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { ReceiptPageComponent } from './components/company-subpages/receipt-page/receipt-page.component';
+import { FinishReceiptComponent } from './components/company-subpages/finish-receipt/finish-receipt.component';
+import { ReceiptViewComponent } from './components/receipt-view/receipt-view.component'; 
 
 
 @NgModule({
@@ -67,6 +70,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
     AddProductToCategotyPageComponent,
     TablesPageComponent,
     HeaderComponent,
+    ReceiptPageComponent,
+    FinishReceiptComponent,
+    ReceiptViewComponent,
   ],
   imports: [
     BrowserModule,

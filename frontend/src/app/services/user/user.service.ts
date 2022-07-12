@@ -5,6 +5,7 @@ import { NgIf } from '@angular/common';
 import { Category } from 'src/app/models/category';
 import { Product } from 'src/app/models/product';
 import { Table } from 'src/app/models/table';
+import { Receipt } from 'src/app/models/receipt';
 
 @Injectable({
   providedIn: 'root',
@@ -217,6 +218,14 @@ export class UserService {
     return this.http.post(`${this.uri}/users/addRoom`, {
       id: user._id,
       name: room,
+    });
+  }
+
+  addReceipt(user: User, receipt: Receipt) {
+    return this.http.post(`${this.uri}/payment/addReceipt`, {
+      productsInfo: receipt.productsInfo,
+      paymentInfo: receipt.paymentInfo,
+      company: user._id,
     });
   }
 }

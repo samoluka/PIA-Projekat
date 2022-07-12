@@ -33,6 +33,7 @@ export class ProductController {
     const companyUsername = req.body.companyUsername;
     const unit = req.body.unit;
     const warehouseInfo = JSON.parse(req.body.warehouseInfo);
+
     User.findOne({
       username: companyUsername,
     })

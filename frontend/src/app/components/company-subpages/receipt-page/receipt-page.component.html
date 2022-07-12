@@ -1,0 +1,51 @@
+<div class="paymentForm">
+  <app-finish-receipt
+    [productsAdded]="productsAdded"
+    *ngIf="state == 'closing'"
+  ></app-finish-receipt>
+  <div class="products" *ngIf="state == 'create'">
+    <mat-form-field appearance="standard">
+      <mat-label>Filter</mat-label>
+      <input
+        matInput
+        (keyup)="filterItems($event)"
+        placeholder="paprika"
+        #input
+      />
+    </mat-form-field>
+    <button mat-raised-button (click)="state = 'closing'">Zatvori racun</button>
+    <div *ngFor="let product of forDisplay" class="productsInfo">
+      <app-product-card
+        [product]="product"
+        class="card"
+        [btns]="false"
+      ></app-product-card>
+      <div class="info">
+        <mat-label>Odaberite cenu artikla</mat-label>
+        <mat-select [(ngModel)]="price">
+          <mat-option
+            *ngFor="let m of product.warehouseInfo"
+            [value]="m.sellPrice"
+            >Magacin:{{ m.id }} - cena: {{ m.sellPrice }}</mat-option
+          >
+        </mat-select>
+        <mat-form-field class="input" appearance="fill">
+          <mat-label>Kolicina proizvoda:</mat-label>
+          <input
+            matInput
+            placeholder="naziv"
+            type="number"
+            [(ngModel)]="quantity[product._id]"
+          />
+        </mat-form-field>
+        <button
+          mat-raised-button
+          color="primary"
+          (click)="addToReceipt(product)"
+        >
+          Dodaj na racun
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
