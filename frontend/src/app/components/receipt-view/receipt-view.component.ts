@@ -1,15 +1,31 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Receipt } from 'src/app/models/receipt';
+import { User } from 'src/app/models/user';
 
 @Component({
   selector: 'app-receipt-view',
   templateUrl: './receipt-view.component.html',
-  styleUrls: ['./receipt-view.component.css']
+  styleUrls: ['./receipt-view.component.css'],
 })
 export class ReceiptViewComponent implements OnInit {
+  constructor() {}
 
-  constructor() { }
+  @Input() receipt: Receipt;
+
+  user: User;
+
+  sumNo = 0;
+  sumYes = 0;
 
   ngOnInit(): void {
+    this.user = JSON.parse(localStorage.getItem('user'));
+    this.receipt.productsInfo.forEach((p) => {
+      this.sumNo += p.price * p.quantity;
+      if (this.user.additionInfo.pdv) {
+        this.sumYes += p.price * p.quantity * (1 + p.taxRate / 100.0);
+      } else {
+        this.sumYes += p.price * p.quantity;
+      }
+    });
   }
-
 }

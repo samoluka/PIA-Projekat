@@ -3,6 +3,7 @@ import { Product } from 'src/app/models/product';
 import { Receipt } from 'src/app/models/receipt';
 import { ReceiptProductInfo } from 'src/app/models/receiptProductInfo';
 import { User } from 'src/app/models/user';
+import { CommonService } from 'src/app/services/commonService.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -11,7 +12,10 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./finish-receipt.component.css'],
 })
 export class FinishReceiptComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private commonService: CommonService
+  ) {}
 
   firstName: string;
   lastName: string;
@@ -55,7 +59,7 @@ export class FinishReceiptComponent implements OnInit {
       ...(this.payingCompany && { company: this.payingCompany._id }),
     };
     this.userService.addReceipt(this.user, receipt).subscribe((receipt) => {
-      this.ngOnInit();
+      this.commonService.sendUpdate('update');
     });
   }
 }

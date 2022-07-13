@@ -13,6 +13,7 @@ let Receipt = new Schema({
       quantity: Number,
       name: String,
       unit: String,
+      taxRate: Number,
     },
   ],
   paymentInfo: {

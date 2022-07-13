@@ -44,8 +44,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { ReceiptPageComponent } from './components/company-subpages/receipt-page/receipt-page.component';
 import { FinishReceiptComponent } from './components/company-subpages/finish-receipt/finish-receipt.component';
-import { ReceiptViewComponent } from './components/receipt-view/receipt-view.component'; 
-
+import { ReceiptViewComponent } from './components/receipt-view/receipt-view.component';
+import { StatisticsPageComponent } from './components/company-subpages/statistics-page/statistics-page.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 @NgModule({
   declarations: [
@@ -73,6 +75,7 @@ import { ReceiptViewComponent } from './components/receipt-view/receipt-view.com
     ReceiptPageComponent,
     FinishReceiptComponent,
     ReceiptViewComponent,
+    StatisticsPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -96,6 +99,8 @@ import { ReceiptViewComponent } from './components/receipt-view/receipt-view.com
     MatTableModule,
     DragDropModule,
     MatToolbarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [],
   bootstrap: [AppComponent],

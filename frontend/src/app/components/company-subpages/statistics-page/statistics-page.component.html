@@ -1,0 +1,35 @@
+<div class="page">
+  <div class="receipts">
+    <app-receipt-view
+      class="receipt"
+      *ngFor="let r of receipts"
+      [receipt]="r"
+    ></app-receipt-view>
+  </div>
+  <div class="statistics">
+    <mat-form-field appearance="fill" class="example-form-field">
+      <mat-label>Choose a date</mat-label>
+      <input
+        matInput
+        [matDatepicker]="datepicker"
+        [(ngModel)]="date"
+        (dateChange)="showStatistics()"
+      />
+      <mat-hint>MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="datepicker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #datepicker>
+        <mat-datepicker-actions>
+          <button mat-button matDatepickerCancel>Cancel</button>
+          <button mat-raised-button color="primary" matDatepickerApply>
+            Apply
+          </button>
+        </mat-datepicker-actions>
+      </mat-datepicker>
+    </mat-form-field>
+    <br />
+    <span>{{message}}</span>
+  </div>
+</div>

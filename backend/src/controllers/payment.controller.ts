@@ -12,6 +12,7 @@ export class PaymentController {
       productsInfo: productsInfo,
       paymentInfo: paymentInfo,
       company: company,
+
       date: new Date(),
     });
     product
@@ -25,7 +26,7 @@ export class PaymentController {
   };
 
   getReceipts = (req: express.Request, res: express.Response) => {
-    let user = req.body.id;
+    let user = req.query.id;
     Receipt.find({
       company: user,
     })

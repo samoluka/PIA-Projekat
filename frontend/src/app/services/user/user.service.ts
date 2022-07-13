@@ -228,6 +228,12 @@ export class UserService {
       company: user._id,
     });
   }
+
+  getReceipts(user: User) {
+    return this.http.get<Receipt[]>(
+      `${this.uri}/payment/getReceipts?id=${user._id}`
+    );
+  }
 }
 
 // "name": "konobar",

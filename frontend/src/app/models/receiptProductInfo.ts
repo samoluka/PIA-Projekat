@@ -5,4 +5,5 @@ export class ReceiptProductInfo {
   quantity: number;
   name: string;
   unit: string;
+  taxRate: number;
 }

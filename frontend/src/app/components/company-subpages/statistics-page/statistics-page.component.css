@@ -1,0 +1,16 @@
+.receipts{
+    display: flex;
+    flex-direction: column;
+    min-width: 250px;
+    width: fit-content;
+}
+
+.page{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.statistics{
+    min-width: 250px;
+    width: fit-content;
+}

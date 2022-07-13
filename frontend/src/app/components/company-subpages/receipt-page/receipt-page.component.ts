@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { Product } from 'src/app/models/product';
 import { ReceiptProductInfo } from 'src/app/models/receiptProductInfo';
 import { User } from 'src/app/models/user';
+import { CommonService } from 'src/app/services/commonService.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -10,7 +12,20 @@ import { UserService } from 'src/app/services/user/user.service';
   styleUrls: ['./receipt-page.component.css'],
 })
 export class ReceiptPageComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private commonService: CommonService
+  ) {
+    this.subscriptionName = this.commonService.getUpdate().subscribe((m) => {
+      this.ngOnInit();
+    });
+  }
+  ngOnDestroy() {
+    this.subscriptionName.unsubscribe();
+  }
+
+  messageReceived: any;
+  private subscriptionName: Subscription;
 
   user: User;
   productsAdded: ReceiptProductInfo[];
@@ -45,6 +60,7 @@ export class ReceiptPageComponent implements OnInit {
       product: product._id,
       name: product.name,
       unit: product.unit,
+      taxRate: product.taxRate,
     });
     console.log(this.productsAdded);
   }
