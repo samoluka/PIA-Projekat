@@ -4,11 +4,11 @@
 
 <div *ngIf="user.additionInfo.pdv">
   <mat-tab-group mat-align-tabs="center">
-    <mat-tab label="Pregled izvestaja">
-      <app-statistics-page></app-statistics-page>
-    </mat-tab>
     <mat-tab label="Izdavanje racuna">
       <app-receipt-page></app-receipt-page>
+    </mat-tab>
+    <mat-tab label="Pregled izvestaja">
+      <app-statistics-page></app-statistics-page>
     </mat-tab>
     <mat-tab label="Roba i usluge">
       <app-all-products></app-all-products>

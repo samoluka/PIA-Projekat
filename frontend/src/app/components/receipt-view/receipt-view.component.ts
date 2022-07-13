@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Receipt } from 'src/app/models/receipt';
+import { ReceiptProductInfo } from 'src/app/models/receiptProductInfo';
 import { User } from 'src/app/models/user';
 
 @Component({
@@ -11,6 +12,7 @@ export class ReceiptViewComponent implements OnInit {
   constructor() {}
 
   @Input() receipt: Receipt;
+  @Input() receiptInfo: ReceiptProductInfo[];
 
   user: User;
 
@@ -19,13 +21,14 @@ export class ReceiptViewComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
-    this.receipt.productsInfo.forEach((p) => {
-      this.sumNo += p.price * p.quantity;
-      if (this.user.additionInfo.pdv) {
-        this.sumYes += p.price * p.quantity * (1 + p.taxRate / 100.0);
-      } else {
-        this.sumYes += p.price * p.quantity;
-      }
-    });
+    if (this.receipt)
+      this.receipt.productsInfo.forEach((p) => {
+        this.sumNo += p.price * p.quantity;
+        if (this.user.additionInfo.pdv) {
+          this.sumYes += p.price * p.quantity * (1 + p.taxRate / 100.0);
+        } else {
+          this.sumYes += p.price * p.quantity;
+        }
+      });
   }
 }

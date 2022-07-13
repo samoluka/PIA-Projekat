@@ -1,7 +1,31 @@
-<div class="receipt" *ngIf="receipt">
+<div class="receipt" *ngIf="receiptInfo">
   <!-- <div class="product" *ngFor="let p of receipt.productsInfo">
         Proizvod:{{p.name}} Kolicina:{{p.quantity}} Cena:{{p.price}}{{p.unit}} Porez:{{p.taxRate}}
     </div> -->
+  <table class="table">
+    <tr>
+      <th>Proizvod</th>
+      <th>Kolicina</th>
+      <th>Cena</th>
+      <th>Porez</th>
+    </tr>
+    <tr *ngFor="let p of receiptInfo">
+      <td>
+        {{ p.name }}
+      </td>
+      <td>{{ p.quantity }}{{ p.unit }}</td>
+      <td>
+        {{ p.price }}
+      </td>
+      <td>{{ p.taxRate }}%</td>
+    </tr>
+  </table>
+</div>
+
+<div class="receipt" *ngIf="receipt">
+  <!-- <div class="product" *ngFor="let p of receipt.productsInfo">
+          Proizvod:{{p.name}} Kolicina:{{p.quantity}} Cena:{{p.price}}{{p.unit}} Porez:{{p.taxRate}}
+      </div> -->
   <table class="table">
     <tr>
       <th>Proizvod</th>
@@ -26,5 +50,5 @@
   <br />
   <span> Nacin placanja:{{ receipt.paymentInfo.paymentType }} </span>
   <br />
-  <span>Datum:{{ receipt.date.toString().substring(0,10) }}</span>
+  <span>Datum:{{ receipt.date.toString().substring(0, 10) }}</span>
 </div>

@@ -1,4 +1,7 @@
-<div class="paymentForm">
+<div
+  class="paymentForm"
+  *ngIf="user && user.additionInfo.category != 'ugostitelj'"
+>
   <app-finish-receipt
     [productsAdded]="productsAdded"
     *ngIf="state == 'closing'"
@@ -14,6 +17,11 @@
       />
     </mat-form-field>
     <button mat-raised-button (click)="state = 'closing'">Zatvori racun</button>
+    <app-receipt-view
+      [receiptInfo]="productsAdded"
+      [receipt]="null"
+    ></app-receipt-view>
+    <app-receipt-view [receipt]=""></app-receipt-view>
     <div *ngFor="let product of forDisplay" class="productsInfo">
       <app-product-card
         [product]="product"
@@ -49,3 +57,6 @@
     </div>
   </div>
 </div>
+<app-receipt-table-page
+  *ngIf="user && user.additionInfo.category == 'ugostitelj'"
+></app-receipt-table-page>

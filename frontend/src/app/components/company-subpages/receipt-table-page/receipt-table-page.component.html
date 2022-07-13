@@ -1,0 +1,83 @@
+<div class="addBtn" *ngIf="state == 'create'">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab [label]="room.name" *ngFor="let room of rooms">
+      <div class="example-boundary center panel">
+        <button
+          class="example-box"
+          [style.width.px]="table.width"
+          [style.height.px]="table.height"
+          [style.border-radius.px]="table.shape == 'circle' ? table.width : 20"
+          [style.transform]="table.position"
+          *ngFor="let table of room.tables"
+          (click)="selectTable(table, room)"
+          [style.background-color]="getColor(table)"
+        >
+          {{ table.name }}
+        </button>
+      </div>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div *ngIf="selectedTable">
+  <div class="paymentForm">
+    <app-finish-receipt
+      [productsAdded]="receipts.get(selectedRoom.name).get(selectedTable.name)"
+      *ngIf="state == 'closing'"
+    ></app-finish-receipt>
+    <div class="products" *ngIf="state == 'create'">
+      <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input
+          matInput
+          (keyup)="filterItems($event)"
+          placeholder="paprika"
+          #input
+        />
+      </mat-form-field>
+      <button mat-raised-button (click)="finishReceipt()">Zatvori racun</button>
+      <app-receipt-view
+        *ngIf="
+          selectedRoom &&
+          selectedTable &&
+          receipts.get(selectedRoom.name) &&
+          receipts.get(selectedRoom.name).get(selectedTable.name)
+        "
+        [receiptInfo]="receipts.get(selectedRoom.name).get(selectedTable.name)"
+        [receipt]="null"
+      ></app-receipt-view>
+      <div *ngFor="let product of forDisplay" class="productsInfo">
+        <app-product-card
+          [product]="product"
+          class="card"
+          [btns]="false"
+        ></app-product-card>
+        <div class="info">
+          <mat-label>Odaberite cenu artikla</mat-label>
+          <mat-select [(ngModel)]="price">
+            <mat-option
+              *ngFor="let m of product.warehouseInfo"
+              [value]="m.sellPrice"
+              >Magacin:{{ m.id }} - cena: {{ m.sellPrice }}</mat-option
+            >
+          </mat-select>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>Kolicina proizvoda:</mat-label>
+            <input
+              matInput
+              placeholder="naziv"
+              type="number"
+              [(ngModel)]="quantity[product._id]"
+            />
+          </mat-form-field>
+          <button
+            mat-raised-button
+            color="primary"
+            (click)="addToReceipt(product)"
+          >
+            Dodaj na racun
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

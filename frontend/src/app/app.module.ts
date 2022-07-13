@@ -48,6 +48,7 @@ import { ReceiptViewComponent } from './components/receipt-view/receipt-view.com
 import { StatisticsPageComponent } from './components/company-subpages/statistics-page/statistics-page.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
+import { ReceiptTablePageComponent } from './components/company-subpages/receipt-table-page/receipt-table-page.component';
 
 @NgModule({
   declarations: [
@@ -76,6 +77,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     FinishReceiptComponent,
     ReceiptViewComponent,
     StatisticsPageComponent,
+    ReceiptTablePageComponent,
   ],
   imports: [
     BrowserModule,

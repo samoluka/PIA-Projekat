@@ -27,12 +27,14 @@ export class StatisticsPageComponent implements OnInit {
   private subscriptionName: Subscription;
 
   receipts: Receipt[];
+  toDisplay: Receipt[];
   user: User;
   date: Date;
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
     this.userService.getReceipts(this.user).subscribe((receipts) => {
       this.receipts = receipts;
+      this.toDisplay = receipts;
     });
   }
 
@@ -50,6 +52,7 @@ export class StatisticsPageComponent implements OnInit {
         d === this.date.getDate()
       );
     });
+    this.toDisplay = onThisDate;
     this.sumY = 0;
     this.sumN = 0;
     onThisDate.forEach((r) => {

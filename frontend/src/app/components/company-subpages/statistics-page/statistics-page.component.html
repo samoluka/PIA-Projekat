@@ -2,7 +2,7 @@
   <div class="receipts">
     <app-receipt-view
       class="receipt"
-      *ngFor="let r of receipts"
+      *ngFor="let r of toDisplay"
       [receipt]="r"
     ></app-receipt-view>
   </div>
