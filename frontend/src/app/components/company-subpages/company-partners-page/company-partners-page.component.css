@@ -36,3 +36,29 @@
 .rezultat {
     padding: 10px;
 }
+.alert {
+    color: red;
+    margin: auto;
+}
+
+.newForm{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: 45vw;
+    min-width: 250px;
+}
+.row{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* justify-content: space-around; */
+}
+.element{
+    margin-right: 1%;
+    /* width: 50%; */
+    min-width: 250px;
+}
+.registerBtn{
+    min-width: 250px;
+}

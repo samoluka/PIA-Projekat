@@ -54,4 +54,8 @@ userRouter.route("/addRoom").post((req, res) => new UserController().addRoom(req
 userRouter.route("/updateTables").post((req, res) => new UserController().updateTables(req, res));
 
 userRouter.route("/getTables").get((req, res) => new UserController().getTables(req, res));
+
+
+userRouter.route("/findUserById").get((req, res) => new UserController().findUserById(req, res));
+
 export default userRouter;

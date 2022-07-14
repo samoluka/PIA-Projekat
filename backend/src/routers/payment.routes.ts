@@ -6,4 +6,6 @@ paymentRouter.route("/addReceipt").post((req, res) => new PaymentController().ad
 paymentRouter
   .route("/getReceipts")
   .get((req, res) => new PaymentController().getReceipts(req, res));
+
+paymentRouter.route("/getLatest").get((req, res) => new PaymentController().getLatest(req, res));
 export default paymentRouter;

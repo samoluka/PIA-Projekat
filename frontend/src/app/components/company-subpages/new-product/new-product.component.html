@@ -58,6 +58,17 @@ photo: string; -->
             <mat-option value="10">Posebna (10%)</mat-option>
           </mat-select>
         </mat-form-field>
+        <mat-form-field appearance="fill" *ngIf="company.additionInfo.category == 'ugostitelj'">
+          <mat-label>Tip artikla</mat-label>
+          <mat-select [(value)]="type" required>
+            <mat-option value="hrana">hrana</mat-option>
+            <mat-option value="pice">pice</mat-option>
+            <mat-option value="sirovina">sirovina</mat-option>
+          </mat-select>
+          <mat-error *ngIf="!unit || unit.length == 0"
+            >"Jedinica mere artikla je obavezno polje"</mat-error
+          >
+        </mat-form-field>
       </div>
     </mat-expansion-panel>
     <mat-expansion-panel>

@@ -29,6 +29,12 @@ let User = new Schema({
     required: true,
     unique: true,
   },
+  address: {
+    city: String,
+    postNumber: String,
+    street: String,
+    streetNumber: String,
+  },
   password: {
     type: String,
     required: true,
@@ -73,6 +79,18 @@ let User = new Schema({
       {
         id: Number,
         name: String,
+      },
+    ],
+    objects: [
+      {
+        location: String,
+        model: String,
+      },
+    ],
+    banks: [
+      {
+        bankName: String,
+        number: String,
       },
     ],
   },

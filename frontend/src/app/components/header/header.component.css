@@ -9,3 +9,12 @@
   height: 50px;
   margin-top: 10px;
 }
+
+.side{
+  display: flex;
+  flex-direction: row;
+}
+.buttons{
+  display: flex;
+  flex-direction: column;
+}

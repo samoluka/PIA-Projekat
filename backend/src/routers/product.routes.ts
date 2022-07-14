@@ -38,4 +38,9 @@ productRouter
 productRouter
   .route("/addToCategory")
   .post((req, res) => new ProductController().addToCategory(req, res));
+
+productRouter
+  .route("/numberOfProducts")
+  .get((req, res) => new ProductController().getNumberOfProducts(req, res));
+
 export default productRouter;

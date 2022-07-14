@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Receipt } from 'src/app/models/receipt';
 import { ReceiptProductInfo } from 'src/app/models/receiptProductInfo';
 import { User } from 'src/app/models/user';
+import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
   selector: 'app-receipt-view',
@@ -9,26 +10,32 @@ import { User } from 'src/app/models/user';
   styleUrls: ['./receipt-view.component.css'],
 })
 export class ReceiptViewComponent implements OnInit {
-  constructor() {}
+  constructor(private userService: UserService) {}
 
   @Input() receipt: Receipt;
   @Input() receiptInfo: ReceiptProductInfo[];
 
   user: User;
+  company: User;
 
   sumNo = 0;
   sumYes = 0;
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
-    if (this.receipt)
-      this.receipt.productsInfo.forEach((p) => {
-        this.sumNo += p.price * p.quantity;
-        if (this.user.additionInfo.pdv) {
-          this.sumYes += p.price * p.quantity * (1 + p.taxRate / 100.0);
-        } else {
-          this.sumYes += p.price * p.quantity;
-        }
-      });
+    if (this.receipt) {
+      this.userService
+        .findUserById(this.receipt.company)
+        .subscribe((user: User) => (this.company = user));
+      if (this.user)
+        this.receipt.productsInfo.forEach((p) => {
+          this.sumNo += p.price * p.quantity;
+          if (this.user.additionInfo.pdv) {
+            this.sumYes += p.price * p.quantity * (1 + p.taxRate / 100.0);
+          } else {
+            this.sumYes += p.price * p.quantity;
+          }
+        });
+    }
   }
 }

@@ -23,9 +23,7 @@
 </div>
 
 <div class="receipt" *ngIf="receipt">
-  <!-- <div class="product" *ngFor="let p of receipt.productsInfo">
-          Proizvod:{{p.name}} Kolicina:{{p.quantity}} Cena:{{p.price}}{{p.unit}} Porez:{{p.taxRate}}
-      </div> -->
+  <h1 *ngIf="company">{{ company.name }}</h1>
   <table class="table">
     <tr>
       <th>Proizvod</th>

@@ -36,6 +36,10 @@ export class UserController {
     let pib = req.body.pib;
     let matBroj = req.body.matBroj;
     let type = req.body.type;
+    let address = JSON.parse(req.body.address);
+
+    // console.log(req.body);
+    
 
     let user = new User({
       firstName: firstName,
@@ -47,6 +51,7 @@ export class UserController {
       type: type,
       status: "pending",
       photo: "default.png",
+      address: address,
     });
 
     if (email != null) {
@@ -94,14 +99,16 @@ export class UserController {
     let username = req.body.username;
     let oldPassword = req.body.oldPassword;
     let newPassword = req.body.newPassword;
+    console.log(req.body);
+
     User.findOne(
       {
         username: username,
-        password: Md5.hashStr(oldPassword),
+        password: oldPassword,
       },
       (err: any, user: any) => {
         if (user != null) {
-          user.password = Md5.hashStr(newPassword);
+          user.password = newPassword;
           user.save().then((user) => {
             res.status(200).json({ message: "sve je okej" });
           });
@@ -133,6 +140,8 @@ export class UserController {
   updateUser = (req: express.Request, res: express.Response) => {
     let username = req.body.username;
     let update = req.body.update;
+    console.log(update);
+
     User.findOneAndUpdate(
       {
         username: username,
@@ -308,5 +317,12 @@ export class UserController {
         res.status(400).json("ne postoji takav korisnik");
       }
     });
+  }
+  findUserById(req, res) {
+    User.findById(req.query.id)
+      .then((user) => {
+        res.status(200).json(user);
+      })
+      .catch((err) => res.status(400).json(err));
   }
 }

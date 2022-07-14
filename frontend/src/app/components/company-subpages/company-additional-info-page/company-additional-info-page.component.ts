@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { BankInfo } from 'src/app/models/bankInfo';
+import { CompanyObject } from 'src/app/models/companyObjects';
 import { User } from 'src/app/models/user';
 import { Warehouse } from 'src/app/models/warehouse';
 import { CommonService } from 'src/app/services/commonService.service';
@@ -17,6 +19,18 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = JSON.parse(localStorage.getItem('user'));
+    this.warehouses.push({
+      id: NaN,
+      name: '',
+    });
+    this.objects.push({
+      location: '',
+      model: '',
+    });
+    this.bankInfos.push({
+      bankName: '',
+      number: '',
+    });
   }
   //   категорију предузећа (продавница или угоститељски објекат);
   //  шифра делатности (може их бити и више, узимају се из шифарника);
@@ -36,8 +50,13 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
   pdv: boolean = false;
   message: string;
 
-  warehouses: Warehouse[];
+  warehouses: Warehouse[] = [];
+  objects: CompanyObject[] = [];
+  bankInfos: BankInfo[] = [];
+
   numberOfWarehouses: number = 1;
+  numberOfObjects: number = 1;
+  numberOfBanks: number = 1;
 
   saveAdditionInfo() {
     const data = {
@@ -45,6 +64,8 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
       code: this.code,
       pdv: this.pdv,
       warehouses: this.warehouses,
+      objects: this.objects,
+      banks: this.bankInfos,
     };
     this.service.setCompanyAdditionInfo(this.user, data).subscribe({
       next: (v: any) => {
@@ -57,7 +78,7 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
       },
     });
   }
-  change() {
+  changeNumberOfWarehouses() {
     this.warehouses = [];
     for (var _i = 0; _i < this.numberOfWarehouses; _i++) {
       this.warehouses.push({
@@ -66,5 +87,23 @@ export class CompanyAdditionalInfoPageComponent implements OnInit {
       });
     }
     console.log(this.warehouses);
+  }
+  changeNumberOfObjects() {
+    this.objects = [];
+    for (var _i = 0; _i < this.numberOfObjects; _i++) {
+      this.objects.push({
+        location: '',
+        model: '',
+      });
+    }
+  }
+  changeNumberOfBanks() {
+    this.bankInfos = [];
+    for (var _i = 0; _i < this.numberOfBanks; _i++) {
+      this.bankInfos.push({
+        bankName: '',
+        number: '',
+      });
+    }
   }
 }

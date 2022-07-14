@@ -1,3 +1,5 @@
+import { BankInfo } from './bankInfo';
+import { CompanyObject } from './companyObjects';
 import { Product } from './product';
 import { Table } from './table';
 import { Warehouse } from './warehouse';
@@ -16,11 +18,19 @@ export class User {
   type: string;
   status: string;
   photo: string;
+  address: {
+    city: string;
+    postNumber: string;
+    street: string;
+    streetNumber: string;
+  };
   additionInfo: {
     category: string;
     code: string;
     pdv: boolean;
-    warehouses: [Warehouse];
+    warehouses: Warehouse[];
+    objects: CompanyObject[];
+    banks: BankInfo[];
   };
   products: Product[];
   partners: User[];

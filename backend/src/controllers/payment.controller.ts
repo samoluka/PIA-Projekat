@@ -35,4 +35,12 @@ export class PaymentController {
       })
       .catch((err) => res.status(400).json(err));
   };
+
+  getLatest(req, res) {
+    Receipt.find()
+      .sort({ date: -1 })
+      .then((receipts) => {
+        res.status(200).json(receipts);
+      });
+  }
 }

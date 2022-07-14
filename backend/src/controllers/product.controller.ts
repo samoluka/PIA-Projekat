@@ -4,6 +4,8 @@ import path, { dirname } from "path";
 import Product from "../models/products";
 import User from "../models/user";
 import Category from "../models/category";
+import { Request, Response } from "express-serve-static-core";
+import { ParsedQs } from "qs";
 
 export class ProductController {
   appDir = dirname(require.main.filename);
@@ -11,10 +13,7 @@ export class ProductController {
 
   uploadImage = async (file, imageName) => {
     const tempPath = file.path;
-    const targetPath = path.join(
-      this.appDir,
-      `../public/productImages/${imageName}`
-    );
+    const targetPath = path.join(this.appDir, `../public/productImages/${imageName}`);
     await this.fs.rename(tempPath, targetPath, (err) => {
       if (err) console.log(`greska ${err}`);
     });
@@ -22,9 +21,7 @@ export class ProductController {
 
   handleError = (err: any, res: express.Response) => {
     console.log(err);
-    res
-      .status(400)
-      .json({ message: "doslo je do greske", err: err.toString() });
+    res.status(400).json({ message: "doslo je do greske", err: err.toString() });
   };
   addProductToCompany = (req, res) => {
     const code = req.body.code;
@@ -45,6 +42,7 @@ export class ProductController {
             taxRate: taxRate,
             company: user._id,
             warehouseInfo: warehouseInfo,
+            ...(req.body.productType && { productType: req.body.productType }),
             unit: unit,
             ...(req.body.additionalData && {
               additionalData: JSON.parse(req.body.additionalData),
@@ -89,15 +87,16 @@ export class ProductController {
 
   deleteProduct = (req, res) => {
     console.log(req.body.id);
+    Product.findById(req.body.id).then((p) => {
+      User.findOneAndUpdate({ _id: p.company }, { $pull: { products: req.body.id } });
+    });
     Product.findByIdAndDelete(req.body.id)
       .then((product: any) => {
         if (product) res.status(200).json({ message: "proizvod obrisan" });
         else res.status(400).json({ message: "ne postoji takav proizvod" });
       })
       .catch((err: any) => {
-        res
-          .status(400)
-          .json({ message: "doslo je do greske", err: err.toString() });
+        res.status(400).json({ message: "doslo je do greske", err: err.toString() });
       });
   };
   updateProduct = (req, res) => {
@@ -105,22 +104,15 @@ export class ProductController {
     delete update.photo;
     Product.findByIdAndUpdate(req.body.id, update, { new: true })
       .then((product: any) => {
-        if (product)
-          res
-            .status(200)
-            .json({ message: "proizvod izmenjen", product: product });
+        if (product) res.status(200).json({ message: "proizvod izmenjen", product: product });
         else res.status(400).json({ message: "ne postoji takav proizvod" });
       })
       .catch((err: any) => {
-        res
-          .status(400)
-          .json({ message: "doslo je do greske", err: err.toString() });
+        res.status(400).json({ message: "doslo je do greske", err: err.toString() });
       });
   };
   getImage = (req, res) => {
-    res.sendFile(
-      path.join(this.appDir, `../public/productImages/${req.query.image}`)
-    );
+    res.sendFile(path.join(this.appDir, `../public/productImages/${req.query.image}`));
   };
 
   addCategory = (req, res) => {
@@ -221,20 +213,27 @@ export class ProductController {
                   });
                 });
               } else {
-                res
-                  .status(400)
-                  .json({ message: "ne postoji trazena kategorija" });
+                res.status(400).json({ message: "ne postoji trazena kategorija" });
               }
             })
             .catch((err) => this.handleError(err, res));
         } else {
-          res
-            .status(400)
-            .json({ message: "proizvod se vec nalazi u kategoriji" });
+          res.status(400).json({ message: "proizvod se vec nalazi u kategoriji" });
         }
       } else {
         res.status(400).json({ message: "ne postoji trazeni proizvod" });
       }
     });
   };
+
+  getNumberOfProducts(req, res) {
+    User.findById(req.query.id)
+      .populate({
+        path: "products",
+        model: "Product",
+      })
+      .then((user) => {
+        res.status(200).json({ number: user.products.length });
+      });
+  }
 }

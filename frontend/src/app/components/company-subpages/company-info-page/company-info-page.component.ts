@@ -47,6 +47,9 @@ export class CompanyInfoPageComponent implements OnInit {
   newPdv: boolean;
   newCode: string;
 
+  newId: number;
+  newWName: string;
+
   message: string;
   update: boolean[];
   changed: boolean[];
@@ -86,6 +89,7 @@ export class CompanyInfoPageComponent implements OnInit {
           category: this.user.additionInfo.category,
           pdv: this.user.additionInfo.pdv,
           code: this.user.additionInfo.code,
+          warehouses: this.user.additionInfo.warehouses,
         },
       }),
     };
@@ -109,5 +113,13 @@ export class CompanyInfoPageComponent implements OnInit {
     this.update[8] = true;
     this.newPdv = !this.newPdv;
     this.saveUpdate(8);
+  }
+
+  addWarehouse() {
+    this.saveUpdate(8);
+    this.user.additionInfo.warehouses.push({
+      id: this.newId,
+      name: this.newWName,
+    });
   }
 }

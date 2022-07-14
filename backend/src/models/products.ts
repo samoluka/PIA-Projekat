@@ -26,6 +26,7 @@ let Product = new Schema({
     type: String,
     required: true,
   },
+  productType: String,
   taxRate: {
     type: Number,
     required: true,

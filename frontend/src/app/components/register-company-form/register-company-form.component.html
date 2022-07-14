@@ -426,6 +426,97 @@
   </div>
   <div class="row">
     <mat-form-field class="element" appearance="fill">
+      <mat-label>Unesite naziv grada:</mat-label>
+      <input
+        matInput
+        placeholder="grad"
+        [(ngModel)]="city"
+        class="form-control"
+        required
+        #cityBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          (cityBinding.invalid && cityBinding.dirty) || cityBinding.touched
+        "
+        class="alert"
+      >
+        <div *ngIf="cityBinding.errors?.['required']">
+          grad je obavezno polje
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="element" appearance="fill">
+      <mat-label>Unesite postanski broj:</mat-label>
+      <input
+        matInput
+        placeholder="postanski broj"
+        [(ngModel)]="postNumber"
+        class="form-control"
+        required
+        #postNumberBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          (postNumberBinding.invalid && postNumberBinding.dirty) ||
+          postNumberBinding.touched
+        "
+        class="alert"
+      >
+        <div *ngIf="postNumberBinding.errors?.['required']">
+          postanski broj je obavezno polje
+        </div>
+      </div>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="element" appearance="fill">
+      <mat-label>Unesite ulicu:</mat-label>
+      <input
+        matInput
+        placeholder="ulica"
+        [(ngModel)]="street"
+        class="form-control"
+        required
+        #streetBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          (streetBinding.invalid && streetBinding.dirty) ||
+          streetBinding.touched
+        "
+        class="alert"
+      >
+        <div *ngIf="streetBinding.errors?.['required']">
+          ulica je obavezno polje
+        </div>
+      </div>
+    </mat-form-field>
+    <mat-form-field class="element" appearance="fill">
+      <mat-label>Unesite broj:</mat-label>
+      <input
+        matInput
+        placeholder="broj"
+        [(ngModel)]="streetNumber"
+        class="form-control"
+        required
+        #streetNumberBinding="ngModel"
+      />
+      <div
+        *ngIf="
+          (streetNumberBinding.invalid && streetNumberBinding.dirty) ||
+          streetNumberBinding.touched
+        "
+        class="alert"
+      >
+        <div *ngIf="streetNumberBinding.errors?.['required']">
+          Broj je obavezno polje
+        </div>
+      </div>
+    </mat-form-field>
+  </div>
+  <div class="row">
+    <mat-form-field class="element" appearance="fill">
       <mat-label>Unesite sifru:</mat-label>
       <input
         matInput
@@ -564,13 +655,17 @@
         emailBinding.invalid ||
         nameBinding.invalid ||
         pibBinding.invalid ||
-        matBrojBinding.invalid
+        matBrojBinding.invalid ||
+        streetNumberBinding.invalid ||
+        streetBinding.invalid ||
+        cityBinding.invalid ||
+        postNumberBinding.invalid
       "
     >
       Registracija
     </button>
   </div>
   <div class="row">
-    {{message}}
+    {{ message }}
   </div>
 </div>

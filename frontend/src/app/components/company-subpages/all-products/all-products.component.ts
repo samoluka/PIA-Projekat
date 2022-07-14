@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { User } from 'src/app/models/user';
 import { CommonService } from 'src/app/services/commonService.service';
+import { ProductService } from 'src/app/services/product/product.service';
 import { UserService } from 'src/app/services/user/user.service';
 
 @Component({
@@ -12,11 +13,13 @@ import { UserService } from 'src/app/services/user/user.service';
 export class AllProductsComponent implements OnInit {
   constructor(
     private userService: UserService,
-    private commonService: CommonService
+    private commonService: CommonService,
+    private productService: ProductService
   ) {}
 
   user: User;
   current = 0;
+  numberOfProducts;
 
   messageReceived: any;
   private subscriptionName: Subscription;
@@ -44,7 +47,12 @@ export class AllProductsComponent implements OnInit {
     this.userService
       .findCompanyWithProducts(JSON.parse(localStorage.getItem('user')), 0, 10)
       .subscribe((user: User) => {
-        if (user) this.user = user;
+        if (user) {
+          this.user = user;
+          this.productService.getNumberOfProducts(user).subscribe((m) => {
+            this.numberOfProducts = m['number'];
+          });
+        }
       });
     this.subscriptionName = this.commonService
       .getUpdate()

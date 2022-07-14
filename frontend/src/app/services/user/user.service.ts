@@ -85,6 +85,7 @@ export class UserService {
     formData.append('pib', user.pib);
     formData.append('matBroj', user.matBroj);
     formData.append('type', 'company');
+    formData.append('address', JSON.stringify(user.address));
     if (file) formData.append('file', file, file.name);
     return this.http.post(`${this.uri}/users/adduser`, formData);
   }
@@ -173,6 +174,10 @@ export class UserService {
     return this.http.post(`${this.uri}/users/findUserWithPartners`, data);
   }
 
+  findUserById(id: string) {
+    return this.http.get(`${this.uri}/users/findUserById?id=${id}`);
+  }
+
   findCompanyWithProducts(user: User, start: number, end: number) {
     return this.http.get(
       `${this.uri}/users/findUserWithProducts/?username=${user.username}&start=${start}&end=${end}`
@@ -233,6 +238,9 @@ export class UserService {
     return this.http.get<Receipt[]>(
       `${this.uri}/payment/getReceipts?id=${user._id}`
     );
+  }
+  getLatest() {
+    return this.http.get<Receipt[]>(`${this.uri}/payment/getLatest`);
   }
 }
 

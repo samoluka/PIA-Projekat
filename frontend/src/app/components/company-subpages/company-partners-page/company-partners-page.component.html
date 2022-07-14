@@ -1,4 +1,386 @@
-<p>company-partners-page works!</p>
+<div class="center">
+  <div class="newForm">
+    <div class="row">
+      <h1>Registrujte se</h1>
+    </div>
+    <div class="row">
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite ime:</mat-label>
+        <input
+          matInput
+          placeholder="ime"
+          [(ngModel)]="firstName"
+          class="form-control"
+          required
+          #firstNameBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (firstNameBinding.invalid && firstNameBinding.dirty) ||
+            firstNameBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="firstNameBinding.errors?.['required']">
+            ime je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite prezime:</mat-label>
+        <input
+          matInput
+          placeholder="prezime"
+          [(ngModel)]="lastName"
+          class="form-control"
+          required
+          #lastNameBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (lastNameBinding.invalid && lastNameBinding.dirty) ||
+            lastNameBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="lastNameBinding.errors?.['required']">
+            prezime je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite korisnicko ime:</mat-label>
+        <input
+          matInput
+          placeholder="korisnicko ime"
+          [(ngModel)]="username"
+          class="form-control"
+          required
+          #usernameBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (usernameBinding.invalid && usernameBinding.dirty) ||
+            usernameBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="usernameBinding.errors?.['required']">
+            korisnicko ime je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite broj telefona:</mat-label>
+        <input
+          matInput
+          placeholder="broj telefona"
+          [(ngModel)]="phone"
+          class="form-control"
+          required
+          #phoneBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (phoneBinding.invalid && phoneBinding.dirty) || phoneBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="phoneBinding.errors?.['required']">
+            broj telefona je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite email:</mat-label>
+        <input
+          matInput
+          placeholder="email"
+          [(ngModel)]="email"
+          class="form-control"
+          required
+          #emailBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (emailBinding.invalid && emailBinding.dirty) || emailBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="emailBinding.errors?.['required']">
+            email je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite naziv preduzeca:</mat-label>
+        <input
+          matInput
+          placeholder="naziv preduzeca"
+          [(ngModel)]="name"
+          class="form-control"
+          required
+          #nameBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (nameBinding.invalid && nameBinding.dirty) || nameBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="nameBinding.errors?.['required']">
+            naziv preduzeca je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite naziv grada:</mat-label>
+        <input
+          matInput
+          placeholder="grad"
+          [(ngModel)]="city"
+          class="form-control"
+          required
+          #cityBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (cityBinding.invalid && cityBinding.dirty) || cityBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="cityBinding.errors?.['required']">
+            grad je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite postanski broj:</mat-label>
+        <input
+          matInput
+          placeholder="postanski broj"
+          [(ngModel)]="postNumber"
+          class="form-control"
+          required
+          #postNumberBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (postNumberBinding.invalid && postNumberBinding.dirty) ||
+            postNumberBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="postNumberBinding.errors?.['required']">
+            postanski broj je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+    <div class="row">
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite ulicu:</mat-label>
+        <input
+          matInput
+          placeholder="ulica"
+          [(ngModel)]="street"
+          class="form-control"
+          required
+          #streetBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (streetBinding.invalid && streetBinding.dirty) ||
+            streetBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="streetBinding.errors?.['required']">
+            ulica je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite broj:</mat-label>
+        <input
+          matInput
+          placeholder="broj"
+          [(ngModel)]="streetNumber"
+          class="form-control"
+          required
+          #streetNumberBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (streetNumberBinding.invalid && streetNumberBinding.dirty) ||
+            streetNumberBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="streetNumberBinding.errors?.['required']">
+            Broj je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+    <!-- <div class="row">
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite sifru:</mat-label>
+        <input
+          matInput
+          [(ngModel)]="password"
+          [type]="hide ? 'password' : 'text'"
+          class="form-control"
+          required
+          pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{8,}$"
+          #passwordBinding="ngModel"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hide = !hide"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hide"
+        >
+          <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+  
+        <div
+          *ngIf="
+            passwordBinding.invalid &&
+            (passwordBinding.dirty || passwordBinding.touched)
+          "
+          class="alert"
+        >
+          <div *ngIf="passwordBinding.errors?.['required']">
+            sifra je obavezno polje
+          </div>
+          <div *ngIf="passwordBinding.errors?.['pattern']">
+            sifra mora sadrzati barem jedno slovo, jedan broj, jedan specijalan
+            karakter i da bude duzine od minimum 8 karaktera
+          </div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>potvrdite sifru:</mat-label>
+        <input
+          matInput
+          [(ngModel)]="passwordConfirm"
+          [type]="hidec ? 'password' : 'text'"
+          class="form-control"
+          required
+          pattern="{{ password }}"
+          #passwordConfirmBinding="ngModel"
+        />
+        <button
+          mat-icon-button
+          matSuffix
+          (click)="hidec = !hidec"
+          [attr.aria-label]="'Hide password'"
+          [attr.aria-pressed]="hidec"
+        >
+          <mat-icon>{{ hidec ? "visibility_off" : "visibility" }}</mat-icon>
+        </button>
+        <div
+          *ngIf="
+            passwordConfirmBinding.invalid &&
+            (passwordConfirmBinding.dirty || passwordConfirmBinding.touched)
+          "
+          class="alert"
+        >
+          <div *ngIf="passwordConfirmBinding.errors?.['required']">
+            potvrda sifre je obavezno polje
+          </div>
+          <div *ngIf="passwordConfirmBinding.errors?.['pattern']">
+            potvrda sifre i sifra moraju biti iste
+          </div>
+        </div>
+      </mat-form-field>
+    </div> -->
+    <div class="row">
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite pib preduzeca:</mat-label>
+        <input
+          matInput
+          placeholder="pib"
+          [(ngModel)]="pibN"
+          class="form-control"
+          required
+          #pibBinding="ngModel"
+        />
+        <div
+          *ngIf="(pibBinding.invalid && pibBinding.dirty) || pibBinding.touched"
+          class="alert"
+        >
+          <div *ngIf="pibBinding.errors?.['required']">pib je obavezno polje</div>
+        </div>
+      </mat-form-field>
+      <mat-form-field class="element" appearance="fill">
+        <mat-label>Unesite maticni broj preduzeca:</mat-label>
+        <input
+          matInput
+          placeholder="maticni broj"
+          [(ngModel)]="matBroj"
+          class="form-control"
+          required
+          #matBrojBinding="ngModel"
+        />
+        <div
+          *ngIf="
+            (matBrojBinding.invalid && matBrojBinding.dirty) ||
+            matBrojBinding.touched
+          "
+          class="alert"
+        >
+          <div *ngIf="matBrojBinding.errors?.['required']">
+            maticni broj je obavezno polje
+          </div>
+        </div>
+      </mat-form-field>
+    </div>
+    <!-- <div class="row">
+      <div class="element">
+        <input hidden id="photoId" type="file" (change)="change($event)" />
+        <label for="photoId" class="mat-button mat-raised mat-primary">
+          <div *ngIf="!file">Odaberite sliku preduzeca</div>
+          <div *ngIf="file">Odabrali ste sliku: {{ file.name }}</div>
+        </label>
+      </div>
+    </div> -->
+    <div class="row">
+      <button
+        mat-raised-button
+        color="primary"
+        class="registerBtn"
+        (click)="register()"
+        [disabled]="
+          firstNameBinding.invalid ||
+          lastNameBinding.invalid ||
+          usernameBinding.invalid ||
+          phoneBinding.invalid ||
+          emailBinding.invalid ||
+          nameBinding.invalid ||
+          pibBinding.invalid ||
+          matBrojBinding.invalid ||
+          streetNumberBinding.invalid ||
+          streetBinding.invalid ||
+          cityBinding.invalid ||
+          postNumberBinding.invalid
+        "
+      >
+        Dodaj narucioca
+      </button>
+    </div>
+    <div class="row">
+      {{ message }}
+    </div>
+  </div>  
+</div>
+
 
 <div class="center">
   <label>PIB:</label>

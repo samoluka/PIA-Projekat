@@ -2,12 +2,15 @@
   <mat-toolbar-row>
     <span>Mnogo kul aplikacija</span>
     <span class="example-spacer"></span>
-    <div *ngIf="user">
+    <div *ngIf="user" class="side">
       <img
         class="photo"
         src="http://localhost:4000/users/getImage/?image={{ user.photo }}"
       />
-      <button mat-button color="secondary" (click)="logOut()">Odjavi se</button>
+      <div class="buttons">
+        <button mat-button color="secondary" (click)="logOut()">Odjavi se</button>
+      <button mat-button color="secondary" [routerLink]="['/passwordChanger']">Promeni sifru</button>
+      </div>
     </div>
   </mat-toolbar-row>
 </mat-toolbar>

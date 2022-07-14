@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Product } from 'src/app/models/product';
+import { User } from 'src/app/models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -19,6 +20,9 @@ export class ProductService {
     formData.append('unit', product.unit);
     formData.append('warehouseInfo', JSON.stringify(product.warehouseInfo));
     formData.append('additionalData', JSON.stringify(product.additionalData));
+    if (product.productType) {
+      formData.append('productType', product.productType);
+    }
     if (photo) formData.append('file', photo, photo.name);
     return this.http.post(`${this.uri}/products/addProduct`, formData);
   }
@@ -29,5 +33,11 @@ export class ProductService {
     return this.http.delete(`${this.uri}/products/delete`, {
       body: data,
     });
+  }
+
+  getNumberOfProducts(user: User) {
+    return this.http.get(
+      `${this.uri}/products/numberOfProducts?id=${user._id}`
+    );
   }
 }

@@ -49,6 +49,8 @@ export class NewProductComponent implements OnInit {
   about: string;
   declaration: string;
 
+  type: string;
+
   warehouseInfo: WarehouseInfo[];
 
   ngOnInit(): void {
@@ -89,6 +91,7 @@ export class NewProductComponent implements OnInit {
     product.taxRate = this.taxRate;
     product.unit = this.unit;
     product.warehouseInfo = this.warehouseInfo;
+    if (this.type) product.productType = this.type;
     product.additionalData = {
       ...(this.origin && {
         origin: this.origin,
@@ -127,7 +130,7 @@ export class NewProductComponent implements OnInit {
     //this.addSimilar(product);
     this.productService.addProduct(product, this.photo).subscribe({
       next: (v) => {
-        console.log(v);
+        this.commonService.sendUpdate('update');
       },
       error: (e) => {
         console.log(e);

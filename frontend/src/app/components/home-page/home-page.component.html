@@ -1,4 +1,7 @@
 <div class="flexRowCol">
   <app-login></app-login>
   <app-register-company-form></app-register-company-form>
+  <div class="receipts">
+    <app-receipt-view *ngFor="let r of receipts" [receipt]="r"></app-receipt-view>
+  </div>
 </div>

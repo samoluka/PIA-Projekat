@@ -1,5 +1,4 @@
-<p>company-info-page works!</p>
-<table class="table">
+<!-- <table class="table">
   <tr>
     <td class="td">ime:</td>
     <td class="td">
@@ -121,7 +120,7 @@
     </td>
   </tr>
   <tr>
-    <td class="td">sifra:</td>
+    <td class="td">sifra delatnosti:</td>
     <td class="td">
       <div (click)="startUpdate(9)" *ngIf="!update[9]">
         {{ user.additionInfo.code }}
@@ -136,10 +135,216 @@
   </tr>
   <tr>
     <td class="td" colspan="2">
+      <span>Podaci o magacinima</span>
+    </td>
+  </tr>
+  <tr class="td" *ngFor="let warehouse of user.additionInfo.warehouses">
+    <td class="td">
+      {{ warehouse.id }}
+    </td>
+    <td class="td">
+      {{ warehouse.name }}
+    </td>
+  </tr>
+  <tr>
+    <td>
+      <input type="numer" [(ngModel)]="newId" />
+    </td>
+    <td>
+      <input type="numer" [(ngModel)]="newWName" />
+    </td>
+  </tr>
+  <tr>
+    <td class="td" colspan="2">
+      <button (click)="addWarehouse()">dodaj magacin</button>
+    </td>
+  </tr>
+
+  <tr>
+    <td class="td" colspan="2">
       <button (click)="saveChanges()">sacuvaj izmene</button>
     </td>
   </tr>
-</table>
+</table> -->
 <p>
   {{ message }}
 </p>
+
+<div *ngIf="user.additionInfo.category">
+  <mat-tab-group mat-align-tabs="center">
+    <mat-tab label="Opsti podaci">
+      <table class="table">
+        <tr>
+          <td class="td">ime:</td>
+          <td class="td">
+            <div (click)="startUpdate(0)" *ngIf="!update[0]">
+              {{ user.firstName }}
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="newFirstName"
+              (blur)="saveUpdate(0)"
+              *ngIf="update[0]"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="td">prezime:</td>
+          <td class="td">
+            <div (click)="startUpdate(1)" *ngIf="!update[1]">
+              {{ user.lastName }}
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="newLastName"
+              (blur)="saveUpdate(1)"
+              *ngIf="update[1]"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="td">broj telefona:</td>
+          <td class="td">
+            <div (click)="startUpdate(3)" *ngIf="!update[3]">
+              {{ user.phone }}
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="newPhone"
+              (blur)="saveUpdate(3)"
+              *ngIf="update[3]"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="td">email:</td>
+          <td class="td">
+            <div (click)="startUpdate(5)" *ngIf="!update[5]">
+              {{ user.email }}
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="newEmail"
+              (blur)="saveUpdate(5)"
+              *ngIf="update[5]"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="td">kategorija:</td>
+          <td class="td">
+            <div (click)="startUpdate(8)" *ngIf="!update[8]">
+              {{ user.additionInfo.category }}
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="newCategory"
+              (blur)="saveUpdate(8)"
+              *ngIf="update[8]"
+            />
+          </td>
+        </tr>
+        <tr>
+          <td class="td">pdv:</td>
+          <td class="td">
+            <div (click)="changePdv()">
+              {{ user.additionInfo.pdv }}
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="td">sifra delatnosti:</td>
+          <td class="td">
+            <div (click)="startUpdate(9)" *ngIf="!update[9]">
+              {{ user.additionInfo.code }}
+            </div>
+            <input
+              type="text"
+              [(ngModel)]="newCode"
+              (blur)="saveUpdate(9)"
+              *ngIf="update[9]"
+            />
+          </td>
+        </tr>
+      </table>
+    </mat-tab>
+    <mat-tab label="Ziro racuni">
+      <table class="table">
+        <tr>
+          <th>banka</th>
+          <th>broj racuna</th>
+        </tr>
+        <tr *ngFor="let bank of user.additionInfo.banks">
+          <td class="td">{{ bank.bankName }}</td>
+          <td class="td">{{ bank.number }}</td>
+        </tr>
+      </table>
+    </mat-tab>
+    <mat-tab label="magacini i objekti">
+      <table class="table">
+        <tr>
+          <th>naziv magacina</th>
+          <th>id magacina</th>
+        </tr>
+        <tr>
+          <th colspan="2">Magacini</th>
+        </tr>
+        <tr class="td" *ngFor="let warehouse of user.additionInfo.warehouses">
+          <td class="td">
+            {{ warehouse.id }}
+          </td>
+          <td class="td">
+            {{ warehouse.name }}
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <input type="numer" [(ngModel)]="newId" />
+          </td>
+          <td>
+            <input type="numer" [(ngModel)]="newWName" />
+          </td>
+        </tr>
+        <tr>
+          <td class="td" colspan="2">
+            <button (click)="addWarehouse()">dodaj magacin</button>
+          </td>
+        </tr>
+      </table>
+      <table class="table">
+        <tr>
+          <th colspan="2">Objekti</th>
+        </tr>
+        <tr>
+          <th class="td">lokacija</th>
+          <th class="td">model kase</th>
+        </tr>
+        <tr *ngFor="let object of user.additionInfo.objects">
+          <td class="td">
+            {{ object.location }}
+          </td>
+          <td class="td">
+            {{ object.model }}
+          </td>
+        </tr>
+        <!-- <tr>
+          <td>
+            <input type="numer" [(ngModel)]="newId" />
+          </td>
+          <td>
+            <input type="numer" [(ngModel)]="newWName" />
+          </td>
+        </tr>
+        <tr>
+          <td class="td" colspan="2">
+            <button (click)="addWarehouse()">dodaj magacin</button>
+          </td>
+        </tr> -->
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+</div>
+<div class="btn">
+  <button mat-raised-button color="primary" class="btn" (click)="saveChanges()">sacuvaj izmene</button>
+  <span>{{message}}</span>
+</div>

@@ -12,6 +12,7 @@ export class Product {
   photo: string;
   category: Category;
   warehouseInfo: WarehouseInfo[];
+  productType: string;
   additionalData: {
     origin: string;
     originalName: string;

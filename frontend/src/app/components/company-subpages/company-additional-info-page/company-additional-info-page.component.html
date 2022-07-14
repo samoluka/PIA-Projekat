@@ -5,7 +5,10 @@
   </h1>
   <mat-form-field class="" appearance="fill">
     <mat-label>Unesite kategoriju preduzeca:</mat-label>
-    <input matInput placeholder="kategorija" [(ngModel)]="category" />
+    <mat-select [(ngModel)]="category">
+      <mat-option value="prodavnica">prodavnica</mat-option>
+      <mat-option value="ugostitelj">ugostitelj</mat-option>
+    </mat-select>
   </mat-form-field>
   <mat-form-field class="" appearance="fill">
     <mat-label>Unesite sifru delatnosti:</mat-label>
@@ -21,7 +24,7 @@
       placeholder="broj magacina"
       type="number"
       [(ngModel)]="numberOfWarehouses"
-      (ngModelChange)="change()"
+      (ngModelChange)="changeNumberOfWarehouses()"
     />
   </mat-form-field>
   <div *ngFor="let warehouse of warehouses" class="warehouses">
@@ -31,7 +34,55 @@
     </mat-form-field>
     <mat-form-field class="input" appearance="fill">
       <mat-label>id magacina:</mat-label>
-      <input matInput placeholder="id" type="number" [(ngModel)]="warehouse.id" />
+      <input
+        matInput
+        placeholder="id"
+        type="number"
+        [(ngModel)]="warehouse.id"
+      />
+    </mat-form-field>
+  </div>
+  <mat-form-field class="" appearance="fill">
+    <mat-label>Unesite broj objekata:</mat-label>
+    <input
+      matInput
+      placeholder="broj objekata"
+      type="number"
+      [(ngModel)]="numberOfObjects"
+      (ngModelChange)="changeNumberOfObjects()"
+    />
+  </mat-form-field>
+  <div *ngFor="let object of objects" class="warehouses">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Lokacija objekta:</mat-label>
+      <input matInput placeholder="lokacija" [(ngModel)]="object.location" />
+    </mat-form-field>
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>model kase:</mat-label>
+      <mat-select [(ngModel)]="object.model">
+        <mat-option value="model 1">model 1</mat-option>
+        <mat-option value="model 2">model 2</mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+  <mat-form-field class="" appearance="fill">
+    <mat-label>Unesite broj bankovnih racuna:</mat-label>
+    <input
+      matInput
+      placeholder="broj racuna"
+      type="number"
+      [(ngModel)]="numberOfBanks"
+      (ngModelChange)="changeNumberOfBanks()"
+    />
+  </mat-form-field>
+  <div *ngFor="let bank of bankInfos" class="warehouses">
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>Ime banke:</mat-label>
+      <input matInput placeholder="banka" [(ngModel)]="bank.bankName" />
+    </mat-form-field>
+    <mat-form-field class="input" appearance="fill">
+      <mat-label>broj racuna:</mat-label>
+      <input matInput placeholder="broj racuna" [(ngModel)]="bank.number" />
     </mat-form-field>
   </div>
   <button mat-raised-button color="primary" (click)="saveAdditionInfo()">

@@ -1,8 +1,8 @@
 <app-company-additional-info-page
-  *ngIf="!user.additionInfo.pdv"
+  *ngIf="!user.additionInfo.category"
 ></app-company-additional-info-page>
 
-<div *ngIf="user.additionInfo.pdv">
+<div *ngIf="user.additionInfo.category">
   <mat-tab-group mat-align-tabs="center">
     <mat-tab label="Izdavanje racuna">
       <app-receipt-page></app-receipt-page>
@@ -14,7 +14,10 @@
       <app-all-products></app-all-products>
       <app-new-product></app-new-product>
     </mat-tab>
-    <mat-tab label="Raspored stolova">
+    <mat-tab
+      label="Raspored stolova"
+      *ngIf="user.additionInfo.category == 'ugostitelj'"
+    >
       <app-tables-page></app-tables-page>
     </mat-tab>
     <mat-tab label="Raspored artikala">

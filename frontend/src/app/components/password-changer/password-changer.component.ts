@@ -20,7 +20,9 @@ export class PasswordChangerComponent implements OnInit {
   passwordConfirm: String;
   user: User;
   message: String;
-
+  hide: boolean = true;
+  hidec: boolean = true;
+  hideo: boolean = true;
   changePassword() {
     if (this.user == null) {
       return;
@@ -33,6 +35,7 @@ export class PasswordChangerComponent implements OnInit {
           this.router.navigate(['/']);
         },
         error: (e) => {
+          console.log(e);
           this.message = e.error['message'];
         },
       });

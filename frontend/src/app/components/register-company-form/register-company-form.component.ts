@@ -43,6 +43,10 @@ export class RegisterCompanyFormComponent implements OnInit {
   pib: string;
   matBroj: string;
   file: File;
+  city: string;
+  postNumber: string;
+  street: string;
+  streetNumber: string;
   message: string;
 
   register() {
@@ -56,6 +60,12 @@ export class RegisterCompanyFormComponent implements OnInit {
     user.name = this.name;
     user.pib = this.pib;
     user.matBroj = this.matBroj;
+    user.address = {
+      city: this.city,
+      postNumber: this.postNumber,
+      street: this.street,
+      streetNumber: this.streetNumber,
+    };
 
     let logedUser: User = JSON.parse(localStorage.getItem('user'));
 
