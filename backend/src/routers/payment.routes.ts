@@ -8,4 +8,8 @@ paymentRouter
   .get((req, res) => new PaymentController().getReceipts(req, res));
 
 paymentRouter.route("/getLatest").get((req, res) => new PaymentController().getLatest(req, res));
+paymentRouter
+  .route("/getReceiptsByIdCard")
+  .get((req, res) => new PaymentController().getReceiptsByIdCard(req, res));
+
 export default paymentRouter;

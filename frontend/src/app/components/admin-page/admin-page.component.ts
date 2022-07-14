@@ -21,6 +21,9 @@ export class AdminPageComponent implements OnInit {
       });
   }
 
+  sumN = 0;
+  sumY = 0;
+
   ngOnInit(): void {
     this.userService.getAllPendingCompanies().subscribe((companies: User[]) => {
       this.companiesPending = companies;
@@ -33,13 +36,36 @@ export class AdminPageComponent implements OnInit {
         this.companiesApprovedFiltered = companies;
       });
     this.userService
-        .findUserWithPartners(JSON.parse(localStorage.getItem('user')))
-        .subscribe((user: User) => {
-          console.log(user);
-          if (user)
-            if (user.partners.length > 0)
-              this.partnerName = user.partners[0].username;
+      .findUserWithPartners(JSON.parse(localStorage.getItem('user')))
+      .subscribe((user: User) => {
+        console.log(user);
+        if (user)
+          if (user.partners.length > 0)
+            this.partnerName = user.partners[0].username;
+      });
+
+    this.userService.getMyReceipts('123').subscribe((rec) => {
+      let date = new Date();
+      let onThisDate = rec.filter((r) => {
+        let y = Number.parseInt(r.date.toString().substring(0, 4));
+        let m = Number.parseInt(r.date.toString().substring(5, 7));
+        let d = Number.parseInt(r.date.toString().substring(8, 10));
+        return (
+          y === date.getFullYear() &&
+          m === date.getMonth() + 1 &&
+          d === date.getDate()
+        );
+      });
+      console.log(onThisDate);
+      this.sumY = 0;
+      this.sumN = 0;
+      onThisDate.forEach((r) => {
+        r.productsInfo.forEach((p) => {
+          this.sumN += p.price * p.quantity;
+          this.sumY += p.price * p.quantity * (1 + p.taxRate / 100.0);
         });
+      });
+    });
   }
 
   ngOnDestroy() {

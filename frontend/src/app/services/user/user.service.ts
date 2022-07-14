@@ -242,6 +242,12 @@ export class UserService {
   getLatest() {
     return this.http.get<Receipt[]>(`${this.uri}/payment/getLatest`);
   }
+
+  getMyReceipts(id) {
+    return this.http.get<Receipt[]>(
+      `${this.uri}/payment/getReceiptsByIdCard?id=${id}`
+    );
+  }
 }
 
 // "name": "konobar",

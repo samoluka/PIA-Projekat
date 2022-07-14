@@ -36,10 +36,8 @@ export class UserController {
     let pib = req.body.pib;
     let matBroj = req.body.matBroj;
     let type = req.body.type;
-    let address = JSON.parse(req.body.address);
 
     // console.log(req.body);
-    
 
     let user = new User({
       firstName: firstName,
@@ -49,9 +47,9 @@ export class UserController {
       phone: phone,
       pib: pib,
       type: type,
-      status: "pending",
+      status: type == "customer" ? "active" : "pending",
       photo: "default.png",
-      address: address,
+      ...(req.body.address && { address: JSON.parse(req.body.address) }),
     });
 
     if (email != null) {

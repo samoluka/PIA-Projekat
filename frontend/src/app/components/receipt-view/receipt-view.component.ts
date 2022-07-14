@@ -27,15 +27,15 @@ export class ReceiptViewComponent implements OnInit {
       this.userService
         .findUserById(this.receipt.company)
         .subscribe((user: User) => (this.company = user));
-      if (this.user)
-        this.receipt.productsInfo.forEach((p) => {
-          this.sumNo += p.price * p.quantity;
-          if (this.user.additionInfo.pdv) {
-            this.sumYes += p.price * p.quantity * (1 + p.taxRate / 100.0);
-          } else {
-            this.sumYes += p.price * p.quantity;
-          }
-        });
+      this.receipt.productsInfo.forEach((p) => {
+        this.sumNo += p.price * p.quantity;
+        this.sumYes += p.price * p.quantity * (1 + p.taxRate / 100.0);
+      });
+    } else {
+      this.receiptInfo.forEach((p) => {
+        this.sumNo += p.price * p.quantity;
+        this.sumYes += p.price * p.quantity * (1 + p.taxRate / 100.0);
+      });
     }
   }
 }

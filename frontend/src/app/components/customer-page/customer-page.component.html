@@ -1,4 +1,19 @@
-<p>customer-page works!</p>
+<!-- <p>customer-page works!</p>
 <a [routerLink]="['/passwordChanger']">Promeni sifru</a>
-<br>
+<br />
 <a [routerLink]="['/customer/info']">Pregled podataka</a>
+<br /> -->
+
+<mat-tab-group mat-align-tabs="center">
+  <mat-tab label="Informacije">
+    <app-customer-info></app-customer-info>
+  </mat-tab>
+  <mat-tab label="Racuni">
+    <div class="receipts">
+      <app-receipt-view
+        *ngFor="let r of receipts"
+        [receipt]="r"
+      ></app-receipt-view>
+    </div>
+  </mat-tab>
+</mat-tab-group>

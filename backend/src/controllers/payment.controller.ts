@@ -1,7 +1,5 @@
 import * as express from "express";
 import Receipt from "../models/receipt";
-import User from "../models/user";
-
 export class PaymentController {
   addReceipt = (req: express.Request, res: express.Response) => {
     let productsInfo = req.body.productsInfo;
@@ -42,5 +40,11 @@ export class PaymentController {
       .then((receipts) => {
         res.status(200).json(receipts);
       });
+  }
+
+  getReceiptsByIdCard(req, res) {
+    Receipt.find().then((rec) => {
+      res.status(200).json(rec);
+    });
   }
 }
