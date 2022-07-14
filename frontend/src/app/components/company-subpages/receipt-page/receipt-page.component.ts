@@ -32,10 +32,14 @@ export class ReceiptPageComponent implements OnInit {
 
   filter: string;
 
-  price: number;
+  price: Map<String, number> = new Map();
   quantity: Map<string, number> = new Map();
+  stocks: Map<string, number> = new Map();
+  messages: Map<string, string> = new Map();
   allProducts: Product[];
   forDisplay: Product[];
+
+  selectedObject: string;
 
   state: string;
 
@@ -50,17 +54,35 @@ export class ReceiptPageComponent implements OnInit {
         this.allProducts = user.products;
         this.forDisplay = user.products;
         console.log(this.forDisplay);
+        this.filter = '';
       });
   }
   addToReceipt(product: Product) {
+    if (this.quantity[product._id] > this.stocks.get(product._id)) {
+      this.messages = new Map();
+      this.messages.set(product._id, 'ne postoji toliko porizvoda na stanju');
+      return;
+    }
     this.productsAdded.push({
-      price: this.price,
+      price: this.price.get(product._id),
       pdv: product.taxRate,
       quantity: this.quantity[product._id],
       product: product._id,
       name: product.name,
       unit: product.unit,
       taxRate: product.taxRate,
+    });
+    product.warehouseInfo.forEach((w) => {
+      if (w.id.toString() == this.selectedObject) {
+        w.stocks = w.stocks - this.quantity[product._id];
+        this.stocks.set(product._id, w.stocks);
+      }
+    });
+    product.objectInfo.forEach((w) => {
+      if (w.location == this.selectedObject) {
+        w.stocks = w.stocks - this.quantity[product._id];
+        this.stocks.set(product._id, w.stocks);
+      }
     });
     console.log(this.productsAdded);
   }
@@ -73,5 +95,34 @@ export class ReceiptPageComponent implements OnInit {
     } else {
       this.forDisplay = this.allProducts;
     }
+  }
+  change() {
+    this.price = new Map();
+    this.stocks = new Map();
+    this.productsAdded = [];
+    this.userService
+      .findCompanyWithProducts(this.user, -1, -1)
+      .subscribe((user: User) => {
+        this.allProducts = user.products;
+        this.forDisplay = user.products;
+        console.log(this.forDisplay);
+      });
+
+    this.forDisplay.forEach((p) => {
+      p.warehouseInfo.forEach((w) => {
+        console.log(`${w.id.toString()}:${this.selectedObject}`);
+        if (w.id.toString() == this.selectedObject) {
+          this.price.set(p._id, w.sellPrice);
+          this.stocks.set(p._id, w.stocks);
+        }
+      });
+      p.objectInfo.forEach((w) => {
+        console.log(`${w.location}:${this.selectedObject}`);
+        if (w.location == this.selectedObject) {
+          this.price.set(p._id, w.sellPrice);
+          this.stocks.set(p._id, w.stocks);
+        }
+      });
+    });
   }
 }

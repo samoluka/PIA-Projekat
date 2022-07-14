@@ -19,6 +19,7 @@ export class ProductService {
     formData.append('companyUsername', product.company.username);
     formData.append('unit', product.unit);
     formData.append('warehouseInfo', JSON.stringify(product.warehouseInfo));
+    formData.append('objectInfo', JSON.stringify(product.objectInfo));
     formData.append('additionalData', JSON.stringify(product.additionalData));
     if (product.productType) {
       formData.append('productType', product.productType);
@@ -39,5 +40,13 @@ export class ProductService {
     return this.http.get(
       `${this.uri}/products/numberOfProducts?id=${user._id}`
     );
+  }
+
+  updateProduct(product: Product, update: any) {
+    const data = {
+      id: product._id,
+      update: update,
+    };
+    return this.http.post(`${this.uri}/products/update`, data);
   }
 }

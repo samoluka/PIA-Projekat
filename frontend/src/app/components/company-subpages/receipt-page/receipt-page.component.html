@@ -13,9 +13,23 @@
         matInput
         (keyup)="filterItems($event)"
         placeholder="paprika"
+        [(ngModel)]="filter"
         #input
       />
     </mat-form-field>
+    <br />
+    <mat-label>Odaberite magacin/objekat</mat-label>
+    <mat-select [(ngModel)]="selectedObject" (ngModelChange)="change()">
+      <mat-option [value]="m.id" *ngFor="let m of user.additionInfo.warehouses">
+        Magacin:{{ m.id }}
+      </mat-option>
+      <mat-option
+        [value]="m.location"
+        *ngFor="let m of user.additionInfo.objects"
+      >
+        Objekat:{{ m.location }}
+      </mat-option>
+    </mat-select>
     <button mat-raised-button (click)="state = 'closing'">Zatvori racun</button>
     <app-receipt-view
       [receiptInfo]="productsAdded"
@@ -29,14 +43,27 @@
         [btns]="false"
       ></app-product-card>
       <div class="info">
-        <mat-label>Odaberite cenu artikla</mat-label>
-        <mat-select [(ngModel)]="price">
+        <div class="price">Cena artikla: {{ price.get(product._id) }};</div>
+        <div class="stocks">Zalihe artikla: {{ stocks.get(product._id) }};</div>
+        <!-- <mat-label>Odaberite cenu artikla</mat-label> -->
+        <!-- <mat-select [(ngModel)]="price">
           <mat-option
-            *ngFor="let m of product.warehouseInfo"
             [value]="m.sellPrice"
-            >Magacin:{{ m.id }} - cena: {{ m.sellPrice }}</mat-option
+            *ngFor="let m of product.warehouseInfo"
+            [disabled]="m.stocks < quantity[product._id]"
           >
-        </mat-select>
+            Magacin:{{ m.id }} - cena: {{ m.sellPrice }} - zalihe:
+            {{ m.stocks }}
+          </mat-option>
+          <mat-option
+            [value]="m.sellPrice"
+            *ngFor="let m of product.objectInfo"
+            [disabled]="m.stocks < quantity[product._id]"
+          >
+            Objekat:{{ m.location }} - cena: {{ m.sellPrice }} - zalihe:
+            {{ m.stocks }}
+          </mat-option>
+        </mat-select> -->
         <mat-form-field class="input" appearance="fill">
           <mat-label>Kolicina proizvoda:</mat-label>
           <input
@@ -53,6 +80,8 @@
         >
           Dodaj na racun
         </button>
+        <br />
+        <span class="alert">{{ messages.get(product._id) }}</span>
       </div>
     </div>
   </div>

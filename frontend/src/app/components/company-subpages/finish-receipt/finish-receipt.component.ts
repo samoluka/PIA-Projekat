@@ -25,6 +25,9 @@ export class FinishReceiptComponent implements OnInit {
   payingCompany: User;
   user: User;
 
+  id: number;
+  location: string;
+
   cash: number = 0;
 
   sumNo: number = 0;
@@ -52,6 +55,8 @@ export class FinishReceiptComponent implements OnInit {
     receipt.productsInfo = this.productsAdded;
     receipt.paymentInfo = {
       paymentType: this.paymentType,
+      ...(this.id && { id: this.id }),
+      ...(this.location && { location: this.location }),
       ...(this.firstName && { firstName: this.firstName }),
       ...(this.lastName && { lastName: this.lastName }),
       ...(this.slip && { slip: this.slip }),

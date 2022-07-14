@@ -49,6 +49,8 @@ import { StatisticsPageComponent } from './components/company-subpages/statistic
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { ReceiptTablePageComponent } from './components/company-subpages/receipt-table-page/receipt-table-page.component';
+import { AllCompanyProductsComponent } from './components/all-company-products/all-company-products.component';
+import { UpdateProductComponent } from './components/company-subpages/update-product/update-product.component';
 
 @NgModule({
   declarations: [
@@ -78,6 +80,8 @@ import { ReceiptTablePageComponent } from './components/company-subpages/receipt
     ReceiptViewComponent,
     StatisticsPageComponent,
     ReceiptTablePageComponent,
+    AllCompanyProductsComponent,
+    UpdateProductComponent,
   ],
   imports: [
     BrowserModule,

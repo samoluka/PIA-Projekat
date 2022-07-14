@@ -30,6 +30,7 @@ export class ProductController {
     const companyUsername = req.body.companyUsername;
     const unit = req.body.unit;
     const warehouseInfo = JSON.parse(req.body.warehouseInfo);
+    const objectInfo = JSON.parse(req.body.objectInfo);
 
     User.findOne({
       username: companyUsername,
@@ -42,6 +43,7 @@ export class ProductController {
             taxRate: taxRate,
             company: user._id,
             warehouseInfo: warehouseInfo,
+            objectInfo: objectInfo,
             ...(req.body.productType && { productType: req.body.productType }),
             unit: unit,
             ...(req.body.additionalData && {

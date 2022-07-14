@@ -203,6 +203,9 @@ export class UserController {
     let start = req.query.start;
     let end = req.query.end;
 
+    console.log(req.query);
+    
+
     User.findOne({ username: username })
       .populate({
         path: "products",

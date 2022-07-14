@@ -1,0 +1,36 @@
+<div class="center">
+  <div class="search">
+    <mat-form-field appearance="fill">
+      <mat-label>Odaberite kompaniju</mat-label>
+      <mat-select [(ngModel)]="selectedCompany">
+        <mat-option *ngFor="let c of allCompanies" [value]="c">
+          {{ c.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite naziv proizvoda:</mat-label>
+      <input matInput placeholder="naziv" [(ngModel)]="productName" />
+    </mat-form-field>
+    <mat-form-field class="" appearance="fill">
+      <mat-label>Unesite naziv proizvodjaca</mat-label>
+      <input matInput placeholder="paziv proizvodjaca" [(ngModel)]="producerName" />
+    </mat-form-field>
+    <button mat-button color="primary" (click)="search()">Pretraga</button>
+  </div>
+  <div class="products">
+    <div class="product" *ngFor="let product of productsToDisplay">
+      <app-product-card [btns]="false" [product]="product"> </app-product-card>
+      <div class="price">
+        <span>Najniza cena: {{ minPrice.get(product._id) }}</span>
+      </div>
+      <div class="availability">
+        <span>Proizvod je dostupan na sledecim lokacijama</span>
+        <br />
+        <span *ngFor="let s of availibility.get(product._id)"
+          ><br />{{ s }}</span
+        >
+      </div>
+    </div>
+  </div>
+</div>

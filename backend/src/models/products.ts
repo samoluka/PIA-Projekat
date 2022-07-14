@@ -59,6 +59,16 @@ let Product = new Schema({
       max: Number,
     },
   ],
+  objectInfo: [
+    {
+      location: String,
+      buyPrice: Number,
+      sellPrice: Number,
+      stocks: Number,
+      min: Number,
+      max: Number,
+    },
+  ],
   additionalData: {
     origin: {
       type: String,

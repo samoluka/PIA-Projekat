@@ -17,6 +17,8 @@ let Receipt = new Schema({
     },
   ],
   paymentInfo: {
+    id: Number,
+    location: String,
     paymentType: String,
     firstName: String,
     lastName: String,

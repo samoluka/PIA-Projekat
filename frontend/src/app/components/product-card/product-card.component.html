@@ -1,19 +1,227 @@
 <mat-card class="card">
   <mat-card-title-group>
-    <mat-card-title>{{product.name}}</mat-card-title>
-    <mat-card-subtitle>sifra:{{product.code}}</mat-card-subtitle>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-subtitle>sifra:{{ product.code }}</mat-card-subtitle>
     <img
       mat-card-md-image
-      src="http://localhost:4000/products/getImage/?image={{product.photo}}"
+      src="http://localhost:4000/products/getImage/?image={{ product.photo }}"
     />
   </mat-card-title-group>
   <mat-card-content>
-    <h2>Jedinica mere: {{product.unit}}</h2>
-    <h2>Stopa poreza: {{product.taxRate}}</h2>
-    <h2>Proizvodjac: {{product.additionalData.producer ? product.additionalData.producer : "nepoznat"}}</h2>
+    <h2>Jedinica mere: {{ product.unit }}</h2>
+    <h2>Stopa poreza: {{ product.taxRate }}</h2>
+    <h2>
+      Proizvodjac:
+      {{
+        product.additionalData.producer
+          ? product.additionalData.producer
+          : "nepoznat"
+      }}
+    </h2>
   </mat-card-content>
   <mat-card-actions *ngIf="btns">
-    <button mat-raised-button color="primary">Izmena</button>
-    <button mat-raised-button color="warn" (click)="deleteProduct()">Brisanje</button>
+    <button mat-raised-button color="primary" (click)="update = true">Izmena</button>
+    <button mat-raised-button color="warn" (click)="deleteProduct()">
+      Brisanje
+    </button>
   </mat-card-actions>
 </mat-card>
+
+<div class="update" *ngIf="update">
+  <div class="globalForm">
+    <mat-accordion [multi]="true">
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Opsti podaci </mat-panel-title>
+          <mat-panel-description>
+            Ovde unosite opste podatke o novom artiklu
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="infoForm">
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Sifra artikla:</mat-label>
+            <input
+              matInput
+              placeholder="12345678"
+              [(ngModel)]="product.code"
+              required
+            />
+            <mat-error *ngIf="!product.code || product.code.length == 0"
+              >"Sifra artikla je obavezno polje"</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Naziv artikla:</mat-label>
+            <input
+              matInput
+              placeholder="pomorandza"
+              [(ngModel)]="product.name"
+              required
+            />
+            <mat-error *ngIf="!product.name || product.name.length == 0"
+              >"Naziv artikla je obavezno polje"</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Jedinica mere artikla</mat-label>
+            <mat-select [(value)]="product.unit" required>
+              <mat-option value="kg">kg</mat-option>
+              <mat-option value="g">g</mat-option>
+              <mat-option value="lb">lb</mat-option>
+            </mat-select>
+            <mat-error *ngIf="!product.unit || product.unit.length == 0"
+              >"Jedinica mere artikla je obavezno polje"</mat-error
+            >
+          </mat-form-field>
+          <mat-form-field appearance="fill" *ngIf="company.additionInfo.pdv">
+            <mat-label>Poreska stopa</mat-label>
+            <mat-select [(value)]="product.taxRate" required>
+              <mat-option value="20">Opsta (20%)</mat-option>
+              <mat-option value="10">Posebna (10%)</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field
+            appearance="fill"
+            *ngIf="company.additionInfo.category == 'ugostitelj'"
+          >
+            <mat-label>Tip artikla</mat-label>
+            <mat-select [(value)]="product.productType" required>
+              <mat-option value="hrana">hrana</mat-option>
+              <mat-option value="pice">pice</mat-option>
+              <mat-option value="sirovina">sirovina</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Dopunski podaci artikla </mat-panel-title>
+          <mat-panel-description>
+            Ovde dodajete dopunske podatke novog artikla(opciono)
+          </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div class="infoForm">
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Zemlja porekla artikla</mat-label>
+            <input matInput placeholder="Turska" [(ngModel)]="product.additionalData.origin" />
+          </mat-form-field>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Strani naziv artikla</mat-label>
+            <input matInput placeholder="orange" [(ngModel)]="product.additionalData.originalName" />
+          </mat-form-field>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Barkod artikla</mat-label>
+            <input matInput placeholder="123dqd1231dq" [(ngModel)]="product.additionalData.barcode" />
+          </mat-form-field>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Naziv proizvodjaca artikla</mat-label>
+            <input matInput placeholder="tuti fruti" [(ngModel)]="product.additionalData.producer" />
+          </mat-form-field>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Carinska tariga artikla</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="10"
+              [(ngModel)]="product.additionalData.customFee"
+            />
+            <span matSuffix>%</span>
+          </mat-form-field>
+          <section class="checkBoxSection">
+            <mat-checkbox [(ngModel)]="product.additionalData.ecoTax">eko taksa</mat-checkbox>
+            <mat-checkbox [(ngModel)]="product.additionalData.excise">akciza</mat-checkbox>
+          </section>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Minimalna zaliha artikla</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="10"
+              [(ngModel)]="product.additionalData.minStock"
+            />
+          </mat-form-field>
+          <mat-form-field class="" appearance="fill">
+            <mat-label>Maksimalna zaliha artikla</mat-label>
+            <input
+              matInput
+              type="number"
+              placeholder="100"
+              [(ngModel)]="product.additionalData.maxStock"
+            />
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>O artiklu</mat-label>
+            <textarea matInput [(ngModel)]="product.additionalData.about"></textarea>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Deklaracija artikla</mat-label>
+            <textarea matInput [(ngModel)]="product.additionalData.declaration"></textarea>
+          </mat-form-field>
+        </div>
+      </mat-expansion-panel>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title> Cena i stanje robe </mat-panel-title>
+          <mat-panel-description> Cena i stanje robe </mat-panel-description>
+        </mat-expansion-panel-header>
+        <div *ngFor="let info of product.warehouseInfo">
+          Magacin id: {{ info.id }}
+          <br />
+          <div class="warehouses">
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>nabavna cena:</mat-label>
+              <input matInput type="number" [(ngModel)]="info.buyPrice" />
+            </mat-form-field>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>prodajna cena:</mat-label>
+              <input matInput type="number" [(ngModel)]="info.sellPrice" />
+            </mat-form-field>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>stanje na lageru</mat-label>
+              <input matInput type="number" [(ngModel)]="info.stocks" />
+            </mat-form-field>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>minimalna kolicina</mat-label>
+              <input matInput type="number" [(ngModel)]="info.min" />
+            </mat-form-field>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>maksimalna kolicina</mat-label>
+              <input matInput type="number" [(ngModel)]="info.max" />
+            </mat-form-field>
+          </div>
+        </div>
+        <div *ngFor="let info of product.objectInfo">
+          Lokacija objekta: {{ info.location }}
+          <br />
+          <div class="warehouses">
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>nabavna cena:</mat-label>
+              <input matInput type="number" [(ngModel)]="info.buyPrice" />
+            </mat-form-field>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>prodajna cena:</mat-label>
+              <input matInput type="number" [(ngModel)]="info.sellPrice" />
+            </mat-form-field>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>stanje na lageru</mat-label>
+              <input matInput type="number" [(ngModel)]="info.stocks" />
+            </mat-form-field>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>minimalna kolicina</mat-label>
+              <input matInput type="number" [(ngModel)]="info.min" />
+            </mat-form-field>
+            <mat-form-field class="input" appearance="fill">
+              <mat-label>maksimalna kolicina</mat-label>
+              <input matInput type="number" [(ngModel)]="info.max" />
+            </mat-form-field>
+          </div>
+        </div>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <div class="submitButton">
+      <button mat-raised-button color="primary" (click)="updateProduct()">
+        izmeni artikal
+      </button>
+    </div>
+  </div>
+</div>

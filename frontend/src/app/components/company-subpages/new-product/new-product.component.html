@@ -58,7 +58,10 @@ photo: string; -->
             <mat-option value="10">Posebna (10%)</mat-option>
           </mat-select>
         </mat-form-field>
-        <mat-form-field appearance="fill" *ngIf="company.additionInfo.category == 'ugostitelj'">
+        <mat-form-field
+          appearance="fill"
+          *ngIf="company.additionInfo.category == 'ugostitelj'"
+        >
           <mat-label>Tip artikla</mat-label>
           <mat-select [(value)]="type" required>
             <mat-option value="hrana">hrana</mat-option>
@@ -144,6 +147,32 @@ photo: string; -->
       </mat-expansion-panel-header>
       <div *ngFor="let info of warehouseInfo">
         Magacin id: {{ info.id }}
+        <br />
+        <div class="warehouses">
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>nabavna cena:</mat-label>
+            <input matInput type="number" [(ngModel)]="info.buyPrice" />
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>prodajna cena:</mat-label>
+            <input matInput type="number" [(ngModel)]="info.sellPrice" />
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>stanje na lageru</mat-label>
+            <input matInput type="number" [(ngModel)]="info.stocks" />
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>minimalna kolicina</mat-label>
+            <input matInput type="number" [(ngModel)]="info.min" />
+          </mat-form-field>
+          <mat-form-field class="input" appearance="fill">
+            <mat-label>maksimalna kolicina</mat-label>
+            <input matInput type="number" [(ngModel)]="info.max" />
+          </mat-form-field>
+        </div>
+      </div>
+      <div *ngFor="let info of objectInfo">
+        Lokacija objekta: {{ info.location }}
         <br />
         <div class="warehouses">
           <mat-form-field class="input" appearance="fill">
